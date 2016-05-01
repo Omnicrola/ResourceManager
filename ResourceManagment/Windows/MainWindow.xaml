@@ -9,6 +9,34 @@
     <Window.CommandBindings>
 
     </Window.CommandBindings>
+
+    <Window.Resources>
+        <ControlTemplate x:Key="ResourceBlockTemplate">
+            <StackPanel Background="Blue">
+                <TextBlock Text="{Binding Project.Name, TargetNullValue='None'}"/>
+                <TextBlock Text="{Binding PairPartner.FirstName}"/>
+            </StackPanel>
+        </ControlTemplate>
+        <DataTemplate x:Key="SinglePersonItemTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Initials}" Grid.Column="0"/>
+                <Button Template="{StaticResource ResourceBlockTemplate}" Grid.Column="1" DataContext="{Binding Monday}"/>
+                <Button Template="{StaticResource ResourceBlockTemplate}" Grid.Column="2" DataContext="{Binding Tuesday}"/>
+                <Button Template="{StaticResource ResourceBlockTemplate}" Grid.Column="3" DataContext="{Binding Wednesday}"/>
+                <Button Template="{StaticResource ResourceBlockTemplate}" Grid.Column="4" DataContext="{Binding Thursday}"/>
+                <Button Template="{StaticResource ResourceBlockTemplate}" Grid.Column="5" DataContext="{Binding Friday}"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
@@ -49,27 +77,7 @@
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
             <StackPanel Grid.Column="2" Orientation="Vertical">
                 <TextBlock Text="Resources"/>
-                <ListView ItemsSource="{Binding SelectedSchedule.Schedules}" Height="506">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Initials}"/>
-                            <GridViewColumn Header="Monday" Width="100" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding Monday.Project.Name}"/>
-                                            <TextBlock Text="{Binding Monday.PairPartner.FirstName}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="Tuesday" Width="100" DisplayMemberBinding="{Binding Tuesday}"/>
-                            <GridViewColumn Header="Wednesday" Width="100" DisplayMemberBinding="{Binding Wednesday}"/>
-                            <GridViewColumn Header="Thursday" Width="100" DisplayMemberBinding="{Binding Thursday}"/>
-                            <GridViewColumn Header="Friday" Width="100" DisplayMemberBinding="{Binding Friday}"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                <ItemsControl ItemsSource="{Binding SelectedSchedule.Schedules}" Height="506" ItemTemplate="{StaticResource SinglePersonItemTemplate}"/>
             </StackPanel>
         </Grid>
 
