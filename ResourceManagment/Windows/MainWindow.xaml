@@ -12,9 +12,15 @@
 
     <Window.Resources>
         <ControlTemplate x:Key="ResourceBlockTemplate">
-            <StackPanel Background="Blue">
-                <TextBlock Text="{Binding Project.Name, TargetNullValue='None'}"/>
-                <TextBlock Text="{Binding PairPartner.FirstName}"/>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Background="Blue" Margin="1">
+                    <TextBlock Text="{Binding Morning.Project.Name, TargetNullValue='None'}" HorizontalAlignment="Center" Margin="2,4"/>
+                    <TextBlock Text="{Binding Morning.PairPartner.FirstName}" HorizontalAlignment="Center" Margin="2,4"/>
+                </StackPanel>
+                <StackPanel Background="Blue" Margin="1">
+                    <TextBlock Text="{Binding Afternoon.Project.Name, TargetNullValue='None'}" HorizontalAlignment="Center" Margin="2,4"/>
+                    <TextBlock Text="{Binding Afternoon.PairPartner.FirstName}" HorizontalAlignment="Center" Margin="2,4"/>
+                </StackPanel>
             </StackPanel>
         </ControlTemplate>
         <DataTemplate x:Key="SinglePersonItemTemplate">

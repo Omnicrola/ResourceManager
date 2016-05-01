@@ -19,8 +19,8 @@ namespace ResourceManagment
         private ResourceDataContext createDataContext()
         {
             ResourceDataContext resourceDataContext = new ResourceDataContext();
-            var wilmut = CreateProject("Wilmut");
-            var dragonfly = CreateProject("Dragonfly");
+            var wilmut = new ProjectViewModel("Wilmut");
+            var dragonfly = new ProjectViewModel("Dragonfly");
             resourceDataContext.Projects.Add(wilmut);
             resourceDataContext.Projects.Add(dragonfly);
 
@@ -33,42 +33,70 @@ namespace ResourceManagment
 
             var eschPersonalSchedule = new PersonalScheduleViewModel(new DateTime(2016, 4, 4), esch);
 
-            eschPersonalSchedule.Monday.Project = wilmut;
-            eschPersonalSchedule.Monday.PairPartner = bvil;
+            eschPersonalSchedule.Monday.Morning.Project = wilmut;
+            eschPersonalSchedule.Monday.Morning.PairPartner = bvil;
+            eschPersonalSchedule.Monday.Afternoon.Project = wilmut;
+            eschPersonalSchedule.Monday.Afternoon.PairPartner = bvil;
 
-            eschPersonalSchedule.Tuesday.Project = wilmut;
-            eschPersonalSchedule.Tuesday.PairPartner = bvil;
 
-            eschPersonalSchedule.Wednesday.Project = dragonfly;
-            eschPersonalSchedule.Wednesday.PairPartner = bvil;
+            eschPersonalSchedule.Tuesday.Morning.Project = wilmut;
+            eschPersonalSchedule.Tuesday.Morning.PairPartner = bvil;
+            eschPersonalSchedule.Tuesday.Afternoon.Project = wilmut;
+            eschPersonalSchedule.Tuesday.Afternoon.PairPartner = bvil;
 
-            eschPersonalSchedule.Thursday.Project = wilmut;
-            eschPersonalSchedule.Thursday.PairPartner = kbec;
 
-            eschPersonalSchedule.Friday.Project = wilmut;
-            eschPersonalSchedule.Friday.PairPartner = bvil;
+            eschPersonalSchedule.Wednesday.Morning.Project = wilmut;
+            eschPersonalSchedule.Wednesday.Morning.PairPartner = bvil;
+            eschPersonalSchedule.Wednesday.Afternoon.Project = wilmut;
+            eschPersonalSchedule.Wednesday.Afternoon.PairPartner = bvil;
+
+
+            eschPersonalSchedule.Thursday.Morning.Project = wilmut;
+            eschPersonalSchedule.Thursday.Morning.PairPartner = bvil;
+            eschPersonalSchedule.Thursday.Afternoon.Project = wilmut;
+            eschPersonalSchedule.Thursday.Afternoon.PairPartner = bvil;
+
+
+            eschPersonalSchedule.Friday.Morning.Project = wilmut;
+            eschPersonalSchedule.Friday.Morning.PairPartner = bvil;
+            eschPersonalSchedule.Friday.Afternoon.Project = wilmut;
+            eschPersonalSchedule.Friday.Afternoon.PairPartner = bvil;
 
             var bvilPersonalSchedule = new PersonalScheduleViewModel(new DateTime(2016, 4, 4), bvil);
 
-            bvilPersonalSchedule.Monday.Project = wilmut;
-            bvilPersonalSchedule.Monday.PairPartner = esch;
+            bvilPersonalSchedule.Monday.Morning.Project = wilmut;
+            bvilPersonalSchedule.Monday.Morning.PairPartner = esch;
+            bvilPersonalSchedule.Monday.Afternoon.Project = wilmut;
+            bvilPersonalSchedule.Monday.Afternoon.PairPartner = esch;
 
-            bvilPersonalSchedule.Tuesday.Project = wilmut;
-            bvilPersonalSchedule.Tuesday.PairPartner = esch;
 
-            bvilPersonalSchedule.Wednesday.Project = dragonfly;
-            bvilPersonalSchedule.Wednesday.PairPartner = esch;
+            bvilPersonalSchedule.Tuesday.Morning.Project = wilmut;
+            bvilPersonalSchedule.Tuesday.Morning.PairPartner = esch;
+            bvilPersonalSchedule.Tuesday.Afternoon.Project = wilmut;
+            bvilPersonalSchedule.Tuesday.Afternoon.PairPartner = esch;
 
-            bvilPersonalSchedule.Thursday.Project = null;
-            bvilPersonalSchedule.Thursday.PairPartner = null;
 
-            bvilPersonalSchedule.Friday.Project = wilmut;
-            bvilPersonalSchedule.Friday.PairPartner = esch;
+            bvilPersonalSchedule.Wednesday.Morning.Project = wilmut;
+            bvilPersonalSchedule.Wednesday.Morning.PairPartner = esch;
+            bvilPersonalSchedule.Wednesday.Afternoon.Project = wilmut;
+            bvilPersonalSchedule.Wednesday.Afternoon.PairPartner = esch;
+
+            bvilPersonalSchedule.Thursday.Morning.Project = null;
+            bvilPersonalSchedule.Thursday.Morning.PairPartner = null;
+            bvilPersonalSchedule.Thursday.Afternoon.Project = null;
+            bvilPersonalSchedule.Thursday.Afternoon.PairPartner = null;
+
+            bvilPersonalSchedule.Friday.Morning.Project = wilmut;
+            bvilPersonalSchedule.Friday.Morning.PairPartner = esch;
+            bvilPersonalSchedule.Friday.Afternoon.Project = wilmut;
+            bvilPersonalSchedule.Friday.Afternoon.PairPartner = esch;
 
             var kbecPersonalSchedule = new PersonalScheduleViewModel(new DateTime(2016, 4, 4), kbec);
 
-            kbecPersonalSchedule.Thursday.Project = wilmut;
-            kbecPersonalSchedule.Thursday.PairPartner = esch;
+            kbecPersonalSchedule.Thursday.Morning.Project = wilmut;
+            kbecPersonalSchedule.Thursday.Morning.PairPartner = esch;
+            kbecPersonalSchedule.Thursday.Afternoon.Project = wilmut;
+            kbecPersonalSchedule.Thursday.Afternoon.PairPartner = esch;
 
             weekSchedule.Schedules.Add(eschPersonalSchedule);
             weekSchedule.Schedules.Add(bvilPersonalSchedule);
@@ -76,16 +104,6 @@ namespace ResourceManagment
             return resourceDataContext;
         }
 
-        private ProjectViewModel CreateProject(string name)
-        {
-            return new ProjectViewModel(name);
-        }
 
-        private static PersonalScheduleViewModel AddSchedule(ProjectViewModel project)
-        {
-            var personalSchedule = new PersonalScheduleViewModel(new DateTime(2016, 4, 4), new PersonViewModel("Eric", "Schreffler"));
-            personalSchedule.Monday.Project = project;
-            return personalSchedule;
-        }
     }
 }

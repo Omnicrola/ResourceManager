@@ -59,6 +59,7 @@
     <Compile Include="Data\ResourceDataContext.cs" />
     <Compile Include="Data\ViewModels\PersonalScheduleViewModel.cs" />
     <Compile Include="Data\ViewModels\PersonViewModel.cs" />
+    <Compile Include="Data\ViewModels\ResourceBlockViewModel.cs" />
     <Compile Include="Data\ViewModels\WeekScheduleViewModel.cs" />
     <Compile Include="Data\ViewModels\WorkDayViewModel.cs" />
     <Compile Include="Data\ViewModels\ViewModel.cs" />
