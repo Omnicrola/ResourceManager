@@ -1,6 +1,7 @@
 ﻿using ResourceManagment.Data.ViewModels;
 using System;
 using System.Windows;
+using System.Windows.Media;
 
 namespace ResourceManagment
 {
@@ -19,8 +20,8 @@ namespace ResourceManagment
         private ResourceDataContext createDataContext()
         {
             ResourceDataContext resourceDataContext = new ResourceDataContext();
-            var wilmut = new ProjectViewModel("Wilmut");
-            var dragonfly = new ProjectViewModel("Dragonfly");
+            var wilmut = new ProjectViewModel("Wilmut") { Color = new SolidColorBrush(Colors.LightBlue) };
+            var dragonfly = new ProjectViewModel("Dragonfly") { Color = new SolidColorBrush(Colors.LemonChiffon) };
             resourceDataContext.Projects.Add(wilmut);
             resourceDataContext.Projects.Add(dragonfly);
 
@@ -51,9 +52,9 @@ namespace ResourceManagment
             eschPersonalSchedule.Wednesday.Afternoon.PairPartner = bvil;
 
 
-            eschPersonalSchedule.Thursday.Morning.Project = wilmut;
+            eschPersonalSchedule.Thursday.Morning.Project = dragonfly;
             eschPersonalSchedule.Thursday.Morning.PairPartner = bvil;
-            eschPersonalSchedule.Thursday.Afternoon.Project = wilmut;
+            eschPersonalSchedule.Thursday.Afternoon.Project = dragonfly;
             eschPersonalSchedule.Thursday.Afternoon.PairPartner = bvil;
 
 
@@ -93,9 +94,9 @@ namespace ResourceManagment
 
             var kbecPersonalSchedule = new PersonalScheduleViewModel(new DateTime(2016, 4, 4), kbec);
 
-            kbecPersonalSchedule.Thursday.Morning.Project = wilmut;
+            kbecPersonalSchedule.Thursday.Morning.Project = dragonfly;
             kbecPersonalSchedule.Thursday.Morning.PairPartner = esch;
-            kbecPersonalSchedule.Thursday.Afternoon.Project = wilmut;
+            kbecPersonalSchedule.Thursday.Afternoon.Project = dragonfly;
             kbecPersonalSchedule.Thursday.Afternoon.PairPartner = esch;
 
             weekSchedule.Schedules.Add(eschPersonalSchedule);

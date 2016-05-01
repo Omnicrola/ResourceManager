@@ -11,18 +11,23 @@
     </Window.CommandBindings>
 
     <Window.Resources>
-        <ControlTemplate x:Key="ResourceBlockTemplate">
-            <StackPanel Orientation="Vertical">
-                <StackPanel Background="Blue" Margin="1">
-                    <TextBlock Text="{Binding Morning.Project.Name, TargetNullValue='None'}" HorizontalAlignment="Center" Margin="2,4"/>
-                    <TextBlock Text="{Binding Morning.PairPartner.FirstName}" HorizontalAlignment="Center" Margin="2,4"/>
-                </StackPanel>
-                <StackPanel Background="Blue" Margin="1">
-                    <TextBlock Text="{Binding Afternoon.Project.Name, TargetNullValue='None'}" HorizontalAlignment="Center" Margin="2,4"/>
-                    <TextBlock Text="{Binding Afternoon.PairPartner.FirstName}" HorizontalAlignment="Center" Margin="2,4"/>
-                </StackPanel>
+        <ControlTemplate x:Key="ResourceButtonTemplate">
+            <StackPanel Background="{Binding Project.Color}" Margin="1">
+                <TextBlock Text="{Binding Project.Name, TargetNullValue='None'}" HorizontalAlignment="Center" Margin="2,4"/>
+                <TextBlock HorizontalAlignment="Center" Margin="2,4">
+                        <Run>/w</Run>
+                        <Run Text="{Binding PairPartner.FirstName}"/>
+                </TextBlock>
             </StackPanel>
         </ControlTemplate>
+
+        <ControlTemplate x:Key="ResourceDayBlockTemplate">
+            <StackPanel Orientation="Vertical">
+                <Button Template="{StaticResource ResourceButtonTemplate}" DataContext="{Binding Morning}"/>
+                <Button Template="{StaticResource ResourceButtonTemplate}" DataContext="{Binding Afternoon}"/>
+            </StackPanel>
+        </ControlTemplate>
+
         <DataTemplate x:Key="SinglePersonItemTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -34,11 +39,11 @@
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{Binding Initials}" Grid.Column="0"/>
-                <Button Template="{StaticResource ResourceBlockTemplate}" Grid.Column="1" DataContext="{Binding Monday}"/>
-                <Button Template="{StaticResource ResourceBlockTemplate}" Grid.Column="2" DataContext="{Binding Tuesday}"/>
-                <Button Template="{StaticResource ResourceBlockTemplate}" Grid.Column="3" DataContext="{Binding Wednesday}"/>
-                <Button Template="{StaticResource ResourceBlockTemplate}" Grid.Column="4" DataContext="{Binding Thursday}"/>
-                <Button Template="{StaticResource ResourceBlockTemplate}" Grid.Column="5" DataContext="{Binding Friday}"/>
+                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Column="1" DataContext="{Binding Monday}"/>
+                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Column="2" DataContext="{Binding Tuesday}"/>
+                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Column="3" DataContext="{Binding Wednesday}"/>
+                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Column="4" DataContext="{Binding Thursday}"/>
+                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Column="5" DataContext="{Binding Friday}"/>
             </Grid>
         </DataTemplate>
     </Window.Resources>

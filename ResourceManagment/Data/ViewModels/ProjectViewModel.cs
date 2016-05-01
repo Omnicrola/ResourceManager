@@ -35,7 +35,7 @@ namespace ResourceManagment
         public ProjectViewModel(string name)
         {
             _name = name;
-            Color = new SolidColorBrush(Colors.AliceBlue);
+            Color = new SolidColorBrush(Colors.LightCoral);
         }
     }
 }
