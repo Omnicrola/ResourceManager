@@ -31,6 +31,15 @@ namespace ResourceManagment
                 FireOnPropertyChanged("LastName");
             }
         }
+        public string Initials
+        {
+            get
+            {
+                string initials = _firstName.Substring(0, 1) + _lastName.Substring(0, 3);
+                return initials.ToUpper();
+            }
+            set { }
+        }
 
     }
 }

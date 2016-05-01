@@ -53,6 +53,11 @@ namespace ResourceManagment
 
         }
 
+        private void Button_AlterResourceBlock(object sender, RoutedEventArgs e)
+        {
+
+        }
+
 
     }
 }

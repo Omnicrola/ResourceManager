@@ -23,14 +23,19 @@
 
         <ControlTemplate x:Key="ResourceDayBlockTemplate">
             <StackPanel Orientation="Vertical">
-                <Button Template="{StaticResource ResourceButtonTemplate}" DataContext="{Binding Morning}"/>
-                <Button Template="{StaticResource ResourceButtonTemplate}" DataContext="{Binding Afternoon}"/>
+                <Button Template="{StaticResource ResourceButtonTemplate}" DataContext="{Binding Morning}" Click="Button_AlterResourceBlock"/>
+                <Button Template="{StaticResource ResourceButtonTemplate}" DataContext="{Binding Afternoon}" Click="Button_AlterResourceBlock"/>
             </StackPanel>
         </ControlTemplate>
 
         <DataTemplate x:Key="SinglePersonItemTemplate">
             <StackPanel Orientation="Vertical" Width="100">
-                <TextBlock Text="{Binding Initials}" Grid.Row="0"/>
+                <TextBlock HorizontalAlignment="Center" Grid.Row="0">
+                    <Run Text="{Binding Person.FirstName}" />
+                    <Run Text="{Binding Person.LastName}"/>
+                    <LineBreak/>
+                    <Run Text="{Binding Person.Initials}"/>
+                </TextBlock>
                 <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Row="1" DataContext="{Binding Monday}"/>
                 <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Row="2" DataContext="{Binding Tuesday}"/>
                 <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Row="3" DataContext="{Binding Wednesday}"/>
@@ -84,11 +89,11 @@
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal"/>
+
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </StackPanel>
         </Grid>
-
     </DockPanel>
 </Window>

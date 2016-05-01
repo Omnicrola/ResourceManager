@@ -10,12 +10,16 @@ namespace ResourceManagment.Data.ViewModels
         private DateTime dateTime;
         private PersonViewModel personViewModel;
 
-        public string Initials
+        public PersonViewModel Person
         {
             get
             {
-                string initials = personViewModel.FirstName.Substring(0, 1) + personViewModel.LastName.Substring(0, 3);
-                return initials.ToUpper();
+                return personViewModel;
+            }
+            set
+            {
+                personViewModel = value;
+                FireOnPropertyChanged("Person");
             }
         }
         public ObservableCollection<WorkDayViewModel> Days
