@@ -55,7 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\ResourceDataContext.cs" />
+    <Compile Include="Data\ViewModels\PersonalScheduleViewModel.cs" />
+    <Compile Include="Data\ViewModels\PersonViewModel.cs" />
+    <Compile Include="Data\ViewModels\WeekScheduleViewModel.cs" />
     <Compile Include="ResourceBlock.cs" />
+    <Compile Include="Data\ViewModels\ViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

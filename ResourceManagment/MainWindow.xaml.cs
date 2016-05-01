@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BusinessLogic.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,21 +22,13 @@ namespace ResourceManagment
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+
+        public MainWindow(ResourceDataContext resourceDataContext)
         {
             InitializeComponent();
+            DataContext = resourceDataContext;
         }
 
-        void MainWindow_Loaded(object sender, RoutedEventArgs args)
-        {
-            LoadData();
-        }
 
-        private void LoadData()
-        {
-            myLabel.Content = "Hello";
-            data_column.Children.Add(new Label() {Content="Hello" });
-            Console.WriteLine("wat");
-        }
     }
 }

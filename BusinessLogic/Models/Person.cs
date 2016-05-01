@@ -1,8 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace BusinessLogic.Models
 {
-    public class Person 
+    public class Person : INotifyPropertyChanged
     {
         public String FirstName { get; set; }
         public String LastName { get; set; }
@@ -14,5 +15,7 @@ namespace BusinessLogic.Models
             LastName = "";
             Role = Role.None;
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

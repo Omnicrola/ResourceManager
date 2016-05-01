@@ -5,8 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ResourceManagment"
         mc:Ignorable="d"
-        Title="Resource Schedule" Height="600" Width="800" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" SizeToContent="WidthAndHeight">
-    <Grid>
-        <TextBlock Margin="5" TextWrapping="Wrap">Wilmut /w ESCH</TextBlock>
-    </Grid>
+        Title="Resource Schedule" Height="600" Width="800"  Margin="5" >
+    <Window.CommandBindings>
+
+    </Window.CommandBindings>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Save"/>
+                <Separator/>
+                <MenuItem Header="_Quit"/>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Name="labelStatus" Text="Ready"/>
+            </StatusBarItem>
+        </StatusBar>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" >
+                <TextBlock Text="Week Ending"/>
+                <ListView Name="listWeeks" Width="200"></ListView>
+            </StackPanel>
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
+            <StackPanel Grid.Column="2" Orientation="Vertical">
+                <TextBlock Text="Resources"/>
+                <ListView ItemsSource="{Binding WeekOfResources}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ListView ItemsSource="{Binding Schedules}">
+                                <WrapPanel>
+                                    <TextBlock Text="{Binding FirstName}"/>
+                                </WrapPanel>
+                            </ListView>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </Grid>
+
+    </DockPanel>
 </Window>

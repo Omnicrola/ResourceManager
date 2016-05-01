@@ -15,8 +15,8 @@ namespace ResourceManagment
     {
         private void Application_Start(object sender, StartupEventArgs args)
         {
-            Console.WriteLine("Application start!");
-            var mainWindow = new MainWindow();
+            ResourceDataContext resourceDataContext = new ResourceDataContext();
+            var mainWindow = new MainWindow(resourceDataContext);
             mainWindow.Show();
         }
     }
