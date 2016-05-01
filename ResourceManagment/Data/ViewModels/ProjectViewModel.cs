@@ -1,27 +1,25 @@
-﻿using BusinessLogic.Models;
-
-namespace ResourceManagment
+﻿namespace ResourceManagment
 {
     public class ProjectViewModel : ViewModel
     {
-        private Project _project;
+        private string _name;
 
         public string Name
         {
             get
             {
-                return _project.Name;
+                return _name;
             }
             set
             {
-                _project.Name = value;
+                _name = value;
                 FireOnPropertyChanged("Name");
             }
         }
 
-        public ProjectViewModel(Project project)
+        public ProjectViewModel(string name)
         {
-            _project = project;
+            _name = name;
         }
     }
 }

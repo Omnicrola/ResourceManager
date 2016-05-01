@@ -1,27 +1,34 @@
-﻿using BusinessLogic.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace ResourceManagment
 {
-    class PersonViewModel : ViewModel
+    public class PersonViewModel : ViewModel
     {
-        private Person _person;
+        private string _firstName;
+        private string _lastName;
 
-        public PersonViewModel(Person person)
+        public PersonViewModel(string firstName, string lastName)
         {
-            this._person = person;
+            _firstName = firstName;
+            _lastName = lastName;
         }
 
-        public String FirstName
+        public string FirstName
         {
-            get { return _person.FirstName; }
-            set {
-                _person.FirstName = value;
+            get { return _firstName; }
+            set
+            {
+                _firstName = value;
                 FireOnPropertyChanged("FirstName");
+            }
+        }
+        public string LastName
+        {
+            get { return _lastName; }
+            set
+            {
+                _lastName = value;
+                FireOnPropertyChanged("LastName");
             }
         }
 

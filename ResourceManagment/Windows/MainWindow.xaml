@@ -53,7 +53,16 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Initials}"/>
-                            <GridViewColumn Header="Monday" Width="100" DisplayMemberBinding="{Binding Monday}"/>
+                            <GridViewColumn Header="Monday" Width="100" DisplayMemberBinding="{Binding Monday}">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Project}"/>
+                                            <TextBlock Text="{Binding PairPartner}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                             <GridViewColumn Header="Tuesday" Width="100" DisplayMemberBinding="{Binding Tuesday}"/>
                             <GridViewColumn Header="Wednesday" Width="100" DisplayMemberBinding="{Binding Wednesday}"/>
                             <GridViewColumn Header="Thursday" Width="100" DisplayMemberBinding="{Binding Thursday}"/>

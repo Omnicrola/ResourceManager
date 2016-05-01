@@ -1,19 +1,20 @@
-﻿using BusinessLogic.Models;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System;
 
 namespace ResourceManagment.Data.ViewModels
 {
     public class PersonalScheduleViewModel : ViewModel
     {
 
-        private PersonalSchedule _personalSchedule;
         private ObservableCollection<WorkDayViewModel> _workDays;
+        private DateTime dateTime;
+        private PersonViewModel personViewModel;
 
         public string Initials
         {
             get
             {
-                string initials = _personalSchedule.Person.FirstName.Substring(0, 1) + _personalSchedule.Person.LastName.Substring(0, 3);
+                string initials = personViewModel.FirstName.Substring(0, 1) + personViewModel.LastName.Substring(0, 3);
                 return initials.ToUpper();
             }
         }
@@ -26,20 +27,26 @@ namespace ResourceManagment.Data.ViewModels
             set { }
         }
 
-        public string Monday { get { return _workDays[0].Project; } }
-        public string Tuesday { get { return _workDays[1].Project; } }
-        public string Wednesday { get { return _workDays[2].Project; } }
-        public string Thursday { get { return _workDays[3].Project; } }
-        public string Friday { get { return _workDays[4].Project; } }
+        public WorkDayViewModel Saturday { get { return _workDays[0]; } }
+        public WorkDayViewModel Sunday { get { return _workDays[1]; } }
+        public WorkDayViewModel Monday { get { return _workDays[2]; } }
+        public WorkDayViewModel Tuesday { get { return _workDays[3]; } }
+        public WorkDayViewModel Wednesday { get { return _workDays[4]; } }
+        public WorkDayViewModel Thursday { get { return _workDays[5]; } }
+        public WorkDayViewModel Friday { get { return _workDays[6]; } }
 
-        public PersonalScheduleViewModel(PersonalSchedule personalSchedule)
+        public PersonalScheduleViewModel(DateTime dateTime, PersonViewModel personViewModel)
         {
-            _personalSchedule = personalSchedule;
+            this.dateTime = dateTime;
+            this.personViewModel = personViewModel;
             _workDays = new ObservableCollection<WorkDayViewModel>();
-            foreach (WorkDay workDay in _personalSchedule.Days)
-            {
-                _workDays.Add(new WorkDayViewModel(workDay));
-            }
+            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(6))));
+            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(5))));
+            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(4))));
+            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(3))));
+            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(2))));
+            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(1))));
+            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(0))));
         }
     }
 }

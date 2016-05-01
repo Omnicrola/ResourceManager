@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
-using BusinessLogic.Models;
 
 namespace ResourceManagment.Windows
 {
@@ -21,7 +20,7 @@ namespace ResourceManagment.Windows
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
             string projectName = textboxProjectName.Text;
-            Projects.Add(new ProjectViewModel(new Project { Name = projectName }));
+            Projects.Add(new ProjectViewModel(projectName));
         }
     }
 }

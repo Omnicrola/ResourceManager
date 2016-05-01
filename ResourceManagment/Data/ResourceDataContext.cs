@@ -1,6 +1,4 @@
-﻿using BusinessLogic.Models;
-using ResourceManagment.Data.ViewModels;
-using System;
+﻿using ResourceManagment.Data.ViewModels;
 using System.Collections.ObjectModel;
 
 namespace ResourceManagment

@@ -1,21 +1,8 @@
-﻿using BusinessLogic.Models;
-using ResourceManagment.Data.ViewModels;
+﻿using ResourceManagment.Data.ViewModels;
 using ResourceManagment.Windows;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ResourceManagment
 {
@@ -36,10 +23,7 @@ namespace ResourceManagment
         private void buttonAddWeek_Click(object sender, RoutedEventArgs e)
         {
             WeekScheduleViewModel weekSchedule = new WeekScheduleViewModel(new DateTime(2016, 3, 3));
-            var person = new Person { FirstName = "Bob", LastName = "Vila" };
-            var personalSchedule = new PersonalSchedule(new DateTime(2016, 2, 2), person);
-            weekSchedule.Schedules.Add(new PersonalScheduleViewModel(personalSchedule));
-
+            weekSchedule.Schedules.Add(new PersonalScheduleViewModel(new DateTime(2016, 2, 2), new PersonViewModel("Bob", "Vila")));
             _resourceDataContext.AllSchedules.Add(weekSchedule);
         }
 

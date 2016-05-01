@@ -1,16 +1,20 @@
-﻿using BusinessLogic.Models;
+﻿using System;
 
 namespace ResourceManagment.Data.ViewModels
 {
     public class WorkDayViewModel
     {
-        private WorkDay workDay;
+        private DateTime _day;
+        private PersonViewModel _pairPartner;
+        private ProjectViewModel _project;
 
-        public WorkDayViewModel(WorkDay workDay)
+        public WorkDayViewModel(DateTime day)
         {
-            this.workDay = workDay;
+            _day = day;
+            _project = null;
+            _pairPartner = null;
         }
 
-        public string Project { get { return workDay.Project != null ? workDay.Project.Name : "None"; } }
+        public ProjectViewModel Project { get; set; }
     }
 }
