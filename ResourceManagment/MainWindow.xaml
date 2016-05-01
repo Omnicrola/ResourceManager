@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ResourceManagment"
         mc:Ignorable="d"
-        Title="Resource Schedule" Height="600" Width="800"  Margin="5" >
+        Title="Resource Schedule" Height="600" Width="898"  Margin="5" >
     <Window.CommandBindings>
 
     </Window.CommandBindings>
@@ -31,7 +31,7 @@
             <StackPanel Grid.Column="0" >
                 <TextBlock Text="Week Ending"/>
                 <Button Name="buttonAddWeek" Click="buttonAddWeek_Click" >Add</Button>
-                <ListView Name="listOfWeeks" Width="200" ItemsSource="{Binding AllSchedules}" SelectionChanged="listOfWeeks_SelectionChanged"  Height="122">
+                <ListView Name="listOfWeeks" Width="200" ItemsSource="{Binding AllSchedules}" SelectionChanged="listOfWeeks_SelectionChanged"  Height="473">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>
@@ -44,15 +44,18 @@
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
             <StackPanel Grid.Column="2" Orientation="Vertical">
                 <TextBlock Text="Resources"/>
-                <ListView ItemsSource="{Binding SelectedSchedule.Schedules}" Height="153">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <WrapPanel>
-                                <TextBlock Text="Name: "/>
-                                <TextBlock Text="{Binding FirstName}"/>
-                            </WrapPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
+                <ListView ItemsSource="{Binding SelectedSchedule.Schedules}" Height="506">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Initials}"/>
+                            <GridViewColumn Header="Monday" Width="100" DisplayMemberBinding="{Binding Monday}"/>
+                            <GridViewColumn Header="Tuesday" Width="100" DisplayMemberBinding="{Binding Tuesday}"/>
+                            <GridViewColumn Header="Wednesday" Width="100" DisplayMemberBinding="{Binding Wednesday}"/>
+                            <GridViewColumn Header="Thursday" Width="100" DisplayMemberBinding="{Binding Thursday}"/>
+                            <GridViewColumn Header="Friday" Width="100" DisplayMemberBinding="{Binding Friday}"/>
+                        </GridView>
+                    </ListView.View>
+
                 </ListView>
             </StackPanel>
         </Grid>

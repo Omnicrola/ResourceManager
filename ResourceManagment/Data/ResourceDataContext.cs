@@ -22,7 +22,6 @@ namespace ResourceManagment
         public ResourceDataContext()
         {
             AllSchedules = new ObservableCollection<WeekScheduleViewModel>();
-            AllSchedules.Add(new WeekScheduleViewModel(DateTime.Now));
         }
     }
 }

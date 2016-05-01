@@ -1,4 +1,5 @@
-﻿using ResourceManagment.Data.ViewModels;
+﻿using BusinessLogic.Models;
+using ResourceManagment.Data.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,11 +18,18 @@ namespace ResourceManagment
         private void Application_Start(object sender, StartupEventArgs args)
         {
             ResourceDataContext resourceDataContext = new ResourceDataContext();
-            WeekScheduleViewModel weekSchedule = new WeekScheduleViewModel(DateTime.Now);
-            weekSchedule.Schedules.Add(new PersonalScheduleViewModel("ESCH"));
+            WeekScheduleViewModel weekSchedule = new WeekScheduleViewModel(new DateTime(2016, 2, 2));
+            weekSchedule.Schedules.Add(AddSchedule());
             resourceDataContext.AllSchedules.Add(weekSchedule);
             var mainWindow = new MainWindow(resourceDataContext);
             mainWindow.Show();
+        }
+
+        private static PersonalScheduleViewModel AddSchedule()
+        {
+            var person = new Person { FirstName = "Eric", LastName = "Schreffler" };
+            var personalSchedule = new PersonalSchedule(new DateTime(2016, 4, 4), person);
+            return new PersonalScheduleViewModel(personalSchedule);
         }
     }
 }

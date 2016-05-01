@@ -34,8 +34,10 @@ namespace ResourceManagment
 
         private void buttonAddWeek_Click(object sender, RoutedEventArgs e)
         {
-            WeekScheduleViewModel weekSchedule = new WeekScheduleViewModel(DateTime.Now);
-            weekSchedule.Schedules.Add(new PersonalScheduleViewModel("ESCH"));
+            WeekScheduleViewModel weekSchedule = new WeekScheduleViewModel(new DateTime(2016, 3, 3));
+            var person = new Person { FirstName = "Bob", LastName = "Vila" };
+            var personalSchedule = new PersonalSchedule(new DateTime(2016, 2, 2), person);
+            weekSchedule.Schedules.Add(new PersonalScheduleViewModel(personalSchedule));
 
             _resourceDataContext.AllSchedules.Add(weekSchedule);
         }
