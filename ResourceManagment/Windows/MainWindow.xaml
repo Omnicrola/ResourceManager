@@ -14,8 +14,13 @@
             <MenuItem Header="_File">
                 <MenuItem Header="_Save"/>
                 <Separator/>
-                <MenuItem Header="_Quit"/>
+                <MenuItem Header="_Quit" Click="MenuItemQuit_Click"/>
             </MenuItem>
+            <MenuItem Header="_Manage">
+                <MenuItem Header="People" Click="MenuItemManagePeople_Click"/>
+                <MenuItem Header="Projects" Click="MenuItemManageProjects_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Help" Click="MenuItemHelp_Click"/>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
@@ -55,7 +60,6 @@
                             <GridViewColumn Header="Friday" Width="100" DisplayMemberBinding="{Binding Friday}"/>
                         </GridView>
                     </ListView.View>
-
                 </ListView>
             </StackPanel>
         </Grid>

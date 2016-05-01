@@ -1,4 +1,5 @@
-﻿using ResourceManagment.Data.ViewModels;
+﻿using BusinessLogic.Models;
+using ResourceManagment.Data.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 
@@ -19,9 +20,12 @@ namespace ResourceManagment
             }
         }
 
+        public ObservableCollection<ProjectViewModel> Projects { get; internal set; }
+
         public ResourceDataContext()
         {
             AllSchedules = new ObservableCollection<WeekScheduleViewModel>();
+            Projects = new ObservableCollection<ProjectViewModel>();
         }
     }
 }

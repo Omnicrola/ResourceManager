@@ -55,14 +55,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\ViewModels\ProjectViewModel.cs" />
     <Compile Include="Data\ResourceDataContext.cs" />
     <Compile Include="Data\ViewModels\PersonalScheduleViewModel.cs" />
     <Compile Include="Data\ViewModels\PersonViewModel.cs" />
     <Compile Include="Data\ViewModels\WeekScheduleViewModel.cs" />
     <Compile Include="Data\ViewModels\WorkDayViewModel.cs" />
-    <Compile Include="ResourceBlock.cs" />
     <Compile Include="Data\ViewModels\ViewModel.cs" />
-    <Page Include="MainWindow.xaml">
+    <Compile Include="Windows\ManageProjectsWindow.xaml.cs">
+      <DependentUpon>ManageProjectsWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -70,13 +73,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\ManageProjectsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

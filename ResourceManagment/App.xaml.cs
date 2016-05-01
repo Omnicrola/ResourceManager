@@ -21,8 +21,15 @@ namespace ResourceManagment
             WeekScheduleViewModel weekSchedule = new WeekScheduleViewModel(new DateTime(2016, 2, 2));
             weekSchedule.Schedules.Add(AddSchedule());
             resourceDataContext.AllSchedules.Add(weekSchedule);
+            resourceDataContext.Projects.Add(CreateProject("Wilmut"));
+            resourceDataContext.Projects.Add(CreateProject("Dragonfly"));
             var mainWindow = new MainWindow(resourceDataContext);
             mainWindow.Show();
+        }
+
+        private ProjectViewModel CreateProject(string name)
+        {
+            return new ProjectViewModel(new Project { Name = name });
         }
 
         private static PersonalScheduleViewModel AddSchedule()

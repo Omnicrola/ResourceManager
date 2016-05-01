@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Models;
 using ResourceManagment.Data.ViewModels;
+using ResourceManagment.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -45,6 +46,27 @@ namespace ResourceManagment
         private void listOfWeeks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _resourceDataContext.SelectedSchedule = (listOfWeeks.SelectedItem as WeekScheduleViewModel);
+        }
+
+        private void MenuItemQuit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItemManagePeople_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItemManageProjects_Click(object sender, RoutedEventArgs e)
+        {
+            var projectsWindow = new ManageProjectsWindow(_resourceDataContext.Projects);
+            projectsWindow.Show();
+        }
+
+        private void MenuItemHelp_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
 
