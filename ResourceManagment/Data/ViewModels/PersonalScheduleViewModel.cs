@@ -14,7 +14,7 @@
             }
         }
 
-        PersonalScheduleViewModel(string firstName)
+        public PersonalScheduleViewModel(string firstName)
         {
             _firstName = firstName;
         }

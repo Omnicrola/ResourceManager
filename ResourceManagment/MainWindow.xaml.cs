@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Models;
+using ResourceManagment.Data.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,11 +23,26 @@ namespace ResourceManagment
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ResourceDataContext _resourceDataContext;
 
         public MainWindow(ResourceDataContext resourceDataContext)
         {
             InitializeComponent();
             DataContext = resourceDataContext;
+            _resourceDataContext = resourceDataContext;
+        }
+
+        private void buttonAddWeek_Click(object sender, RoutedEventArgs e)
+        {
+            WeekScheduleViewModel weekSchedule = new WeekScheduleViewModel(DateTime.Now);
+            weekSchedule.Schedules.Add(new PersonalScheduleViewModel("ESCH"));
+
+            _resourceDataContext.AllSchedules.Add(weekSchedule);
+        }
+
+        private void listOfWeeks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _resourceDataContext.SelectedSchedule = (listOfWeeks.SelectedItem as WeekScheduleViewModel);
         }
 
 

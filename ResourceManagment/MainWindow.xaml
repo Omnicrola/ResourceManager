@@ -30,19 +30,27 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" >
                 <TextBlock Text="Week Ending"/>
-                <ListView Name="listWeeks" Width="200"></ListView>
+                <Button Name="buttonAddWeek" Click="buttonAddWeek_Click" >Add</Button>
+                <ListView Name="listOfWeeks" Width="200" ItemsSource="{Binding AllSchedules}" SelectionChanged="listOfWeeks_SelectionChanged"  Height="122">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock Text="{Binding WeekEnding}"/>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackPanel>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
             <StackPanel Grid.Column="2" Orientation="Vertical">
                 <TextBlock Text="Resources"/>
-                <ListView ItemsSource="{Binding WeekOfResources}">
+                <ListView ItemsSource="{Binding SelectedSchedule.Schedules}" Height="153">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ListView ItemsSource="{Binding Schedules}">
-                                <WrapPanel>
-                                    <TextBlock Text="{Binding FirstName}"/>
-                                </WrapPanel>
-                            </ListView>
+                            <WrapPanel>
+                                <TextBlock Text="Name: "/>
+                                <TextBlock Text="{Binding FirstName}"/>
+                            </WrapPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

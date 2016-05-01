@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ResourceManagment.Data.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -16,6 +17,9 @@ namespace ResourceManagment
         private void Application_Start(object sender, StartupEventArgs args)
         {
             ResourceDataContext resourceDataContext = new ResourceDataContext();
+            WeekScheduleViewModel weekSchedule = new WeekScheduleViewModel(DateTime.Now);
+            weekSchedule.Schedules.Add(new PersonalScheduleViewModel("ESCH"));
+            resourceDataContext.AllSchedules.Add(weekSchedule);
             var mainWindow = new MainWindow(resourceDataContext);
             mainWindow.Show();
         }
