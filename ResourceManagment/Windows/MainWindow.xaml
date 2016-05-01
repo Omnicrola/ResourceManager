@@ -53,12 +53,12 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Initials}"/>
-                            <GridViewColumn Header="Monday" Width="100" DisplayMemberBinding="{Binding Monday}">
+                            <GridViewColumn Header="Monday" Width="100" >
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel>
-                                            <TextBlock Text="{Binding Project}"/>
-                                            <TextBlock Text="{Binding PairPartner}"/>
+                                            <TextBlock Text="{Binding Monday.Project.Name}"/>
+                                            <TextBlock Text="{Binding Monday.PairPartner.FirstName}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>

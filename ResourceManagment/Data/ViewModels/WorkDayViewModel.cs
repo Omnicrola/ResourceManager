@@ -16,5 +16,11 @@ namespace ResourceManagment.Data.ViewModels
         }
 
         public ProjectViewModel Project { get; set; }
+        public PersonViewModel PairPartner { get; set; }
+
+        public override string ToString()
+        {
+            return Project != null ? Project.Name : "None";
+        }
     }
 }
