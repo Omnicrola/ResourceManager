@@ -29,22 +29,14 @@
         </ControlTemplate>
 
         <DataTemplate x:Key="SinglePersonItemTemplate">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding Initials}" Grid.Column="0"/>
-                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Column="1" DataContext="{Binding Monday}"/>
-                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Column="2" DataContext="{Binding Tuesday}"/>
-                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Column="3" DataContext="{Binding Wednesday}"/>
-                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Column="4" DataContext="{Binding Thursday}"/>
-                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Column="5" DataContext="{Binding Friday}"/>
-            </Grid>
+            <StackPanel Orientation="Vertical" Width="100">
+                <TextBlock Text="{Binding Initials}" Grid.Row="0"/>
+                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Row="1" DataContext="{Binding Monday}"/>
+                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Row="2" DataContext="{Binding Tuesday}"/>
+                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Row="3" DataContext="{Binding Wednesday}"/>
+                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Row="4" DataContext="{Binding Thursday}"/>
+                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Row="5" DataContext="{Binding Friday}"/>
+            </StackPanel>
         </DataTemplate>
     </Window.Resources>
 
@@ -88,7 +80,13 @@
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
             <StackPanel Grid.Column="2" Orientation="Vertical">
                 <TextBlock Text="Resources"/>
-                <ItemsControl ItemsSource="{Binding SelectedSchedule.Schedules}" Height="506" ItemTemplate="{StaticResource SinglePersonItemTemplate}"/>
+                <ItemsControl ItemsSource="{Binding SelectedSchedule.Schedules}" Height="Auto" ItemTemplate="{StaticResource SinglePersonItemTemplate}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
             </StackPanel>
         </Grid>
 
