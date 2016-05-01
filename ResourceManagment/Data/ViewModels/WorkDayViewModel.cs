@@ -12,8 +12,8 @@ namespace ResourceManagment.Data.ViewModels
         public WorkDayViewModel(DateTime day)
         {
             _day = day;
-            Morning = new ResourceBlockViewModel();
-            Afternoon = new ResourceBlockViewModel();
+            Morning = new ResourceBlockViewModel(day);
+            Afternoon = new ResourceBlockViewModel(day.Add(TimeSpan.FromHours(12)));
         }
 
         public string Day { get { return _day.DayOfWeek.ToString(); } }

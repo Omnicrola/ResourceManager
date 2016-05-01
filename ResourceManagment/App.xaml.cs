@@ -28,6 +28,9 @@ namespace ResourceManagment
             var esch = new PersonViewModel("Eric", "Schreffler");
             var bvil = new PersonViewModel("Bob", "Vila");
             var kbec = new PersonViewModel("Kent", "Beck");
+            resourceDataContext.People.Add(esch);
+            resourceDataContext.People.Add(bvil);
+            resourceDataContext.People.Add(kbec);
 
             WeekScheduleViewModel weekSchedule = new WeekScheduleViewModel(new DateTime(2016, 2, 2));
             resourceDataContext.AllSchedules.Add(weekSchedule);

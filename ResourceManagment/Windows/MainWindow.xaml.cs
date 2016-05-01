@@ -55,7 +55,9 @@ namespace ResourceManagment
 
         private void Button_AlterResourceBlock(object sender, RoutedEventArgs e)
         {
-
+            ResourceBlockViewModel resourceBlock = (sender as Button).DataContext as ResourceBlockViewModel;
+            var alterBlockWindow = new AlterResourceBlockWindow(_resourceDataContext.People, _resourceDataContext.Projects, resourceBlock);
+            alterBlockWindow.Show();
         }
 
 
