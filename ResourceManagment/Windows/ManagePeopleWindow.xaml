@@ -1,14 +1,14 @@
-﻿<Window x:Class="ResourceManagment.Windows.ManageProjectsWindow"
+﻿<Window x:Class="ResourceManagment.Windows.ManagePeopleWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ResourceManagment.Windows"
         mc:Ignorable="d"
-        Title="Manage Projects"
+        Title="ManagePeopleWindow" 
         WindowStartupLocation="CenterOwner"
-        Height="300" 
-        Width="500">
+        Height="284.211" 
+        Width="508.647">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
@@ -20,16 +20,8 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <ListView Grid.Column="0"
                   x:Name="projectList"
-                  ItemsSource="{Binding Projects}"
-                          SelectedItem="{Binding SelectedProject}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <WrapPanel>
-                                <Rectangle Fill="Black" Margin="4"/>
-                                <TextBlock Text="{Binding Name}"/>
-                            </WrapPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
+                  ItemsSource="{Binding People}"
+                  SelectedItem="{Binding SelectedPerson}">
                 </ListView>
             </ScrollViewer>
         </StackPanel>
@@ -37,7 +29,8 @@
         <Canvas Grid.Column="2" Margin="5">
             <Grid >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
@@ -45,16 +38,33 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="1" Grid.Column="0" Margin="10">Name:</Label>
+                <Label Grid.Row="0" Grid.Column="0" Margin="10">First Name:</Label>
+                <TextBox 
+                    Width="200" 
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="10"
+                    x:Name ="textboxFirstName"  
+                    Text="{Binding EditedFirstName}"/>
+                <Label Grid.Row="1" Grid.Column="0" Margin="10">Last Name:</Label>
                 <TextBox 
                     Width="200" 
                     Grid.Row="1"
                     Grid.Column="1"
                     Margin="10"
-                    x:Name ="textboxProjectName"  
-                    Text="{Binding EditedProjectName}"/>
+                    x:Name ="textboxLastName"  
+                    Text="{Binding EditedLastName}"/>
+                <Label Grid.Row="2" Grid.Column="0" Margin="10">Initials:</Label>
+                <TextBox 
+                    Width="200" 
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="10"
+                    x:Name ="textboxInitials"
+                    IsEnabled="False"
+                    Text="{Binding Initials}"/>
                 <Button
-                    Grid.Row="3"
+                    Grid.Row="4"
                     Grid.Column="1"
                     Margin="10"
                     HorizontalAlignment="Right" 

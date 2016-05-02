@@ -39,13 +39,16 @@ namespace ResourceManagment
 
         private void MenuItemManagePeople_Click(object sender, RoutedEventArgs e)
         {
-
+            var peopleWindow = new ManagePeopleWindow(new AllPeopleViewModel(_resourceDataContext.People));
+            peopleWindow.Owner = this;
+            peopleWindow.ShowDialog();
         }
 
         private void MenuItemManageProjects_Click(object sender, RoutedEventArgs e)
         {
             var projectsWindow = new ManageProjectsWindow(new AllProjectsViewModel(_resourceDataContext.Projects));
-            projectsWindow.Show();
+            projectsWindow.Owner = this;
+            projectsWindow.ShowDialog();
         }
 
         private void MenuItemHelp_Click(object sender, RoutedEventArgs e)
