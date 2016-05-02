@@ -22,5 +22,11 @@ namespace ResourceManagment.Windows
             _allProjectsViewModel.SelectedProject.Name = _allProjectsViewModel.EditedProjectName;
         }
 
+        private void ButtonNewProject_Click(object sender, RoutedEventArgs e)
+        {
+            var newProject = new ProjectViewModel("New Project");
+            _allProjectsViewModel.Projects.Add(newProject);
+            _allProjectsViewModel.SelectedProject = newProject;
+        }
     }
 }
