@@ -21,42 +21,22 @@ namespace ResourceManagment.Windows
     /// </summary>
     public partial class AlterResourceBlockWindow : Window
     {
+        private AlterBlockDataContext _alterBlockDataContext;
         private ResourceBlockViewModel _resourceBlock;
 
-        public AlterResourceBlockWindow(ObservableCollection<PersonViewModel> people, ObservableCollection<ProjectViewModel> projects, ResourceBlockViewModel resourceBlock)
+        public AlterResourceBlockWindow(AlterBlockDataContext alterBlockDataContext, ResourceBlockViewModel resourceBlock)
         {
             InitializeComponent();
-            People = people;
-            Projects = projects;
-            this._resourceBlock = resourceBlock;
-            DataContext = this;
+            DataContext = alterBlockDataContext ;
+            _alterBlockDataContext = alterBlockDataContext;
+            _resourceBlock = resourceBlock;
         }
 
-        public string ResourceName
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            get
-            {
-                return "N/A";
-            }
-            set { }
+            _resourceBlock.Project = _alterBlockDataContext.Project;
+            _resourceBlock.PairPartner = _alterBlockDataContext.PairPartner;
+            Close();
         }
-        public string BlockTime
-        {
-            get
-            {
-                string morningEvening = _resourceBlock.Date.Hour < 12 ? "Morning" : "Afternoon";
-                string dayOfWeek = _resourceBlock.Date.DayOfWeek.ToString();
-                int dayOfMonth = _resourceBlock.Date.Day;
-                int month = _resourceBlock.Date.Month;
-                return String.Format("{0} of {1} on {2}/{3}", morningEvening, dayOfWeek, month, dayOfMonth);
-            }
-            set
-            {
-
-            }
-        }
-
-        public ObservableCollection<PersonViewModel> People { get; private set; }
-        public ObservableCollection<ProjectViewModel> Projects { get; private set; }
     }
 }

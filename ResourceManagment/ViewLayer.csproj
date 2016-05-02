@@ -63,6 +63,7 @@
     <Compile Include="Data\ViewModels\WeekScheduleViewModel.cs" />
     <Compile Include="Data\ViewModels\WorkDayViewModel.cs" />
     <Compile Include="Data\ViewModels\ViewModel.cs" />
+    <Compile Include="Data\AlterBlockDataContext.cs" />
     <Compile Include="Windows\AlterResourceBlockWindow.xaml.cs">
       <DependentUpon>AlterResourceBlockWindow.xaml</DependentUpon>
     </Compile>

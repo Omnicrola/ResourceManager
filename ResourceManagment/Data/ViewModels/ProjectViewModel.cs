@@ -37,5 +37,10 @@ namespace ResourceManagment
             _name = name;
             Color = new SolidColorBrush(Colors.LightCoral);
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
