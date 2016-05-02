@@ -70,6 +70,7 @@
     <Compile Include="Windows\ManageProjectsWindow.xaml.cs">
       <DependentUpon>ManageProjectsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\ViewModels\AllProjectsViewModel.cs" />
     <Page Include="Windows\AlterResourceBlockWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

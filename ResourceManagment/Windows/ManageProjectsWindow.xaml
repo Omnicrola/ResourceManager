@@ -5,31 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ResourceManagment.Windows"
         mc:Ignorable="d"
-        Title="ManageProjects" Height="300" Width="500">
+        Title="Manage Projects" Height="300" Width="500">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView Grid.Column="0" 
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ListView Grid.Column="0"
                   x:Name="projectList"
-                  ItemsSource="{Binding Projects}" >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                  ItemsSource="{Binding Projects}"
+                          SelectedItem="{Binding SelectedProject}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <Rectangle Fill="Black" Margin="4"/>
+                            <TextBlock Text="{Binding Name}"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
         <GridSplitter Width="5" Grid.Column="1"/>
-        <StackPanel Grid.Column="2" Margin="5">
-            <WrapPanel>
-                <Label>Name:</Label>
-                <TextBox Width="200" x:Name ="textboxProjectName"  Text="{Binding SelectedItem.Name, ElementName=projectList}"/>
-            </WrapPanel>
-            <WrapPanel>
-                <Button HorizontalAlignment="Right" x:Name="buttonAdd" Click="buttonAdd_Click">Add</Button>
-            </WrapPanel>
-        </StackPanel>
+        <Canvas Grid.Column="2" Margin="5">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="1" Grid.Column="0" Margin="10">Name:</Label>
+                <TextBox 
+                    Width="200" 
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="10"
+                    x:Name ="textboxProjectName"  
+                    Text="{Binding EditedProjectName}"/>
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="10"
+                    HorizontalAlignment="Right" 
+                    x:Name="buttonAdd" 
+                    Padding="4,2"
+                    Click="buttonSave_Click">Save</Button>
+            </Grid>
+        </Canvas>
     </Grid>
 </Window>

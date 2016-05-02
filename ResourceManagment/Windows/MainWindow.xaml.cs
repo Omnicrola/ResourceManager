@@ -44,7 +44,7 @@ namespace ResourceManagment
 
         private void MenuItemManageProjects_Click(object sender, RoutedEventArgs e)
         {
-            var projectsWindow = new ManageProjectsWindow(_resourceDataContext.Projects);
+            var projectsWindow = new ManageProjectsWindow(new AllProjectsViewModel(_resourceDataContext.Projects));
             projectsWindow.Show();
         }
 

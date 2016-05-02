@@ -8,19 +8,19 @@ namespace ResourceManagment.Windows
     /// </summary>
     public partial class ManageProjectsWindow : Window
     {
-        private ObservableCollection<ProjectViewModel> Projects { get; set; }
+        private AllProjectsViewModel _allProjectsViewModel;
 
-        public ManageProjectsWindow(ObservableCollection<ProjectViewModel> projects)
+        public ManageProjectsWindow(AllProjectsViewModel projectDataContext)
         {
-            Projects = projects;
             InitializeComponent();
-            DataContext = this;
+            DataContext = projectDataContext;
+            _allProjectsViewModel = projectDataContext;
         }
 
-        private void buttonAdd_Click(object sender, RoutedEventArgs e)
+        private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
-            string projectName = textboxProjectName.Text;
-            Projects.Add(new ProjectViewModel(projectName));
+            _allProjectsViewModel.SelectedProject.Name = _allProjectsViewModel.EditedProjectName;
         }
+
     }
 }
