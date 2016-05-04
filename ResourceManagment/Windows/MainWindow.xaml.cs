@@ -55,18 +55,20 @@ namespace ResourceManagment
 
         private void MenuItemHelp_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         public void AddResource_Click(object sender, RoutedEventArgs e)
         {
+            var selectedSchedule = _resourceDataContext.SelectedSchedule;
+            var addResourceWindow = new AddResourceWindow(new AddResourceViewModel(_resourceDataContext.People), selectedSchedule);
+            addResourceWindow.Owner = this;
+            addResourceWindow.ShowDialog();
 
         }
 
         private void Button_AlterResourceBlock(object sender, RoutedEventArgs e)
         {
             ResourceBlockViewModel resourceBlock = (sender as Button).DataContext as ResourceBlockViewModel;
-
             AlterBlockDataContext alterBlockDataContext = new AlterBlockDataContext(_resourceDataContext.People, _resourceDataContext.Projects, resourceBlock);
             var alterBlockWindow = new AlterResourceBlockWindow(alterBlockDataContext, resourceBlock);
             alterBlockWindow.Owner = this;

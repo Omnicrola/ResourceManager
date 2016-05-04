@@ -67,6 +67,10 @@
     <Compile Include="Data\ViewModels\ViewModel.cs" />
     <Compile Include="Data\AlterBlockDataContext.cs" />
     <Compile Include="Data\ViewModels\AllPeopleViewModel.cs" />
+    <Compile Include="Windows\AddResourceViewModel.cs" />
+    <Compile Include="Windows\AddResourceWindow.xaml.cs">
+      <DependentUpon>AddResourceWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AlterResourceBlockWindow.xaml.cs">
       <DependentUpon>AlterResourceBlockWindow.xaml</DependentUpon>
     </Compile>
@@ -79,6 +83,10 @@
       <DependentUpon>ManageProjectsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\ViewModels\AllProjectsViewModel.cs" />
+    <Page Include="Windows\AddResourceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\AlterResourceBlockWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
