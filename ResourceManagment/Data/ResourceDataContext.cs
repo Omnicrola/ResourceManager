@@ -20,12 +20,14 @@ namespace ResourceManagment
 
         public ObservableCollection<ProjectViewModel> Projects { get; internal set; }
         public ObservableCollection<PersonViewModel> People { get; internal set; }
+        public ResourceToolbarDataContext ResourceToolbarContext { get; private set; }
 
         public ResourceDataContext()
         {
             AllSchedules = new ObservableCollection<WeekScheduleViewModel>();
             Projects = new ObservableCollection<ProjectViewModel>();
             People = new ObservableCollection<PersonViewModel>();
+            ResourceToolbarContext = new ResourceToolbarDataContext();
         }
     }
 }

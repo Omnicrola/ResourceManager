@@ -85,20 +85,17 @@
             </StackPanel>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
             <StackPanel Grid.Column="2" Orientation="Vertical">
-                <ToolBar>
+                <ToolBar DataContext="{Binding ResourceToolbarContext}">
                     <TextBlock Text="Resources" Margin="4" FontSize="20" FontWeight="Bold"/>
                     <Separator/>
-                    <Label Margin="6">Filter By:</Label>
-                    <ComboBox Width="100" Name="FilterOptions">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <CheckBox IsChecked="{Binding IsSelected}"/>
-                                    <TextBlock Text="{Binding FilterName}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                    <Button Click="AddResource_Click">Add Resource</Button>
+                    <Separator/>
+                    <TextBlock Margin="8" FontWeight="Bold">Show:</TextBlock>
+                    <ToggleButton Margin="6" IsChecked="{Binding ShowDev}">DEV</ToggleButton>
+                    <ToggleButton Margin="6" IsChecked="{Binding ShowHta}">HTA</ToggleButton>
+                    <ToggleButton Margin="6" IsChecked="{Binding ShowQa}">QA</ToggleButton>
+                    <ToggleButton Margin="6" IsChecked="{Binding ShowPm}">PM</ToggleButton>
+                    <Separator/>
                 </ToolBar>
 
                 <ItemsControl ItemsSource="{Binding SelectedSchedule.Schedules}" Height="Auto" ItemTemplate="{StaticResource SinglePersonItemTemplate}">
