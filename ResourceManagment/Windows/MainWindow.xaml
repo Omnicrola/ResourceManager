@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
         xmlns:local="clr-namespace:ResourceManagment"
         mc:Ignorable="d"
         Title="Resource Schedule" Height="600" Width="898"  Margin="5" >
@@ -84,7 +85,22 @@
             </StackPanel>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
             <StackPanel Grid.Column="2" Orientation="Vertical">
-                <TextBlock Text="Resources"/>
+                <ToolBar>
+                    <TextBlock Text="Resources" Margin="4" FontSize="20" FontWeight="Bold"/>
+                    <Separator/>
+                    <Label Margin="6">Filter By:</Label>
+                    <ComboBox Width="100" Name="FilterOptions">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox IsChecked="{Binding IsSelected}"/>
+                                    <TextBlock Text="{Binding FilterName}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </ToolBar>
+
                 <ItemsControl ItemsSource="{Binding SelectedSchedule.Schedules}" Height="Auto" ItemTemplate="{StaticResource SinglePersonItemTemplate}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>

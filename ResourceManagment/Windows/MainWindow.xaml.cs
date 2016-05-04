@@ -1,6 +1,7 @@
 ﻿using ResourceManagment.Data.ViewModels;
 using ResourceManagment.Windows;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -18,6 +19,17 @@ namespace ResourceManagment
             InitializeComponent();
             DataContext = resourceDataContext;
             _resourceDataContext = resourceDataContext;
+            LoadFilterOptions();
+        }
+
+        private void LoadFilterOptions()
+        {
+            FilterOptions.ItemsSource = new List<IResourceFilter> {
+                new RoleFilter("HTA", Role.HTA),
+                new RoleFilter("DEV", Role.DEV),
+                new RoleFilter("QA", Role.QA),
+                new RoleFilter("PM", Role.PM)
+            };
         }
 
         private void buttonAddWeek_Click(object sender, RoutedEventArgs e)

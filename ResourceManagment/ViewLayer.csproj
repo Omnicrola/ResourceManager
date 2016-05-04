@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\Filtering\ResourceFilters\Role.cs" />
     <Compile Include="Data\ViewModels\ProjectViewModel.cs" />
     <Compile Include="Data\ResourceDataContext.cs" />
     <Compile Include="Data\ViewModels\PersonalScheduleViewModel.cs" />
@@ -68,6 +69,8 @@
     <Compile Include="Windows\AlterResourceBlockWindow.xaml.cs">
       <DependentUpon>AlterResourceBlockWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Filtering\ResourceFilters\RoleFilter.cs" />
+    <Compile Include="Data\Filtering\ResourceFilters\IResourceFilter.cs" />
     <Compile Include="Windows\ManagePeopleWindow.xaml.cs">
       <DependentUpon>ManagePeopleWindow.xaml</DependentUpon>
     </Compile>

@@ -6,11 +6,13 @@ namespace ResourceManagment
     {
         private string _firstName;
         private string _lastName;
+        private Role _role;
 
         public PersonViewModel(string firstName, string lastName)
         {
             _firstName = firstName;
             _lastName = lastName;
+            _role = Role.NONE;
         }
 
         public string FirstName
@@ -39,6 +41,16 @@ namespace ResourceManagment
                 return initials.ToUpper();
             }
             set { }
+        }
+
+        public Role Role
+        {
+            get { return this._role; }
+            set
+            {
+                this.Role = value;
+                FireOnPropertyChanged("Role");
+            }
         }
 
         public override string ToString()
