@@ -70,19 +70,40 @@
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" >
-                <TextBlock Text="Week Ending"/>
-                <Button Name="buttonAddWeek" Click="buttonAddWeek_Click" >Add</Button>
-                <ListView Name="listOfWeeks" Width="200" ItemsSource="{Binding AllSchedules}" SelectionChanged="listOfWeeks_SelectionChanged"  Height="473">
+            <Grid Grid.Column="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <TextBlock FontSize="18" FontWeight="Bold">Week Ending</TextBlock>
+                    <Button Name="buttonAddWeek" Click="buttonAddWeek_Click" >Add</Button>
+                </StackPanel>
+                <ListView Name="listOfWeeks"
+                          Grid.Row="1"
+                          ItemsSource="{Binding AllSchedules}" 
+                          SelectionChanged="listOfWeeks_SelectionChanged"  Height="Auto">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <WrapPanel>
-                                <TextBlock Text="{Binding WeekEnding}"/>
-                            </WrapPanel>
+                            <TextBlock Text="{Binding WeekEnding}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </StackPanel>
+                <StackPanel Grid.Row="2"  MinHeight="100" Margin="6">
+                    <TextBlock>Required Resources</TextBlock>
+                    <ItemsControl ItemsSource="{Binding RequiredProjectResources}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <TextBlock Text="{Binding Name}"/>
+                                    <TextBlock Text="{Binding PercentFilled}"/>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Grid>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
             <StackPanel Grid.Column="2" Orientation="Vertical">
                 <ToolBar DataContext="{Binding ResourceToolbarContext}">

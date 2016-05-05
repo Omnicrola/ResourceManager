@@ -39,6 +39,8 @@ namespace ResourceManagment.Data.ViewModels
         public WorkDayViewModel Thursday { get { return _workDays[5]; } }
         public WorkDayViewModel Friday { get { return _workDays[6]; } }
 
+        public Action ResourceBlockChanged { get; set; }
+
         public PersonalScheduleViewModel(DateTime dateTime, PersonViewModel personViewModel)
         {
             this.dateTime = dateTime;
@@ -51,6 +53,19 @@ namespace ResourceManagment.Data.ViewModels
             _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(2))));
             _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(1))));
             _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(0))));
+
+            foreach (var workDay in _workDays)
+            {
+                workDay.BlockChanged += IndividualBlockChanged;
+            }
+        }
+
+        private void IndividualBlockChanged()
+        {
+            if (ResourceBlockChanged != null)
+            {
+                ResourceBlockChanged();
+            }
         }
     }
 }

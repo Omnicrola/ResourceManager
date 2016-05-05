@@ -33,6 +33,8 @@ namespace ResourceManagment
             resourceDataContext.People.Add(kbec);
 
             WeekScheduleViewModel weekSchedule = new WeekScheduleViewModel(new DateTime(2016, 4, 1));
+            weekSchedule.RequiredProjectResources.Add(new RequiredResourceViewModel(wilmut, 2));
+            weekSchedule.RequiredProjectResources.Add(new RequiredResourceViewModel(dragonfly, 1));
             resourceDataContext.AllSchedules.Add(weekSchedule);
 
             var eschPersonalSchedule = new PersonalScheduleViewModel(new DateTime(2016, 4, 8), esch);
