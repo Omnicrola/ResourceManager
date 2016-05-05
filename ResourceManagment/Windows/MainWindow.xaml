@@ -88,6 +88,13 @@
                 <ToolBar DataContext="{Binding ResourceToolbarContext}">
                     <TextBlock Text="Resources" Margin="4" FontSize="20" FontWeight="Bold"/>
                     <Separator/>
+                    <Label Margin="6">Week Ending:</Label>
+                    <DatePicker Margin="6" 
+                                SelectedDate="{Binding DataContext.SelectedSchedule.WeekEnding, RelativeSource={RelativeSource AncestorType=Window}}"
+                                DisplayDateStart="2010-01-01"
+                                DisplayDateEnd="2100-01-01"
+                                Name="DatePickerCurrentWeekEnding"
+                                />
                     <Button Click="AddResource_Click">Add Resource</Button>
                     <Separator/>
                     <TextBlock Margin="8" FontWeight="Bold">Show:</TextBlock>

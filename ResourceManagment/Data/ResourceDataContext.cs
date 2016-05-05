@@ -11,11 +11,7 @@ namespace ResourceManagment
         public WeekScheduleViewModel SelectedSchedule
         {
             get { return _selectedSchedule; }
-            set
-            {
-                _selectedSchedule = value;
-                FireOnPropertyChanged("SelectedSchedule");
-            }
+            set { SetPropertyField(ref _selectedSchedule, value); }
         }
 
         public ObservableCollection<ProjectViewModel> Projects { get; internal set; }

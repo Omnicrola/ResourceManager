@@ -32,10 +32,10 @@ namespace ResourceManagment
             resourceDataContext.People.Add(bvil);
             resourceDataContext.People.Add(kbec);
 
-            WeekScheduleViewModel weekSchedule = new WeekScheduleViewModel(new DateTime(2016, 2, 2));
+            WeekScheduleViewModel weekSchedule = new WeekScheduleViewModel(new DateTime(2016, 4, 1));
             resourceDataContext.AllSchedules.Add(weekSchedule);
 
-            var eschPersonalSchedule = new PersonalScheduleViewModel(new DateTime(2016, 4, 4), esch);
+            var eschPersonalSchedule = new PersonalScheduleViewModel(new DateTime(2016, 4, 8), esch);
 
             eschPersonalSchedule.Monday.Morning.Project = wilmut;
             eschPersonalSchedule.Monday.Morning.PairPartner = bvil;

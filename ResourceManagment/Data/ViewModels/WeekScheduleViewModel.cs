@@ -9,10 +9,13 @@ namespace ResourceManagment.Data.ViewModels
 {
     public class WeekScheduleViewModel : ViewModel
     {
-        public ObservableCollection<PersonalScheduleViewModel> Schedules { get; private set; }
-        public DateTime WeekEnding { get; private set; }
+        private DateTime _weekEnding;
 
-        public WeekScheduleViewModel(DateTime weekEnding) {
+        public ObservableCollection<PersonalScheduleViewModel> Schedules { get; private set; }
+        public DateTime WeekEnding { get { return _weekEnding; } set { SetPropertyField(ref _weekEnding, value); } }
+
+        public WeekScheduleViewModel(DateTime weekEnding)
+        {
             Schedules = new ObservableCollection<PersonalScheduleViewModel>();
             WeekEnding = weekEnding;
         }

@@ -1,4 +1,6 @@
-﻿namespace ResourceManagment
+﻿using System;
+
+namespace ResourceManagment
 {
     public class ResourceToolbarDataContext : ViewModel
     {
@@ -7,15 +9,16 @@
         private bool _showPm;
         private bool _showQa;
 
+
         public ResourceToolbarDataContext()
         {
             ShowAll = true;
         }
 
-        public bool ShowHta { get { return _showHta; } set { _showHta = value; FireOnPropertyChanged("ShowHta"); } }
-        public bool ShowDev { get { return _showDev; } set { _showDev = value; FireOnPropertyChanged("ShowDev"); } }
-        public bool ShowQa { get { return _showQa; } set { _showQa = value; FireOnPropertyChanged("ShowQa"); } }
-        public bool ShowPm { get { return _showPm; } set { _showPm = value; FireOnPropertyChanged("ShowPm"); } }
+        public bool ShowHta { get { return _showHta; } set { SetPropertyField(ref _showHta, value); } }
+        public bool ShowDev { get { return _showDev; } set { SetPropertyField(ref _showDev, value); } }
+        public bool ShowQa { get { return _showQa; } set { SetPropertyField(ref _showQa, value); } }
+        public bool ShowPm { get { return _showPm; } set { SetPropertyField(ref _showPm, value); } }
         public bool ShowAll
         {
             get

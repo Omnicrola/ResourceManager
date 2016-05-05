@@ -21,7 +21,6 @@ namespace ResourceManagment
             _resourceDataContext = resourceDataContext;
         }
 
-
         private void buttonAddWeek_Click(object sender, RoutedEventArgs e)
         {
             WeekScheduleViewModel weekSchedule = new WeekScheduleViewModel(new DateTime(2016, 3, 3));
