@@ -18,7 +18,17 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Margin="10" Grid.Row="1" Grid.Column="0">Resource:</Label>
-        <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding SelectedPerson}" ItemsSource="{Binding People}"></ComboBox>
+        <ComboBox Grid.Row="1" 
+                  Grid.Column="1" 
+                  Margin="10" 
+                  SelectedItem="{Binding SelectedPerson}" 
+                  ItemsSource="{Binding People}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" Foreground="{Binding TextColor}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
         <Button Grid.Row="3" Margin="10" Width="50" Click="AddButton_Click" HorizontalAlignment="Right" Grid.Column="1">Add</Button>
     </Grid>
 </Window>

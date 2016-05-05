@@ -16,7 +16,7 @@ namespace ResourceManagment.Windows
         public AddResourceWindow(AddResourceViewModel addResourceViewModel, WeekScheduleViewModel selectedSchedule)
         {
             InitializeComponent();
-            DataContext = _windowViewModel;
+            DataContext = addResourceViewModel;
             _windowViewModel = addResourceViewModel;
             _selectedSchedule = selectedSchedule;
         }
@@ -24,9 +24,9 @@ namespace ResourceManagment.Windows
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             var selectedPerson = _windowViewModel.SelectedPerson;
-            if (selectedPerson != null)
+            if (selectedPerson != null && selectedPerson.IsSelectable)
             {
-                var personalSchedule = new PersonalScheduleViewModel(_selectedSchedule.WeekEnding, _windowViewModel.SelectedPerson);
+                var personalSchedule = new PersonalScheduleViewModel(_selectedSchedule.WeekEnding, selectedPerson.Person);
                 _selectedSchedule.Schedules.Add(personalSchedule);
                 Close();
             }

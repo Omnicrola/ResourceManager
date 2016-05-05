@@ -60,7 +60,7 @@ namespace ResourceManagment
         public void AddResource_Click(object sender, RoutedEventArgs e)
         {
             var selectedSchedule = _resourceDataContext.SelectedSchedule;
-            var addResourceWindow = new AddResourceWindow(new AddResourceViewModel(_resourceDataContext.People), selectedSchedule);
+            var addResourceWindow = new AddResourceWindow(new AddResourceViewModel(_resourceDataContext.People, selectedSchedule), selectedSchedule);
             addResourceWindow.Owner = this;
             addResourceWindow.ShowDialog();
 

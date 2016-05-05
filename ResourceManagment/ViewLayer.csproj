@@ -83,6 +83,7 @@
       <DependentUpon>ManageProjectsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\ViewModels\AllProjectsViewModel.cs" />
+    <Compile Include="Data\ViewModels\SelectablePersonViewModel.cs" />
     <Page Include="Windows\AddResourceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
