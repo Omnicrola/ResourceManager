@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:ResourceManagment"
              Startup="Application_Start">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--                 <ResourceDictionary Source="Windows\ResourceBlock.xaml"></ResourceDictionary> -->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

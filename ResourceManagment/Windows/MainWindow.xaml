@@ -13,22 +13,26 @@
 
     <Window.Resources>
         <ControlTemplate x:Key="ResourceButtonTemplate">
-            <StackPanel Background="{Binding Project.Color}" 
+            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                <StackPanel Background="{Binding Project.Color}" 
                         Margin="1" 
-                        
                         d:DataContext="{d:DesignInstance viewModels:ResourceBlockViewModel }">
-                <TextBlock Text="{Binding Project.Name, TargetNullValue='None'}" HorizontalAlignment="Center" Margin="2,4"/>
-                <TextBlock HorizontalAlignment="Center" Margin="2,4">
+                    <TextBlock Text="{Binding Project.Name, TargetNullValue='None'}" HorizontalAlignment="Center" Margin="2,4"/>
+                    <TextBlock HorizontalAlignment="Center" Margin="2,4">
                         <Run>/w</Run>
                         <Run Text="{Binding PairPartner.FirstName}"/>
-                </TextBlock>
-            </StackPanel>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
         </ControlTemplate>
 
         <Style x:Key="ResourceBlockStyle" TargetType="Button" >
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="Transparent" />
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Cursor" Value="Hand"></Setter>
+                    <Setter Property="BorderBrush" Value="Black"></Setter>
                 </Trigger>
             </Style.Triggers>
         </Style>
