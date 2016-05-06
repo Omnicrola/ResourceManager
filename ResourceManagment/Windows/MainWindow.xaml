@@ -118,7 +118,7 @@
                           SelectionChanged="listOfWeeks_SelectionChanged"  Height="Auto">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding WeekEnding}"/>
+                            <TextBlock Text="{Binding WeekEnding, StringFormat=MMMM dd yyyy}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
