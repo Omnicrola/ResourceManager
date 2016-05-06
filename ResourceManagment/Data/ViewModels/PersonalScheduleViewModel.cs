@@ -62,10 +62,7 @@ namespace ResourceManagment.Data.ViewModels
 
         private void IndividualBlockChanged()
         {
-            if (ResourceBlockChanged != null)
-            {
-                ResourceBlockChanged();
-            }
+            ResourceBlockChanged?.Invoke();
         }
     }
 }

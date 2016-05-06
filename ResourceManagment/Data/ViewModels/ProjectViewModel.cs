@@ -6,6 +6,7 @@ namespace ResourceManagment
     {
         private string _name;
         private Brush _color;
+        public static ProjectViewModel Empty { get { return new ProjectViewModel("None") { Color = Brushes.Gray }; } }
 
         public string Name
         {

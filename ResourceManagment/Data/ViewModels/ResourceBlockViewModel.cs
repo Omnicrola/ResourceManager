@@ -2,7 +2,7 @@
 
 namespace ResourceManagment.Data.ViewModels
 {
-    public class ResourceBlockViewModel :ViewModel
+    public class ResourceBlockViewModel : ViewModel
     {
         private ProjectViewModel _project;
         private PersonViewModel _pairPartner;
@@ -10,8 +10,9 @@ namespace ResourceManagment.Data.ViewModels
         public ResourceBlockViewModel(DateTime dateTime)
         {
             Date = dateTime;
+            Project = ProjectViewModel.Empty;
         }
-        public ProjectViewModel Project { get { return _project; }set { _project = value;  FireOnPropertyChanged("Project"); } }
+        public ProjectViewModel Project { get { return _project; } set { _project = value; FireOnPropertyChanged("Project"); } }
         public PersonViewModel PairPartner { get { return _pairPartner; } set { _pairPartner = value; FireOnPropertyChanged("PairPartner"); } }
         public DateTime Date { get; private set; }
     }

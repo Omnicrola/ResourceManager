@@ -3,17 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        
         xmlns:local="clr-namespace:ResourceManagment"
-        mc:Ignorable="d"
-        Title="Resource Schedule" Height="600" Width="898"  Margin="5" >
-    <Window.CommandBindings>
+        xmlns:viewModels="clr-namespace:ResourceManagment.Data.ViewModels"
 
-    </Window.CommandBindings>
+        mc:Ignorable="d"
+        Title="Resource Schedule" 
+        Height="600" Width="898"  
+        Margin="5" d:DataContext="{d:DesignInstance local:ResourceDataContext}">
 
     <Window.Resources>
         <ControlTemplate x:Key="ResourceButtonTemplate">
-            <StackPanel Background="{Binding Project.Color}" Margin="1">
+            <StackPanel Background="{Binding Project.Color}" 
+                        Margin="1" 
+                        
+                        d:DataContext="{d:DesignInstance viewModels:ResourceBlockViewModel }">
                 <TextBlock Text="{Binding Project.Name, TargetNullValue='None'}" HorizontalAlignment="Center" Margin="2,4"/>
                 <TextBlock HorizontalAlignment="Center" Margin="2,4">
                         <Run>/w</Run>
@@ -22,14 +25,39 @@
             </StackPanel>
         </ControlTemplate>
 
+        <Style x:Key="ResourceBlockStyle" TargetType="Button" >
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
         <ControlTemplate x:Key="ResourceDayBlockTemplate">
-            <StackPanel Orientation="Vertical">
-                <Button Template="{StaticResource ResourceButtonTemplate}" DataContext="{Binding Morning}" Click="Button_AlterResourceBlock"/>
-                <Button Template="{StaticResource ResourceButtonTemplate}" DataContext="{Binding Afternoon}" Click="Button_AlterResourceBlock"/>
+            <StackPanel Orientation="Vertical" d:DataContext="{d:DesignInstance viewModels:WorkDayViewModel }">
+                <Button PreviewMouseLeftButtonDown="ResourceBlock_LeftButtonDown" 
+                        PreviewMouseMove="ResourceBlock_MouseMove" 
+                        AllowDrop="True"
+                        Drop="ResourceBlock_Drop"
+                        DragEnter="ResourceBlock_DragEnter"
+                        Template="{StaticResource ResourceButtonTemplate}" 
+                        DataContext="{Binding Morning}" 
+                        Click="Button_AlterResourceBlock"
+                        Style="{StaticResource ResourceBlockStyle}"
+                        />
+                <Button PreviewMouseLeftButtonDown="ResourceBlock_LeftButtonDown" 
+                        PreviewMouseMove="ResourceBlock_MouseMove" 
+                        AllowDrop="True"
+                        Drop="ResourceBlock_Drop"
+                        DragEnter="ResourceBlock_DragEnter"
+                        Template="{StaticResource ResourceButtonTemplate}" 
+                        DataContext="{Binding Afternoon}" 
+                        Click="Button_AlterResourceBlock"
+                        Style="{StaticResource ResourceBlockStyle}"/>
             </StackPanel>
         </ControlTemplate>
 
-        <DataTemplate x:Key="SinglePersonItemTemplate">
+        <DataTemplate x:Key="SinglePersonItemTemplate" DataType="viewModels:PersonalScheduleViewModel">
             <StackPanel Orientation="Vertical" Width="100">
                 <TextBlock HorizontalAlignment="Center" Grid.Row="0">
                     <Run Text="{Binding Person.FirstName}" />
