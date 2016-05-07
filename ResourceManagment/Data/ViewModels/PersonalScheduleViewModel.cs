@@ -46,13 +46,13 @@ namespace ResourceManagment.Data.ViewModels
             this.dateTime = dateTime;
             this.personViewModel = personViewModel;
             _workDays = new ObservableCollection<WorkDayViewModel>();
-            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(6))));
-            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(5))));
-            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(4))));
-            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(3))));
-            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(2))));
-            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(1))));
-            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(0))));
+            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(6)), personViewModel));
+            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(5)), personViewModel));
+            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(4)), personViewModel));
+            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(3)), personViewModel));
+            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(2)), personViewModel));
+            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(1)), personViewModel));
+            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(0)), personViewModel));
 
             foreach (var workDay in _workDays)
             {

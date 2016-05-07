@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ResourceManagment.Windows.Main;
 
 namespace ResourceManagment
 {
@@ -14,14 +15,14 @@ namespace ResourceManagment
     public partial class MainWindow : Window
     {
         private ResourceDataContext _resourceDataContext;
-        private DragHelper _dragHelper;
+        private ResourceDragDropHandler _resourceDragDropHandler;
 
         public MainWindow(ResourceDataContext resourceDataContext)
         {
             InitializeComponent();
             DataContext = resourceDataContext;
             _resourceDataContext = resourceDataContext;
-            _dragHelper = new DragHelper();
+            _resourceDragDropHandler = new ResourceDragDropHandler();
         }
 
         private void buttonAddWeek_Click(object sender, RoutedEventArgs e)
@@ -80,7 +81,7 @@ namespace ResourceManagment
 
         private void ResourceBlock_LeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            _dragHelper.Start = e;
+            _resourceDragDropHandler.Start = e;
         }
 
         private void ResourceBlock_MouseMove(object sender, MouseEventArgs e)
@@ -88,68 +89,18 @@ namespace ResourceManagment
             var isPressed = e.LeftButton == MouseButtonState.Pressed;
             if (isPressed)
             {
-                _dragHelper.DragTo(e);
+                _resourceDragDropHandler.DragTo(e);
             }
         }
 
         private void ResourceBlock_Drop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent("resourceBlock"))
-            {
-                var resourceBlockToCopy = e.Data.GetData("resourceBlock") as ResourceBlockViewModel;
-                var button = (e.Source as Button);
-                var targetResourceBlock = button?.DataContext as ResourceBlockViewModel;
-                if (targetResourceBlock != null)
-                {
-                    if (resourceBlockToCopy != null)
-                    {
-                        targetResourceBlock.PairPartner = resourceBlockToCopy.PairPartner;
-                        targetResourceBlock.Project = resourceBlockToCopy.Project;
-                    }
-                }
-            }
+            _resourceDragDropHandler.Drop(e);
         }
 
         private void ResourceBlock_DragEnter(object sender, DragEventArgs e)
         {
-            if (!e.Data.GetDataPresent("resourceBlock") || sender == e.Source)
-            {
-                e.Effects = DragDropEffects.None;
-            }
-        }
-    }
-
-    internal class DragHelper
-    {
-        private MouseButtonEventArgs _start;
-        private Point _startPoint;
-
-        public MouseButtonEventArgs Start
-        {
-            get { return _start; }
-            set
-            {
-                _start = value;
-                _startPoint = value.GetPosition(null);
-            }
-        }
-
-        public void DragTo(MouseEventArgs mouseEventArgs)
-        {
-            var diff = _startPoint - mouseEventArgs.GetPosition(null);
-            var farEnoughHorizontally = Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance;
-            var farEnoughVertically = Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance;
-            if (farEnoughVertically &&
-                farEnoughHorizontally)
-            {
-                var source = mouseEventArgs.Source as Button;
-                var resourceBlock = source?.DataContext;
-                if (resourceBlock != null)
-                {
-                    var dataObject = new DataObject("resourceBlock", resourceBlock);
-                    DragDrop.DoDragDrop(source, dataObject, DragDropEffects.Copy);
-                }
-            }
+            _resourceDragDropHandler.DragOver(sender, e);
         }
     }
 }

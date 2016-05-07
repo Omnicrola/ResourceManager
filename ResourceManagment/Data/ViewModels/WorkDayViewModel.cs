@@ -12,11 +12,11 @@ namespace ResourceManagment.Data.ViewModels
         public string Day { get { return _day.DayOfWeek.ToString(); } }
         public Action BlockChanged { get; set; }
 
-        public WorkDayViewModel(DateTime day)
+        public WorkDayViewModel(DateTime day, PersonViewModel person)
         {
             _day = day;
-            Morning = new ResourceBlockViewModel(day);
-            Afternoon = new ResourceBlockViewModel(day.Add(TimeSpan.FromHours(12)));
+            Morning = new ResourceBlockViewModel(person, day);
+            Afternoon = new ResourceBlockViewModel(person, day.Add(TimeSpan.FromHours(12)));
             Morning.PropertyChanged += BlockPropertyUpdated;
         }
 
