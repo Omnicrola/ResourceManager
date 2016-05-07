@@ -67,7 +67,7 @@
     <Compile Include="Data\ViewModels\WorkDayViewModel.cs" />
     <Compile Include="Data\ViewModels\ViewModel.cs" />
     <Compile Include="Data\AlterBlockDataContext.cs" />
-    <Compile Include="Data\ViewModels\AllPeopleViewModel.cs" />
+    <Compile Include="Windows\ManagePeople\AllPeopleViewModel.cs" />
     <Compile Include="Windows\AddResourceViewModel.cs" />
     <Compile Include="Windows\AddResourceWindow.xaml.cs">
       <DependentUpon>AddResourceWindow.xaml</DependentUpon>
@@ -77,13 +77,13 @@
     </Compile>
     <Compile Include="Data\Filtering\ResourceFilters\RoleFilter.cs" />
     <Compile Include="Data\Filtering\ResourceFilters\IResourceFilter.cs" />
-    <Compile Include="Windows\ManagePeopleWindow.xaml.cs">
+    <Compile Include="Windows\ManagePeople\ManagePeopleWindow.xaml.cs">
       <DependentUpon>ManagePeopleWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ManageProjectsWindow.xaml.cs">
+    <Compile Include="Windows\ManageProjects\ManageProjectsWindow.xaml.cs">
       <DependentUpon>ManageProjectsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\ViewModels\AllProjectsViewModel.cs" />
+    <Compile Include="Windows\ManageProjects\AllProjectsViewModel.cs" />
     <Compile Include="Data\ViewModels\SelectablePersonViewModel.cs" />
     <Compile Include="Windows\Main\ResourceDragDropHandler.cs" />
     <Page Include="Windows\AddResourceWindow.xaml">
@@ -110,11 +110,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\ManagePeopleWindow.xaml">
+    <Page Include="Windows\ManagePeople\ManagePeopleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\ManageProjectsWindow.xaml">
+    <Page Include="Windows\ManageProjects\ManageProjectsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
