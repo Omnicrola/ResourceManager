@@ -1,12 +1,14 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace ResourceManagment.Windows
+namespace ResourceManagment.Windows.ManageProjects
 {
-    public class AllProjectsViewModel : INotifyPropertyChanged
+    public class AllProjectsViewModel : ViewModel
     {
         private string _editedProjectName;
         private ProjectViewModel _selectedProject;
+        private bool _dataHasChanged;
+        public ObservableCollection<ProjectViewModel> Projects { get; private set; }
 
         public AllProjectsViewModel(ObservableCollection<ProjectViewModel> projects)
         {
@@ -15,30 +17,39 @@ namespace ResourceManagment.Windows
         }
         public string EditedProjectName
         {
-            get
-            {
-                return _editedProjectName;
-            }
+            get { return _editedProjectName; }
             set
             {
-                _editedProjectName = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("EditedProjectName"));
+                SetPropertyField(ref _editedProjectName, value);
+                EvalDataChange();
             }
         }
 
-        public ObservableCollection<ProjectViewModel> Projects { get; private set; }
+        private void EvalDataChange()
+        {
+            if (_editedProjectName == null || _selectedProject == null)
+            {
+                return;
+            }
+            bool nameIsEdited = !_editedProjectName.Equals(_selectedProject.Name);
+            DataHasChanged = nameIsEdited;
+        }
+
         public ProjectViewModel SelectedProject
         {
-            get
-            {
-                return _selectedProject;
-            }
+            get { return _selectedProject; }
             set
             {
-                _selectedProject = value;
-                EditedProjectName = _selectedProject.Name;
-                PropertyChanged(this, new PropertyChangedEventArgs("SelectedProject"));
+                SetPropertyField(ref _selectedProject, value);
+                EditedProjectName = _selectedProject == null ? "" : _selectedProject.Name;
+                DataHasChanged = false;
             }
+        }
+
+        public bool DataHasChanged
+        {
+            get { return _dataHasChanged; }
+            set { SetPropertyField(ref _dataHasChanged, value); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

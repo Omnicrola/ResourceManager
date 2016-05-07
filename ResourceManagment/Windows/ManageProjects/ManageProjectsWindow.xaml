@@ -1,12 +1,14 @@
-﻿<Window x:Class="ResourceManagment.Windows.ManageProjectsWindow"
+﻿<Window x:Class="ResourceManagment.Windows.ManageProjects.ManageProjectsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ResourceManagment.Windows"
+        xmlns:manageProjects="clr-namespace:ResourceManagment.Windows.ManageProjects"
         mc:Ignorable="d"
         Title="Manage Projects"
         WindowStartupLocation="CenterOwner"
+        d:DataContext="{d:DesignInstance manageProjects:AllProjectsViewModel}"
         Height="300" 
         Width="500">
     <Grid>
@@ -52,7 +54,7 @@
                     Grid.Column="1"
                     Margin="10"
                     x:Name ="textboxProjectName"  
-                    Text="{Binding EditedProjectName}"/>
+                    Text="{Binding EditedProjectName, UpdateSourceTrigger=PropertyChanged}"/>
                 <Button
                     Grid.Row="3"
                     Grid.Column="1"
@@ -60,7 +62,16 @@
                     HorizontalAlignment="Right" 
                     x:Name="buttonAdd" 
                     Padding="4,2"
+                    IsEnabled="{Binding DataHasChanged}"
                     Click="buttonSave_Click">Save</Button>
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="10"
+                    HorizontalAlignment="Left" 
+                    x:Name="buttonCancel" 
+                    Padding="4,2"
+                    Click="buttonCancel_Click">Cancel</Button>
             </Grid>
         </Canvas>
     </Grid>

@@ -13,7 +13,7 @@ namespace ResourceManagment
         private void Application_Start(object sender, StartupEventArgs args)
         {
             var dataContext = createDataContext();
-            var mainWindow = new MainWindow(dataContext);
+            var mainWindow = new Windows.Main.MainWindow(dataContext);
             mainWindow.Show();
         }
 

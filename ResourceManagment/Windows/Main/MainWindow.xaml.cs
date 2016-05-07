@@ -1,13 +1,12 @@
-﻿using ResourceManagment.Data.ViewModels;
-using ResourceManagment.Windows;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ResourceManagment.Windows.Main;
+using ResourceManagment.Data.ViewModels;
+using ResourceManagment.Windows.ManagePeople;
+using ResourceManagment.Windows.ManageProjects;
 
-namespace ResourceManagment
+namespace ResourceManagment.Windows.Main
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -44,14 +43,14 @@ namespace ResourceManagment
 
         private void MenuItemManagePeople_Click(object sender, RoutedEventArgs e)
         {
-            var peopleWindow = new ManagePeopleWindow(new AllPeopleViewModel(_resourceDataContext.People));
+            var peopleWindow = new ManagePeople.ManagePeopleWindow(new AllPeopleViewModel(_resourceDataContext.People));
             peopleWindow.Owner = this;
             peopleWindow.ShowDialog();
         }
 
         private void MenuItemManageProjects_Click(object sender, RoutedEventArgs e)
         {
-            var projectsWindow = new ManageProjectsWindow(new AllProjectsViewModel(_resourceDataContext.Projects));
+            var projectsWindow = new ManageProjects.ManageProjectsWindow(new AllProjectsViewModel(_resourceDataContext.Projects));
             projectsWindow.Owner = this;
             projectsWindow.ShowDialog();
         }
