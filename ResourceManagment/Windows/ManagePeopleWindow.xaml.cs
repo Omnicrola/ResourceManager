@@ -43,5 +43,11 @@ namespace ResourceManagment.Windows
             _allPeopleViewModel.SelectedPerson = newPerson;
         }
 
+        private void buttonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            _allPeopleViewModel.SelectedPerson = null;
+            _allPeopleViewModel.EditedFirstName = null;
+            _allPeopleViewModel.EditedLastName = null;
+        }
     }
 }

@@ -68,11 +68,20 @@
                     Grid.Row="4"
                     Grid.Column="1"
                     Margin="10"
+                    HorizontalAlignment="Left"
+                    x:Name="buttonCancel"
+                    Padding="4,2"
+                    Click="buttonCancel_Click">Cancel</Button>
+                <Button
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Margin="10"
                     HorizontalAlignment="Right" 
                     x:Name="buttonAdd" 
                     Padding="4,2"
                     IsEnabled="{Binding DataHasChanged}"
                     Click="buttonSave_Click">Save</Button>
+
             </Grid>
         </Canvas>
     </Grid>

@@ -72,8 +72,11 @@ namespace ResourceManagment.Windows
             set
             {
                 SetPropertyField(ref _selectedPerson, value);
-                EditedFirstName = value.FirstName;
-                EditedLastName = value.LastName;
+                if (value != null)
+                {
+                    EditedFirstName = value.FirstName;
+                    EditedLastName = value.LastName;
+                }
                 DataHasChanged = false;
             }
         }
