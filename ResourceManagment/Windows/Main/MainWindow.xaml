@@ -62,7 +62,9 @@
         </ControlTemplate>
 
         <DataTemplate x:Key="SinglePersonItemTemplate" DataType="viewModels:PersonalScheduleViewModel">
-            <StackPanel Orientation="Vertical" Width="100">
+            <StackPanel Orientation="Vertical" 
+                        Width="100"
+                        MouseMove="ToggleResourceDragMode">
                 <TextBlock HorizontalAlignment="Center" Grid.Row="0">
                     <Run Text="{Binding Person.FirstName}" />
                     <Run Text="{Binding Person.LastName}"/>

@@ -81,7 +81,7 @@ namespace ResourceManagment
 
         private void ResourceBlock_LeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            _resourceDragDropHandler.Start = e;
+            _resourceDragDropHandler.StartDragging(e);
         }
 
         private void ResourceBlock_MouseMove(object sender, MouseEventArgs e)
@@ -102,5 +102,25 @@ namespace ResourceManagment
         {
             _resourceDragDropHandler.DragOver(sender, e);
         }
+
+        private void ToggleResourceDragMode(object sender, MouseEventArgs e)
+        {
+            var ctrlIsPressed = (Keyboard.Modifiers & ModifierKeys.Control) != 0;
+            var shiftIsPressed = (Keyboard.Modifiers & ModifierKeys.Shift) != 0;
+            if (ctrlIsPressed)
+            {
+                _resourceDragDropHandler.Mode = DragDropMode.SINGLE;
+            }
+            else if (shiftIsPressed)
+            {
+                _resourceDragDropHandler.Mode = DragDropMode.PAINT;
+            }
+            else
+            {
+                _resourceDragDropHandler.Mode = DragDropMode.NONE;
+            }
+
+        }
     }
+
 }
