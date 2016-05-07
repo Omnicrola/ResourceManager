@@ -26,12 +26,14 @@ namespace ResourceManagment.Windows
             InitializeComponent();
             DataContext = peopleViewModel;
             _allPeopleViewModel = peopleViewModel;
+
         }
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
             _allPeopleViewModel.SelectedPerson.FirstName = _allPeopleViewModel.EditedFirstName;
             _allPeopleViewModel.SelectedPerson.LastName = _allPeopleViewModel.EditedLastName;
+            _allPeopleViewModel.DataHasChanged = false;
         }
 
         private void ButtonNewProject_Click(object sender, RoutedEventArgs e)

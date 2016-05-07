@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="ManagePeopleWindow" 
         WindowStartupLocation="CenterOwner"
+        d:DataContext="{d:DesignInstance local:AllPeopleViewModel}"
         Height="284.211" 
         Width="508.647">
     <Grid>
@@ -45,7 +46,7 @@
                     Grid.Column="1"
                     Margin="10"
                     x:Name ="textboxFirstName"  
-                    Text="{Binding EditedFirstName}"/>
+                    Text="{Binding EditedFirstName, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Grid.Row="1" Grid.Column="0" Margin="10">Last Name:</Label>
                 <TextBox 
                     Width="200" 
@@ -53,7 +54,7 @@
                     Grid.Column="1"
                     Margin="10"
                     x:Name ="textboxLastName"  
-                    Text="{Binding EditedLastName}"/>
+                    Text="{Binding EditedLastName, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Grid.Row="2" Grid.Column="0" Margin="10">Initials:</Label>
                 <TextBox 
                     Width="200" 
@@ -70,6 +71,7 @@
                     HorizontalAlignment="Right" 
                     x:Name="buttonAdd" 
                     Padding="4,2"
+                    IsEnabled="{Binding DataHasChanged}"
                     Click="buttonSave_Click">Save</Button>
             </Grid>
         </Canvas>

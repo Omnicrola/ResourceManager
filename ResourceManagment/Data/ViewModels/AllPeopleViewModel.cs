@@ -4,11 +4,12 @@ using System.ComponentModel;
 
 namespace ResourceManagment.Windows
 {
-    public class AllPeopleViewModel : INotifyPropertyChanged
+    public class AllPeopleViewModel : ViewModel
     {
         private string _editedFirstName;
         private string _editedLastName;
         private PersonViewModel _selectedPerson;
+        private bool _dataHasChanged;
 
         public ObservableCollection<PersonViewModel> People { get; private set; }
 
@@ -21,8 +22,8 @@ namespace ResourceManagment.Windows
         {
             get
             {
-                string first = _editedFirstName != null ? _editedFirstName : "";
-                string last = _editedLastName != null ? _editedLastName : "";
+                string first = _editedFirstName ?? "";
+                string last = _editedLastName ?? "";
                 int len1 = Math.Min(first.Length, 1);
                 int len2 = Math.Min(last.Length, 3);
                 string initials = first.Substring(0, len1) + last.Substring(0, len2);
@@ -35,33 +36,57 @@ namespace ResourceManagment.Windows
             get { return _editedFirstName; }
             set
             {
-                _editedFirstName = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("EditedFirstName"));
-                PropertyChanged(this, new PropertyChangedEventArgs("Initials"));
+                SetPropertyField(ref _editedFirstName, value);
+                NotifyInitialsChanged();
+                EvaluateChange();
             }
         }
+
         public string EditedLastName
         {
             get { return _editedLastName; }
             set
             {
-                _editedLastName = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("EditedLastName"));
-                PropertyChanged(this, new PropertyChangedEventArgs("Initials"));
+                SetPropertyField(ref _editedLastName, value);
+                NotifyInitialsChanged();
+                EvaluateChange();
             }
         }
+
+        private void EvaluateChange()
+        {
+            if (_editedFirstName == null ||
+                _editedLastName == null ||
+                _selectedPerson == null)
+            {
+                return;
+            }
+            bool firstNameChanged = !_editedFirstName.Equals(_selectedPerson.FirstName);
+            bool lastNameChanged = !_editedLastName.Equals(_selectedPerson.LastName);
+            DataHasChanged = firstNameChanged || lastNameChanged;
+        }
+
         public PersonViewModel SelectedPerson
         {
             get { return _selectedPerson; }
             set
             {
-                _selectedPerson = value;
+                SetPropertyField(ref _selectedPerson, value);
                 EditedFirstName = value.FirstName;
                 EditedLastName = value.LastName;
-                PropertyChanged(this, new PropertyChangedEventArgs("SelectedPerson"));
+                DataHasChanged = false;
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyInitialsChanged()
+        {
+            FireOnPropertyChanged("Initials");
+        }
+
+        public bool DataHasChanged
+        {
+            get { return _dataHasChanged; }
+            set { SetPropertyField(ref _dataHasChanged, value); }
+        }
     }
 }
