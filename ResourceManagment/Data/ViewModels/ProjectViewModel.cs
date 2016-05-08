@@ -29,7 +29,7 @@ namespace ResourceManagment
             set
             {
                 _color = value;
-                FireOnPropertyChanged("Color");
+                FireOnPropertyChanged("WeekColor");
             }
         }
 

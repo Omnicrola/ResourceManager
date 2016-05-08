@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:ResourceManagment.Windows.ManageWeeklySchedule"
         xmlns:viewModel="clr-namespace:ResourceManagment.Data.ViewModels"
         mc:Ignorable="d"
@@ -33,8 +34,13 @@
         <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}">Week Ending:</Label>
         <DatePicker Grid.Row="0" Grid.Column="1" Margin="10" SelectedDate="{Binding WeekEnding}"></DatePicker>
 
-        <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource LabelStyle}">Color:</Label>
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="10" IsEnabled="False"></TextBox>
+        <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource LabelStyle}">WeekColor:</Label>
+        <xctk:ColorPicker Grid.Row="1" Grid.Column="1" 
+                          Width="100" 
+                          HorizontalAlignment="Left" 
+                          Margin="10" 
+                          DisplayColorAndName="True"
+                          SelectedColor="{Binding WeekColor}"/>
 
         <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource LabelStyle}">Notes:</Label>
         <TextBox Grid.Row="2" Grid.Column="1" 
@@ -47,3 +53,4 @@
         <Button Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" Click="CancelButton_Click">Cancel</Button>
     </Grid>
 </Window>
+
