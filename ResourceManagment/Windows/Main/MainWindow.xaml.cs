@@ -2,9 +2,11 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ResourceManagment.Data;
 using ResourceManagment.Data.ViewModels;
 using ResourceManagment.Windows.ManagePeople;
 using ResourceManagment.Windows.ManageProjects;
+using ResourceManagment.Windows.ManageWeeklySchedule;
 
 namespace ResourceManagment.Windows.Main
 {
@@ -123,8 +125,11 @@ namespace ResourceManagment.Windows.Main
 
         private void EditWeeklySchedule_Click(object sender, RoutedEventArgs e)
         {
-
+            var button = e.Source as Button;
+            var targetSchedule = button.DataContext as WeekScheduleViewModel;
+            var editableWeeklySchedule = new EditableWeeklyScheduleViewModel(targetSchedule);
+            var editWeeklyScheduleWindow = new EditWeeklyScheduleWindow(editableWeeklySchedule) { Owner = this };
+            editWeeklyScheduleWindow.ShowDialog();
         }
     }
-
 }

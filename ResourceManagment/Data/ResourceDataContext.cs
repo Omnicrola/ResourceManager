@@ -1,7 +1,7 @@
-﻿using ResourceManagment.Data.ViewModels;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using ResourceManagment.Data.ViewModels;
 
-namespace ResourceManagment
+namespace ResourceManagment.Data
 {
     public class ResourceDataContext : ViewModel
     {

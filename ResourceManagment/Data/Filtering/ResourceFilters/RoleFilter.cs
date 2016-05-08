@@ -1,5 +1,4 @@
-﻿using System;
-using ResourceManagment.Data.ViewModels;
+﻿using ResourceManagment.Data.ViewModels;
 
 namespace ResourceManagment
 {

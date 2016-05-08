@@ -57,6 +57,8 @@
     </ApplicationDefinition>
     <Compile Include="Data\Filtering\ResourceFilters\Role.cs" />
     <Compile Include="Data\ResourceToolbarDataContext.cs" />
+    <Compile Include="Data\ViewModels\EditableWeeklyScheduleViewModel.cs" />
+    <Compile Include="Data\ViewModels\IWeekScheduleViewModel.cs" />
     <Compile Include="Data\ViewModels\ProjectViewModel.cs" />
     <Compile Include="Data\ResourceDataContext.cs" />
     <Compile Include="Data\ViewModels\PersonalScheduleViewModel.cs" />
@@ -86,6 +88,9 @@
     <Compile Include="Windows\ManageProjects\AllProjectsViewModel.cs" />
     <Compile Include="Data\ViewModels\SelectablePersonViewModel.cs" />
     <Compile Include="Windows\Main\ResourceDragDropHandler.cs" />
+    <Compile Include="Windows\ManageWeeklySchedule\EditWeeklyScheduleWindow.xaml.cs">
+      <DependentUpon>EditWeeklyScheduleWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Windows\AddResourceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -115,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ManageProjects\ManageProjectsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ManageWeeklySchedule\EditWeeklyScheduleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

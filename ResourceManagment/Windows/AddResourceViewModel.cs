@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using ResourceManagment.Data.ViewModels;
 using System.Collections.Generic;
 using System.Linq;

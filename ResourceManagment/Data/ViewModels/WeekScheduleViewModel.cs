@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ResourceManagment.Data.ViewModels
 {
-    public class WeekScheduleViewModel : ViewModel
+    public class WeekScheduleViewModel : ViewModel, IWeekScheduleViewModel
     {
         private DateTime _weekEnding;
+        private string _notes;
 
-        public ObservableCollection<PersonalScheduleViewModel> Schedules { get; private set; }
-        public DateTime WeekEnding { get { return _weekEnding; } set { SetPropertyField(ref _weekEnding, value); } }
+
+        public ObservableCollection<PersonalScheduleViewModel> Schedules { get; set; }
         public ObservableCollection<RequiredResourceViewModel> RequiredProjectResources { get; set; }
+        public DateTime WeekEnding { get { return _weekEnding; } set { SetPropertyField(ref _weekEnding, value); } }
+        public string Notes { get { return _notes; } set { SetPropertyField(ref _notes, value); } }
 
         public Action BlockChanged { get; set; }
 
@@ -25,6 +24,11 @@ namespace ResourceManagment.Data.ViewModels
             WeekEnding = weekEnding;
 
             Schedules.CollectionChanged += UpdateObservers;
+        }
+
+        public void Save()
+        {
+
         }
 
         private void UpdateObservers(object sender, NotifyCollectionChangedEventArgs e)
@@ -42,5 +46,6 @@ namespace ResourceManagment.Data.ViewModels
                 requirement.Recalculate(this);
             }
         }
+
     }
 }

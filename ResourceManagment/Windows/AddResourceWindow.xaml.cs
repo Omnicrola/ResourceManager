@@ -1,6 +1,4 @@
 ﻿using ResourceManagment.Data.ViewModels;
-using System;
-using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace ResourceManagment.Windows

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ResourceManagment
+﻿namespace ResourceManagment
 {
     public class ResourceToolbarDataContext : ViewModel
     {

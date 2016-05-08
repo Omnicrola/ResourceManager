@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 namespace ResourceManagment.Windows.ManageProjects
 {
@@ -52,6 +51,5 @@ namespace ResourceManagment.Windows.ManageProjects
             set { SetPropertyField(ref _dataHasChanged, value); }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

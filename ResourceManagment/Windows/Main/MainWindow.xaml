@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ResourceManagment"
         xmlns:viewModels="clr-namespace:ResourceManagment.Data.ViewModels"
+        xmlns:data="clr-namespace:ResourceManagment.Data"
 
         mc:Ignorable="d"
         Title="Resource Schedule" 
         Height="600" Width="898"  
-        Margin="5" d:DataContext="{d:DesignInstance local:ResourceDataContext}">
+        Margin="5" d:DataContext="{d:DesignInstance data:ResourceDataContext}">
 
     <Window.Resources>
         <BitmapImage x:Key="Gear16" UriSource="../../Assets/Icons/gear16.png" />
@@ -67,17 +68,17 @@
             <StackPanel Orientation="Vertical" 
                         Width="100"
                         MouseMove="ToggleResourceDragMode">
-                <TextBlock HorizontalAlignment="Center" Grid.Row="0">
+                <TextBlock HorizontalAlignment="Center">
                     <Run Text="{Binding Person.FirstName}" />
                     <Run Text="{Binding Person.LastName}"/>
                     <LineBreak/>
                     <Run Text="{Binding Person.Initials}"/>
                 </TextBlock>
-                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Row="1" DataContext="{Binding Monday}"/>
-                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Row="2" DataContext="{Binding Tuesday}"/>
-                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Row="3" DataContext="{Binding Wednesday}"/>
-                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Row="4" DataContext="{Binding Thursday}"/>
-                <Button Template="{StaticResource ResourceDayBlockTemplate}" Grid.Row="5" DataContext="{Binding Friday}"/>
+                <Button Template="{StaticResource ResourceDayBlockTemplate}" DataContext="{Binding Monday}"/>
+                <Button Template="{StaticResource ResourceDayBlockTemplate}" DataContext="{Binding Tuesday}"/>
+                <Button Template="{StaticResource ResourceDayBlockTemplate}" DataContext="{Binding Wednesday}"/>
+                <Button Template="{StaticResource ResourceDayBlockTemplate}" DataContext="{Binding Thursday}"/>
+                <Button Template="{StaticResource ResourceDayBlockTemplate}" DataContext="{Binding Friday}"/>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
