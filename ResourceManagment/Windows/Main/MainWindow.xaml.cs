@@ -120,6 +120,11 @@ namespace ResourceManagment.Windows.Main
             }
 
         }
+
+        private void EditWeeklySchedule_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 }

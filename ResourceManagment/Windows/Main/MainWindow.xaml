@@ -12,6 +12,8 @@
         Margin="5" d:DataContext="{d:DesignInstance local:ResourceDataContext}">
 
     <Window.Resources>
+        <BitmapImage x:Key="Gear16" UriSource="../../Assets/Icons/gear16.png" />
+
         <ControlTemplate x:Key="ResourceButtonTemplate">
             <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                 <StackPanel Background="{Binding Project.Color}" 
@@ -120,7 +122,26 @@
                           SelectionChanged="listOfWeeks_SelectionChanged"  Height="Auto">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding WeekEnding, StringFormat=MMMM dd yyyy}"/>
+                            <WrapPanel>
+                                <Button Padding="2" 
+                                        Margin="2" 
+                                        Background="Transparent"  
+                                        BorderThickness="0"
+                                        Click="EditWeeklySchedule_Click">
+                                    <Button.Style>
+                                        <Style>
+                                            <Setter Property="Button.Visibility" Value="Hidden"></Setter>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=IsMouseOver}" Value="True">
+                                                    <Setter Property="Button.Visibility" Value="Visible"></Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <Image Source="{StaticResource Gear16}"></Image>
+                                </Button>
+                                <TextBlock Margin="2" VerticalAlignment="Center" Text="{Binding WeekEnding, StringFormat=MMMM dd yyyy}"/>
+                            </WrapPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
