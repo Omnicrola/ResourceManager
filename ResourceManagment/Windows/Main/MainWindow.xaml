@@ -15,13 +15,34 @@
     <Window.Resources>
         <BitmapImage x:Key="Gear16" UriSource="../../Assets/Icons/gear16.png" />
         <BitmapImage x:Key="GreenPlus" UriSource="../../Assets/Icons/plus16.png" />
+        <BitmapImage x:Key="Pencil16" UriSource="../../Assets/Icons/pencil16.png" />
 
-        <ControlTemplate x:Key="ResourceButtonTemplate">
+        <ControlTemplate x:Key="ResourceButtonTemplate" TargetType="Button">
             <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                 <StackPanel Background="{Binding Project.Color}" 
                         Margin="1" 
+                                HorizontalAlignment="Stretch"
                         d:DataContext="{d:DesignInstance viewModels:ResourceBlockViewModel }">
-                    <TextBlock Text="{Binding Project.Name, TargetNullValue='None'}" HorizontalAlignment="Center" Margin="2,4"/>
+                    <WrapPanel>
+                        <Button Click="Button_AlterResourceBlock"
+                                Background="Transparent"
+                                Width="16"
+                                Height="16"
+                                BorderThickness="0">
+                            <Button.Style>
+                                <Style>
+                                    <Setter Property="Button.Visibility" Value="Hidden"></Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=StackPanel}, Path=IsMouseOver}" Value="True">
+                                            <Setter Property="Button.Visibility" Value="Visible"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Image Source="{StaticResource Pencil16}"/>
+                        </Button>
+                        <TextBlock Text="{Binding Project.Name, TargetNullValue='None'}" HorizontalAlignment="Center" Margin="2,4"/>
+                    </WrapPanel>
                     <TextBlock HorizontalAlignment="Center" Margin="2,4">
                         <Run>/w</Run>
                         <Run Text="{Binding PairPartner.FirstName}"/>
@@ -33,6 +54,7 @@
         <Style x:Key="ResourceBlockStyle" TargetType="Button" >
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="AllowDrop" Value="True"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Cursor" Value="Hand"></Setter>
@@ -45,17 +67,14 @@
             <StackPanel Orientation="Vertical" d:DataContext="{d:DesignInstance viewModels:WorkDayViewModel }">
                 <Button PreviewMouseLeftButtonDown="ResourceBlock_LeftButtonDown" 
                         PreviewMouseMove="ResourceBlock_MouseMove" 
-                        AllowDrop="True"
                         Drop="ResourceBlock_Drop"
                         DragEnter="ResourceBlock_DragEnter"
                         Template="{StaticResource ResourceButtonTemplate}" 
                         DataContext="{Binding Morning}" 
-                        Click="Button_AlterResourceBlock"
                         Style="{StaticResource ResourceBlockStyle}"
                         />
                 <Button PreviewMouseLeftButtonDown="ResourceBlock_LeftButtonDown" 
                         PreviewMouseMove="ResourceBlock_MouseMove" 
-                        AllowDrop="True"
                         Drop="ResourceBlock_Drop"
                         DragEnter="ResourceBlock_DragEnter"
                         Template="{StaticResource ResourceButtonTemplate}" 
