@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Windows.Media;
 
 namespace ResourceManagment.Data.ViewModels
 {
@@ -9,7 +10,7 @@ namespace ResourceManagment.Data.ViewModels
         ObservableCollection<PersonalScheduleViewModel> Schedules { get; set; }
         ObservableCollection<RequiredResourceViewModel> RequiredProjectResources { get; set; }
         DateTime WeekEnding { get; set; }
-        System.Windows.Media.Color WeekColor { get; set; }
+        Color WeekColor { get; set; }
 
         void Save();
 

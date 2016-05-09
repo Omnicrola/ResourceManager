@@ -120,10 +120,28 @@
                 <ListView Name="listOfWeeks"
                           Grid.Row="1"
                           ItemsSource="{Binding AllSchedules}" 
-                          SelectionChanged="listOfWeeks_SelectionChanged"  Height="Auto">
+                          SelectionChanged="listOfWeeks_SelectionChanged"  Height="Auto" >
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <WrapPanel>
+                            <WrapPanel HorizontalAlignment="Stretch" >
+                                <WrapPanel.Style>
+                                    <Style TargetType="WrapPanel">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" Opacity="0.5">
+                                                    <GradientStop Color="{Binding WeekColor}" Offset="0"/>
+                                                    <GradientStop Color="Transparent"  Offset="0.5"/>
+                                                    <GradientStop Color="{Binding WeekColor}" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </WrapPanel.Style>
                                 <Button Padding="2" 
                                         Margin="2" 
                                         Background="Transparent"  

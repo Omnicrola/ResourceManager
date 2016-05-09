@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\Converters\ColorToBrushConverter.cs" />
     <Compile Include="Data\Filtering\ResourceFilters\Role.cs" />
     <Compile Include="Data\ResourceToolbarDataContext.cs" />
     <Compile Include="Data\ViewModels\EditableWeeklyScheduleViewModel.cs" />

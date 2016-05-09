@@ -6,11 +6,13 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:ResourceManagment.Windows.ManageWeeklySchedule"
         xmlns:viewModel="clr-namespace:ResourceManagment.Data.ViewModels"
+        xmlns:converters="clr-namespace:ResourceManagment.Data.Converters"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         d:DataContext="{d:DesignInstance viewModel:IWeekScheduleViewModel}"
         Title="Edit Schedule Details" Height="328.195" Width="446.617">
     <Window.Resources>
+        <converters:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="Margin" Value="4"/>
             <Setter Property="Padding" Value="4,2"/>
