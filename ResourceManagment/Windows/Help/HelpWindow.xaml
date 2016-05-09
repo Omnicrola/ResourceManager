@@ -1,0 +1,22 @@
+﻿<Window x:Class="ResourceManagment.Windows.Help.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ResourceManagment.Windows.Help"
+        xmlns:properties="clr-namespace:ResourceManagment.Properties"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Title="Help" Height="204.136" Width="396.993">
+    <StackPanel Margin="5">
+        <TextBlock Margin="0,5">Resource Manager v0.2</TextBlock>
+        <!--        <TextBlock Text="{Binding Source={x:Static properties:Settings.Default}, Path=Properties}"/>-->
+        <TextBlock Margin="0,5">Build Date: 2016-05-08</TextBlock>
+        <TextBlock>Author : Eric Schreffler</TextBlock>
+        <TextBlock Margin="0,5">
+            <Run>Github :</Run>
+            <Hyperlink>https://github.com/Omnicrola/ResourceManager</Hyperlink>
+        </TextBlock>
+    </StackPanel>
+</Window>

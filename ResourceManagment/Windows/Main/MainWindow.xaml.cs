@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using ResourceManagment.Data;
 using ResourceManagment.Data.ViewModels;
+using ResourceManagment.Windows.Help;
 using ResourceManagment.Windows.ManagePeople;
 using ResourceManagment.Windows.ManageProjects;
 using ResourceManagment.Windows.ManageWeeklySchedule;
@@ -40,7 +41,7 @@ namespace ResourceManagment.Windows.Main
 
         private void MenuItemQuit_Click(object sender, RoutedEventArgs e)
         {
-
+            Application.Current.Shutdown(0);
         }
 
         private void MenuItemManagePeople_Click(object sender, RoutedEventArgs e)
@@ -59,6 +60,8 @@ namespace ResourceManagment.Windows.Main
 
         private void MenuItemHelp_Click(object sender, RoutedEventArgs e)
         {
+            var helpWindow = new HelpWindow() { Owner = this };
+            helpWindow.ShowDialog();
         }
 
         public void AddResource_Click(object sender, RoutedEventArgs e)
