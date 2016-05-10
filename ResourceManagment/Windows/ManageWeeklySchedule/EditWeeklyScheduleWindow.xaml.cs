@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using ResourceManagment.Data.ViewModels;
 
 namespace ResourceManagment.Windows.ManageWeeklySchedule
@@ -17,9 +18,12 @@ namespace ResourceManagment.Windows.ManageWeeklySchedule
             _weeklySchedule = weeklySchedule;
         }
 
+        public Action ScheduleSaved { get; set; }
+
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             _weeklySchedule.Save();
+            ScheduleSaved?.Invoke();
             Close();
         }
 

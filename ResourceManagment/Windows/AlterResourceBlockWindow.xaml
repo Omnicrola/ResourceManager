@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ResourceManagment.Windows"
         mc:Ignorable="d"
-        Title="AlterResourceBlockWindow" Height="272" Width="348.153">
+        Title="Edit Resource Block" Height="272" Width="348.153">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>

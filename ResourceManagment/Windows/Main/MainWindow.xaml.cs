@@ -29,9 +29,15 @@ namespace ResourceManagment.Windows.Main
 
         private void buttonAddWeek_Click(object sender, RoutedEventArgs e)
         {
-            WeekScheduleViewModel weekSchedule = new WeekScheduleViewModel(new DateTime(2016, 3, 3));
-            weekSchedule.Schedules.Add(new PersonalScheduleViewModel(new DateTime(2016, 2, 2), new PersonViewModel("Bob", "Vila")));
-            _resourceDataContext.AllSchedules.Add(weekSchedule);
+            var weekScheduleViewModel = new WeekScheduleViewModel(DateTime.Now);
+            var editableModel = new EditableWeeklyScheduleViewModel(weekScheduleViewModel);
+            var editWeeklyScheduleWindow = new EditWeeklyScheduleWindow(editableModel) { Owner = this };
+            editWeeklyScheduleWindow.ScheduleSaved = () =>
+            {
+                _resourceDataContext.AllSchedules.Add(weekScheduleViewModel);
+            };
+            editWeeklyScheduleWindow.ShowDialog();
+
         }
 
         private void listOfWeeks_SelectionChanged(object sender, SelectionChangedEventArgs e)

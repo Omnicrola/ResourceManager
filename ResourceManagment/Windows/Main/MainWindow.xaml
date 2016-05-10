@@ -138,7 +138,11 @@
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0">
                     <TextBlock FontSize="18" FontWeight="Bold" Margin="10">Week Ending</TextBlock>
-                    <Button Name="buttonAddWeek" HorizontalContentAlignment="Left"  Margin="10" Padding="4" Click="buttonAddWeek_Click" >
+                    <Button Name="buttonAddWeek" 
+                            HorizontalContentAlignment="Left"  
+                            Margin="10" 
+                            Padding="4" 
+                            Click="buttonAddWeek_Click" >
                         <WrapPanel >
                             <Image Source="{StaticResource GreenPlus}" Width="16" Margin="5,0"/>
                             <TextBlock Text="Add Week"></TextBlock>
