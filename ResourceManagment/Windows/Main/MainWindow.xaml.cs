@@ -140,5 +140,10 @@ namespace ResourceManagment.Windows.Main
             var editWeeklyScheduleWindow = new EditWeeklyScheduleWindow(editableWeeklySchedule) { Owner = this };
             editWeeklyScheduleWindow.ShowDialog();
         }
+
+        private void DisableDataGridSelection(object sender, SelectionChangedEventArgs e)
+        {
+            ScheduleDataGrid.UnselectAll();
+        }
     }
 }

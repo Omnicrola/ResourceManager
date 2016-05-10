@@ -60,7 +60,9 @@
                             </Button.Style>
                             <Image Source="{StaticResource Pencil16}"/>
                         </Button>
-                        <TextBlock Text="{Binding Project.Name, TargetNullValue='None'}" HorizontalAlignment="Center" Margin="2,4"/>
+                        <TextBlock Text="{Binding Project.Name, TargetNullValue='None'}" 
+                                   HorizontalAlignment="Center"
+                                   Margin="2,4"/>
                     </WrapPanel>
                     <TextBlock HorizontalAlignment="Center" Margin="2,4">
                         <Run>/w</Run>
@@ -83,7 +85,9 @@
         </Style>
 
         <ControlTemplate x:Key="ScheduleDayCellTemplate"  >
-            <StackPanel Orientation="Vertical" d:DataContext="{d:DesignInstance viewModels:WorkDayViewModel }">
+            <StackPanel Orientation="Vertical" 
+                        MinWidth="100"
+                        d:DataContext="{d:DesignInstance viewModels:WorkDayViewModel }">
                 <Button PreviewMouseLeftButtonDown="ResourceBlock_LeftButtonDown" 
                         PreviewMouseMove="ResourceBlock_MouseMove" 
                         Drop="ResourceBlock_Drop"
@@ -226,12 +230,27 @@
                     <Separator/>
                 </ToolBar>
                 <DataGrid ItemsSource="{Binding SelectedSchedule.Schedules}"
+                          CanUserAddRows="False"
+                          Name="ScheduleDataGrid"
+                          IsReadOnly="True"
+                          CanUserDeleteRows="False"
+                          CanUserReorderColumns="False"
+                          GridLinesVisibility="Horizontal"
+                          HorizontalGridLinesBrush="LightGray"
+                          SelectionChanged="DisableDataGridSelection"
                           AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Name" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Person}"/>
+                                    <StackPanel  Margin="10">
+                                        <TextBlock TextAlignment="Center" FontSize="18" FontWeight="Bold" Text="{Binding Person.Initials}"/>
+                                        <TextBlock HorizontalAlignment="Center" FontSize="14">
+                                            <Run Text="{Binding Person.FirstName}"/>
+                                            <Run Text=" "/>
+                                            <Run Text="{Binding Person.LastName}"/>
+                                        </TextBlock>
+                                    </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
