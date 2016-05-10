@@ -82,7 +82,7 @@
             </Style.Triggers>
         </Style>
 
-        <ControlTemplate x:Key="ResourceDayBlockTemplate">
+        <ControlTemplate x:Key="ScheduleDayCellTemplate"  >
             <StackPanel Orientation="Vertical" d:DataContext="{d:DesignInstance viewModels:WorkDayViewModel }">
                 <Button PreviewMouseLeftButtonDown="ResourceBlock_LeftButtonDown" 
                         PreviewMouseMove="ResourceBlock_MouseMove" 
@@ -102,24 +102,6 @@
                         Style="{StaticResource ResourceBlockStyle}"/>
             </StackPanel>
         </ControlTemplate>
-
-        <DataTemplate x:Key="SinglePersonItemTemplate" DataType="viewModels:PersonalScheduleViewModel">
-            <StackPanel Orientation="Vertical" 
-                        Width="100"
-                        MouseMove="ToggleResourceDragMode">
-                <TextBlock HorizontalAlignment="Center">
-                    <Run Text="{Binding Person.FirstName}" />
-                    <Run Text="{Binding Person.LastName}"/>
-                    <LineBreak/>
-                    <Run Text="{Binding Person.Initials}"/>
-                </TextBlock>
-                <Button Template="{StaticResource ResourceDayBlockTemplate}" DataContext="{Binding Monday}"/>
-                <Button Template="{StaticResource ResourceDayBlockTemplate}" DataContext="{Binding Tuesday}"/>
-                <Button Template="{StaticResource ResourceDayBlockTemplate}" DataContext="{Binding Wednesday}"/>
-                <Button Template="{StaticResource ResourceDayBlockTemplate}" DataContext="{Binding Thursday}"/>
-                <Button Template="{StaticResource ResourceDayBlockTemplate}" DataContext="{Binding Friday}"/>
-            </StackPanel>
-        </DataTemplate>
     </Window.Resources>
 
     <DockPanel>
@@ -253,11 +235,41 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Monday" Binding="{Binding Monday}"/>
-                        <DataGridTextColumn Header="Tuesday" Binding="{Binding Tuesday}"/>
-                        <DataGridTextColumn Header="Wednesday" Binding="{Binding Wednesday}"/>
-                        <DataGridTextColumn Header="Thursday" Binding="{Binding Thursday}"/>
-                        <DataGridTextColumn Header="Friday" Binding="{Binding Friday}"/>
+                        <DataGridTemplateColumn Header="Monday"  >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate >
+                                    <UserControl DataContext="{Binding Monday}" Template="{StaticResource ScheduleDayCellTemplate}"></UserControl>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Tuesday"  >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate >
+                                    <UserControl DataContext="{Binding Tuesday}" Template="{StaticResource ScheduleDayCellTemplate}"></UserControl>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Wednesday"  >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate >
+                                    <UserControl DataContext="{Binding Wednesday}" Template="{StaticResource ScheduleDayCellTemplate}"></UserControl>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Thursday"  >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate >
+                                    <UserControl DataContext="{Binding Thursday}" Template="{StaticResource ScheduleDayCellTemplate}"></UserControl>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Friday"  >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate >
+                                    <UserControl DataContext="{Binding Friday}" Template="{StaticResource ScheduleDayCellTemplate}"></UserControl>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
