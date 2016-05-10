@@ -137,52 +137,60 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0">
-                    <TextBlock FontSize="18" FontWeight="Bold">Week Ending</TextBlock>
-                    <Button Name="buttonAddWeek" Click="buttonAddWeek_Click" >Add</Button>
+                    <TextBlock FontSize="18" FontWeight="Bold" Margin="10">Week Ending</TextBlock>
+                    <Button Name="buttonAddWeek" HorizontalContentAlignment="Left"  Margin="10" Padding="4" Click="buttonAddWeek_Click" >
+                        <WrapPanel >
+                            <Image Source="{StaticResource GreenPlus}" Width="16" Margin="5,0"/>
+                            <TextBlock Text="Add Week"></TextBlock>
+                        </WrapPanel>
+                    </Button>
                 </StackPanel>
-                <ListView Name="listOfWeeks"
-                          Grid.Row="1"
+                <ScrollViewer Grid.Row="1"
+                              HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollBarVisibility="Visible">
+                    <ListView Name="listOfWeeks"
                           ItemsSource="{Binding AllSchedules}" 
                           SelectionChanged="listOfWeeks_SelectionChanged"  Height="Auto" >
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                            <Setter Property="Background" >
-                                <Setter.Value>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" Opacity="0.5">
-                                        <GradientStop Color="{Binding WeekColor}" Offset="0"/>
-                                        <GradientStop Color="Transparent"  Offset="0.25"/>
-                                        <GradientStop Color="{Binding WeekColor}" Offset="0.75"/>
-                                    </LinearGradientBrush>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <WrapPanel HorizontalAlignment="Stretch" >
-                                <Button Padding="2" 
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                <Setter Property="Background" >
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" Opacity="0.5">
+                                            <GradientStop Color="{Binding WeekColor}" Offset="0"/>
+                                            <GradientStop Color="Transparent"  Offset="0.25"/>
+                                            <GradientStop Color="{Binding WeekColor}" Offset="0.75"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel HorizontalAlignment="Stretch" >
+                                    <Button Padding="2" 
                                         Margin="2" 
                                         Background="Transparent"  
                                         BorderThickness="0"
                                         Click="EditWeeklySchedule_Click">
-                                    <Button.Style>
-                                        <Style>
-                                            <Setter Property="Button.Visibility" Value="Hidden"></Setter>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=IsMouseOver}" Value="True">
-                                                    <Setter Property="Button.Visibility" Value="Visible"></Setter>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                    <Image Source="{StaticResource Gear16}"></Image>
-                                </Button>
-                                <TextBlock Margin="2" VerticalAlignment="Center" Text="{Binding WeekEnding, StringFormat=MMMM dd yyyy}"/>
-                            </WrapPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                                        <Button.Style>
+                                            <Style>
+                                                <Setter Property="Button.Visibility" Value="Hidden"></Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=IsMouseOver}" Value="True">
+                                                        <Setter Property="Button.Visibility" Value="Visible"></Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <Image Source="{StaticResource Gear16}"></Image>
+                                    </Button>
+                                    <TextBlock Margin="2" VerticalAlignment="Center" Text="{Binding WeekEnding, StringFormat=MMMM dd yyyy}"/>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollViewer>
                 <StackPanel Grid.Row="2"  MinHeight="100" Margin="6">
                     <TextBlock>Required Resources</TextBlock>
                     <ItemsControl ItemsSource="{Binding RequiredProjectResources}">
@@ -204,12 +212,12 @@
                     <Separator Margin="10,0"/>
                     <TextBlock VerticalAlignment="Center">
                         <Run>Week Ending: </Run>
-                        <Run Text="{Binding SelectedSchedule.WeekEnding}"/>
+                        <Run Text="{Binding SelectedSchedule.WeekEnding, StringFormat=MMMM dd YYYY}"/>
                     </TextBlock>
                     <Separator Margin="10,0"/>
                     <Button Click="AddResource_Click">
-                        <WrapPanel>
-                            <Image Source="{StaticResource GreenPlus}"/>
+                        <WrapPanel Margin="5">
+                            <Image Margin="5,0" Source="{StaticResource GreenPlus}"/>
                             <TextBlock Text="Add Resource"/>
                         </WrapPanel>
                     </Button>
