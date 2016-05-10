@@ -10,7 +10,7 @@
 
         mc:Ignorable="d"
         Title="Resource Schedule" 
-        Height="600" Width="898"  
+        Height="800" Width="898"  
         Margin="5" d:DataContext="{d:DesignInstance data:ResourceDataContext}">
 
     <Window.Resources>
@@ -19,6 +19,22 @@
         <BitmapImage x:Key="Pencil16" UriSource="../../Assets/Icons/pencil16.png" />
 
         <converters:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
+
+        <Style x:Key="VerticalText" TargetType="TextBlock">
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <RotateTransform Angle="-90"/>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+        <Style x:Key="WeekdayLabelStyle" TargetType="TextBlock" BasedOn="{StaticResource VerticalText}">
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Background" Value="Gray"></Setter>
+        </Style>
 
         <ControlTemplate x:Key="ResourceButtonTemplate" TargetType="Button">
             <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
@@ -227,14 +243,24 @@
                     </Button>
                     <Separator/>
                 </ToolBar>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel>
+                        <TextBlock Width="30" Style="{StaticResource VerticalText}"></TextBlock>
+                        <TextBlock Style="{StaticResource WeekdayLabelStyle}">Monday</TextBlock>
+                        <TextBlock Style="{StaticResource WeekdayLabelStyle}">Tuesday</TextBlock>
+                        <TextBlock Style="{StaticResource WeekdayLabelStyle}">Wednesday</TextBlock>
+                        <TextBlock Style="{StaticResource WeekdayLabelStyle}">Thursday</TextBlock>
+                        <TextBlock Style="{StaticResource WeekdayLabelStyle}">Friday</TextBlock>
+                    </StackPanel>
 
-                <ItemsControl ItemsSource="{Binding SelectedSchedule.Schedules}" Height="Auto" ItemTemplate="{StaticResource SinglePersonItemTemplate}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
+                    <ItemsControl ItemsSource="{Binding SelectedSchedule.Schedules}" Height="Auto" ItemTemplate="{StaticResource SinglePersonItemTemplate}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </DockPanel>
