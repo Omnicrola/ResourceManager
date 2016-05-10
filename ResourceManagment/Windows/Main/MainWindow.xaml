@@ -243,24 +243,23 @@
                     </Button>
                     <Separator/>
                 </ToolBar>
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel>
-                        <TextBlock Width="30" Style="{StaticResource VerticalText}"></TextBlock>
-                        <TextBlock Style="{StaticResource WeekdayLabelStyle}">Monday</TextBlock>
-                        <TextBlock Style="{StaticResource WeekdayLabelStyle}">Tuesday</TextBlock>
-                        <TextBlock Style="{StaticResource WeekdayLabelStyle}">Wednesday</TextBlock>
-                        <TextBlock Style="{StaticResource WeekdayLabelStyle}">Thursday</TextBlock>
-                        <TextBlock Style="{StaticResource WeekdayLabelStyle}">Friday</TextBlock>
-                    </StackPanel>
-
-                    <ItemsControl ItemsSource="{Binding SelectedSchedule.Schedules}" Height="Auto" ItemTemplate="{StaticResource SinglePersonItemTemplate}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </StackPanel>
+                <DataGrid ItemsSource="{Binding SelectedSchedule.Schedules}"
+                          AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Name" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Person}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Monday" Binding="{Binding Monday}"/>
+                        <DataGridTextColumn Header="Tuesday" Binding="{Binding Tuesday}"/>
+                        <DataGridTextColumn Header="Wednesday" Binding="{Binding Wednesday}"/>
+                        <DataGridTextColumn Header="Thursday" Binding="{Binding Thursday}"/>
+                        <DataGridTextColumn Header="Friday" Binding="{Binding Friday}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </StackPanel>
         </Grid>
     </DockPanel>
