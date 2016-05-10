@@ -26,7 +26,7 @@ namespace ResourceManagment.Data.ViewModels
             Schedules = new ObservableCollection<PersonalScheduleViewModel>();
             RequiredProjectResources = new ObservableCollection<RequiredResourceViewModel>();
             WeekEnding = weekEnding;
-
+            WeekColor = Colors.Blue;
             Schedules.CollectionChanged += UpdateObservers;
         }
 

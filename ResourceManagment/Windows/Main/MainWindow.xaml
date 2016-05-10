@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ResourceManagment"
         xmlns:viewModels="clr-namespace:ResourceManagment.Data.ViewModels"
         xmlns:data="clr-namespace:ResourceManagment.Data"
+        xmlns:converters="clr-namespace:ResourceManagment.Data.Converters"
 
         mc:Ignorable="d"
         Title="Resource Schedule" 
@@ -16,6 +17,8 @@
         <BitmapImage x:Key="Gear16" UriSource="../../Assets/Icons/gear16.png" />
         <BitmapImage x:Key="GreenPlus" UriSource="../../Assets/Icons/plus16.png" />
         <BitmapImage x:Key="Pencil16" UriSource="../../Assets/Icons/pencil16.png" />
+
+        <converters:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
 
         <ControlTemplate x:Key="ResourceButtonTemplate" TargetType="Button">
             <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
@@ -144,24 +147,20 @@
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                            <Setter Property="Background" >
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" Opacity="0.5">
+                                        <GradientStop Color="{Binding WeekColor}" Offset="0"/>
+                                        <GradientStop Color="Transparent"  Offset="0.25"/>
+                                        <GradientStop Color="{Binding WeekColor}" Offset="0.75"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
                         </Style>
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel HorizontalAlignment="Stretch" >
-                                <WrapPanel.Style>
-                                    <Style TargetType="WrapPanel">
-                                        <Setter Property="Background">
-                                            <Setter.Value>
-                                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" Opacity="0.5">
-                                                    <GradientStop Color="{Binding WeekColor}" Offset="0"/>
-                                                    <GradientStop Color="Transparent"  Offset="0.5"/>
-                                                    <GradientStop Color="{Binding WeekColor}" Offset="1"/>
-                                                </LinearGradientBrush>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </WrapPanel.Style>
                                 <Button Padding="2" 
                                         Margin="2" 
                                         Background="Transparent"  

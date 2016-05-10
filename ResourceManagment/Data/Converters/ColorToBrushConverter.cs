@@ -15,13 +15,6 @@ namespace ResourceManagment.Data.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var colorBrush = value as SolidColorBrush;
-            var brush = colorBrush;
-            return brush?.Color;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
             if (value is Color)
             {
                 var color = (Color)value;
@@ -31,6 +24,13 @@ namespace ResourceManagment.Data.Converters
             {
                 return null;
             }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var colorBrush = value as SolidColorBrush;
+            var brush = colorBrush;
+            return brush?.Color;
         }
     }
 }
