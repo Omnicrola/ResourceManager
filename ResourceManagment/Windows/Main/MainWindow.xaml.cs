@@ -106,11 +106,13 @@ namespace ResourceManagment.Windows.Main
         private void ResourceBlock_Drop(object sender, DragEventArgs e)
         {
             _resourceDragDropHandler.Drop(e);
+            e.Handled = true;
         }
 
         private void ResourceBlock_DragEnter(object sender, DragEventArgs e)
         {
             _resourceDragDropHandler.DragOver(sender, e);
+            e.Handled = true;
         }
 
         private void ToggleResourceDragMode(object sender, MouseEventArgs e)

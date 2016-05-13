@@ -37,33 +37,33 @@
         </Style>
 
         <ControlTemplate x:Key="ResourceButtonTemplate" TargetType="Button">
-            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+            <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="{TemplateBinding BorderThickness}">
                 <StackPanel Background="{Binding Project.Color}" 
-                        Margin="1" 
-                                HorizontalAlignment="Stretch"
-                        d:DataContext="{d:DesignInstance viewModels:ResourceBlockViewModel }">
-                    <WrapPanel>
-                        <Button Click="Button_AlterResourceBlock"
+                            Margin="5" 
+                            HorizontalAlignment="Stretch"
+                            Orientation="Horizontal"
+                            d:DataContext="{d:DesignInstance viewModels:ResourceBlockViewModel }">
+                    <Button Click="Button_AlterResourceBlock"
                                 Background="Transparent"
                                 Width="16"
                                 Height="16"
                                 BorderThickness="0">
-                            <Button.Style>
-                                <Style>
-                                    <Setter Property="Button.Visibility" Value="Hidden"></Setter>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=StackPanel}, Path=IsMouseOver}" Value="True">
-                                            <Setter Property="Button.Visibility" Value="Visible"></Setter>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                            <Image Source="{StaticResource Pencil16}"/>
-                        </Button>
-                        <TextBlock Text="{Binding Project.Name, TargetNullValue='None'}" 
+                        <Button.Style>
+                            <Style>
+                                <Setter Property="Button.Visibility" Value="Hidden"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=StackPanel}, Path=IsMouseOver}" Value="True">
+                                        <Setter Property="Button.Visibility" Value="Visible"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Image Source="{StaticResource Pencil16}"/>
+                    </Button>
+                    <TextBlock Text="{Binding Project.Name, TargetNullValue='None'}" 
                                    HorizontalAlignment="Center"
                                    Margin="2,4"/>
-                    </WrapPanel>
                     <TextBlock HorizontalAlignment="Center" Margin="2,4">
                         <Run>/w</Run>
                         <Run Text="{Binding PairPartner.FirstName}"/>
@@ -102,7 +102,6 @@
                         DragEnter="ResourceBlock_DragEnter"
                         Template="{StaticResource ResourceButtonTemplate}" 
                         DataContext="{Binding Afternoon}" 
-                        Click="Button_AlterResourceBlock"
                         Style="{StaticResource ResourceBlockStyle}"/>
             </StackPanel>
         </ControlTemplate>
@@ -239,8 +238,27 @@
                           HorizontalGridLinesBrush="LightGray"
                           SelectionChanged="DisableDataGridSelection"
                           AutoGenerateColumns="False">
+                    <DataGrid.LayoutTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="90"/>
+                            <MatrixTransform Matrix="-1,0,0,1,0,0"/>
+                        </TransformGroup>
+                    </DataGrid.LayoutTransform>
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}"
+                               BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                            <Setter Property="LayoutTransform">
+                                <Setter.Value>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="-90"/>
+                                        <ScaleTransform ScaleX="1" ScaleY="-1"/>
+                                    </TransformGroup>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Name" >
+                        <DataGridTemplateColumn Header="" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel  Margin="10">
@@ -290,6 +308,18 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="LayoutTransform">
+                                <Setter.Value>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="-90"/>
+                                        <ScaleTransform ScaleX="1" ScaleY="-1"/>
+                                    </TransformGroup>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGrid.CellStyle>
                 </DataGrid>
             </StackPanel>
         </Grid>
