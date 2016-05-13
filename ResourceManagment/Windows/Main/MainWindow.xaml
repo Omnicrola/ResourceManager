@@ -72,6 +72,7 @@
             </Border>
         </ControlTemplate>
 
+
         <Style x:Key="ResourceBlockStyle" TargetType="Button" >
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="BorderBrush" Value="Transparent" />
@@ -105,6 +106,34 @@
                         Style="{StaticResource ResourceBlockStyle}"/>
             </StackPanel>
         </ControlTemplate>
+
+        <DataTemplate x:Key="ResourceColumnHeaderTemplate" >
+            <Grid HorizontalAlignment="Stretch" Height="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.RowSpan="2" 
+                            Margin="4"
+                            Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}">
+                    <TextBlock.LayoutTransform>
+                        <RotateTransform Angle="-90"/>
+                    </TextBlock.LayoutTransform>
+                </TextBlock>
+                <TextBlock Grid.Row="0" 
+                            Grid.Column="1" 
+                            Margin="4"
+                            TextAlignment="Center">AM</TextBlock>
+                <TextBlock Grid.Row="1" 
+                            Grid.Column="1" 
+                            Margin="4"
+                            TextAlignment="Center">PM</TextBlock>
+            </Grid>
+        </DataTemplate>
     </Window.Resources>
 
     <DockPanel>
@@ -234,6 +263,8 @@
                           IsReadOnly="True"
                           CanUserDeleteRows="False"
                           CanUserReorderColumns="False"
+                          CanUserResizeColumns="False"
+                          CanUserResizeRows="False"
                           GridLinesVisibility="Horizontal"
                           HorizontalGridLinesBrush="LightGray"
                           SelectionChanged="DisableDataGridSelection"
@@ -272,35 +303,35 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Monday"  >
+                        <DataGridTemplateColumn Header="Monday" HeaderTemplate="{StaticResource ResourceColumnHeaderTemplate}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate >
                                     <UserControl DataContext="{Binding Monday}" Template="{StaticResource ScheduleDayCellTemplate}"></UserControl>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Tuesday"  >
+                        <DataGridTemplateColumn Header="Tuesday"  HeaderTemplate="{StaticResource ResourceColumnHeaderTemplate}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate >
                                     <UserControl DataContext="{Binding Tuesday}" Template="{StaticResource ScheduleDayCellTemplate}"></UserControl>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Wednesday"  >
+                        <DataGridTemplateColumn Header="Wednesday"  HeaderTemplate="{StaticResource ResourceColumnHeaderTemplate}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate >
                                     <UserControl DataContext="{Binding Wednesday}" Template="{StaticResource ScheduleDayCellTemplate}"></UserControl>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Thursday"  >
+                        <DataGridTemplateColumn Header="Thursday"  HeaderTemplate="{StaticResource ResourceColumnHeaderTemplate}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate >
                                     <UserControl DataContext="{Binding Thursday}" Template="{StaticResource ScheduleDayCellTemplate}"></UserControl>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Friday"  >
+                        <DataGridTemplateColumn Header="Friday"  HeaderTemplate="{StaticResource ResourceColumnHeaderTemplate}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate >
                                     <UserControl DataContext="{Binding Friday}" Template="{StaticResource ScheduleDayCellTemplate}"></UserControl>
