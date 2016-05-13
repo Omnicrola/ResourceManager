@@ -143,9 +143,5 @@ namespace ResourceManagment.Windows.Main
             editWeeklyScheduleWindow.ShowDialog();
         }
 
-        private void DisableDataGridSelection(object sender, SelectionChangedEventArgs e)
-        {
-            ScheduleDataGrid.UnselectAll();
-        }
     }
 }
