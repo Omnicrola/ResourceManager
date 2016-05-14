@@ -6,7 +6,6 @@ using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManageWeeklySchedule
 {
-
     public class WeekScheduleViewModel : ViewModel, IWeekScheduleViewModel
     {
         private DateTime _weekEnding;

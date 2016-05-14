@@ -1,8 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 using ResourceManagment.Operations;
+using ResourceManagment.Windows.AlterResourceBlock;
 using ResourceManagment.Windows.Help;
 using ResourceManagment.Windows.ManagePeople;
 using ResourceManagment.Windows.ManageProjects;
