@@ -136,7 +136,7 @@
             </DataGrid.LayoutTransform>
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="{x:Type DataGridColumnHeader}"
-                               BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                       BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
                     <Setter Property="LayoutTransform">
                         <Setter.Value>
                             <TransformGroup>
