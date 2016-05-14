@@ -19,32 +19,34 @@ namespace DatabaseApi.SqlLite.Api
 
         public string BuildCreateQuery()
         {
-            string columns = Columns.Select(c => c.BuildCreateQuery())
-                .Aggregate((total, next) => total + ", " + next);
+            List<string> columnsAndKeys = new List<string>();
+            columnsAndKeys.AddRange(Columns.Select(c => c.BuildCreateQuery()));
+            columnsAndKeys.AddRange(ForeignKeys.Select(f => f.BuildCreateQuery()));
 
-            string foreignKeys = ForeignKeys.Select(f => f.BuildCreateQuery())
-                .Aggregate((total, next) => total + ", " + next);
+            string columns = columnsAndKeys.Implode(", ");
 
-            string creationQuery = $"CREATE TABLE {GetTableName()}  ({columns}, {foreignKeys});";
+            string creationQuery = $"CREATE TABLE IF NOT EXISTS {GetTableName()}  ({columns});";
             return creationQuery;
         }
 
         public abstract string GetTableName();
 
-        public void Create(List<T> people)
+        public void Create(List<T> dataObjects)
         {
-            if (people.Any())
+            if (dataObjects.Any())
             {
-                var sqlColumnBindings = GetColumnBindings(people[0]);
+                var sqlColumnBindings = GetColumnBindings(dataObjects[0]);
                 string columnNames = sqlColumnBindings.Select(b => b.Column.Name).Implode(", ");
                 var stringBuilder = new StringBuilder();
                 stringBuilder.Append($"INSERT INTO {GetTableName()} ");
                 stringBuilder.Append($"({columnNames}) ");
 
-                string data = people.Select(p => CreateSingle(p, sqlColumnBindings)).Implode(", ");
+                string data = dataObjects.Select(p => CreateSingle(p, sqlColumnBindings)).Implode(", ");
                 stringBuilder.Append(data);
                 stringBuilder.Append(";");
 
+                var query = stringBuilder.ToString();
+                DatabaseSchema.ExecuteNonQuery(query);
             }
         }
 
@@ -90,7 +92,7 @@ namespace DatabaseApi.SqlLite.Api
 
         private ISqlColumn FindColumn(SqlColumnBindingAttribute bindingAttribute)
         {
-            return Columns.First(c => c.Name.Equals(bindingAttribute.ColumnName));
+            return Columns.FirstOrDefault(c => c.Name.Equals(bindingAttribute.ColumnName));
         }
     }
 }

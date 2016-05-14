@@ -24,7 +24,8 @@ namespace ResourceManagment.Data.Database.Tables
                 Id,
                 DateTime,
                 FkPerson,
-                FkProject
+                FkProject,
+                FkSchedule
             };
             ForeignKeys.Add(new SqlForeignKey(FkPerson, PersonTable.TableName, PersonTable.Id));
             ForeignKeys.Add(new SqlForeignKey(FkProject, ProjectTable.TableName, ProjectTable.Id));

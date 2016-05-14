@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.SQLite;
+using System.IO;
 using System.Linq;
 using DatabaseApi.SqlLite.Api;
 
@@ -44,6 +45,7 @@ namespace DatabaseApi.SqlLite
         {
             if (_sqLiteConnection == null)
             {
+                Directory.CreateDirectory(_databaseLocation);
                 string connectionString = $"Data Source={_databaseLocation}ResourceManagement.sqlite; Version = 3;";
 
                 _sqLiteConnection = new SQLiteConnection(connectionString);
@@ -55,7 +57,20 @@ namespace DatabaseApi.SqlLite
 
         private void VerifyStructure()
         {
-            _schemaVerifier.Verify(_sqLiteConnection);
+            var result = _schemaVerifier.Verify(_sqLiteConnection);
+            if (result == null)
+            {
+                CreateSchema();
+            }
+        }
+
+        private void CreateSchema()
+        {
+            SqlTables.ForEach(t =>
+            {
+                var createQuery = t.BuildCreateQuery();
+                ExecuteNonQuery(createQuery);
+            });
         }
 
         public void Dispose()

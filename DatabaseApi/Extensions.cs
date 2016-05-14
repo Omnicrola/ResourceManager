@@ -8,7 +8,14 @@ namespace DatabaseApi
 
         public static string Implode(this IEnumerable<string> list, string glue)
         {
-            return list.Aggregate((cumulative, current) => cumulative + glue);
+            if (list.Any())
+            {
+                return list.Aggregate((cumulative, current) => cumulative + glue + current);
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
 
     }

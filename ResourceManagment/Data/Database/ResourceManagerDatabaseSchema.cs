@@ -1,5 +1,7 @@
-﻿using DatabaseApi.SqlLite;
+﻿using System.Collections.Generic;
+using DatabaseApi.SqlLite;
 using ResourceManagment.Data.Database.Tables;
+using ResourceManagment.Windows.Main;
 
 namespace ResourceManagment.Data.Database
 {
@@ -26,5 +28,6 @@ namespace ResourceManagment.Data.Database
         public PersonTable PersonTable { get; }
 
         public ProjectTable ProjectTable { get; }
+
     }
 }

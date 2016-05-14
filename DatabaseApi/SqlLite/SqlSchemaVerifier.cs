@@ -12,14 +12,17 @@ namespace DatabaseApi.SqlLite
             _expectedSchemaVersion = expectedVersion;
         }
 
-        public void Verify(SQLiteConnection sqLiteConnection)
+        public string Verify(SQLiteConnection sqLiteConnection)
         {
-            string query = $"SELECT {MetadataTable.Value} FROM {MetadataTable.TableName} WHERE {MetadataTable.Key} LIKE 'schema.version'";
+            string query = $"SELECT {MetadataTable.Value.Name} FROM {MetadataTable.TableName} WHERE {MetadataTable.Key.Name} LIKE 'schema.version'";
             var sqLiteCommand = new SQLiteCommand(query, sqLiteConnection);
-            var result = sqLiteCommand.ExecuteScalar().ToString();
-            if (!result.Equals(_expectedSchemaVersion))
+            try
             {
-                throw new InvalidSchemaVersionException(_expectedSchemaVersion, result);
+                return sqLiteCommand.ExecuteScalar()?.ToString();
+            }
+            catch (SQLiteException)
+            {
+                return null;
             }
         }
     }
