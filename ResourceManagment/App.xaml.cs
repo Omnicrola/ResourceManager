@@ -1,12 +1,7 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Configuration;
 using System.Windows;
 using System.Windows.Media;
-using DatabaseApi.SqlLite;
-using ResourceManagment.Data;
-using ResourceManagment.Data.Database;
-using ResourceManagment.Data.Database.Tables;
 using ResourceManagment.Operations;
 using ResourceManagment.Windows.Main;
 using ResourceManagment.Windows.ManagePeople;
@@ -24,12 +19,10 @@ namespace ResourceManagment
         private void Application_Start(object sender, StartupEventArgs args)
         {
             var schemaVersion = ConfigurationManager.AppSettings["sql.schema.version"];
-
-            var sqlSchemaVerifier = new SqlSchemaVerifier(schemaVersion);
             var databaseLocation = Environment.ExpandEnvironmentVariables(ConfigurationManager.AppSettings["sql.database.location"]);
-            var databaseSchema = new ResourceManagerDatabaseSchema(databaseLocation, sqlSchemaVerifier);
 
-            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel(databaseSchema);
+
+            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
 
             var mainViewModel = CreateMainViewModel(mainWindowViewModel);
             var mainWindow = new MainWindow(mainViewModel, new OperationsQueue(Dispatcher));

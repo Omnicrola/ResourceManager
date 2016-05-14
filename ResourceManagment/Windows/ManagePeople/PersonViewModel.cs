@@ -1,12 +1,11 @@
 ﻿using System;
-using DatabaseApi.SqlLite.Api;
 using ResourceManagment.Data.Filtering.ResourceFilters;
-using ResourceManagment.Windows.Main;
+using ResourceManagment.Data.Models;
 using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManagePeople
 {
-    public class PersonViewModel : ViewModel, IPerson
+    public class PersonViewModel : ViewModel
     {
         private string _firstName;
         private string _lastName;
@@ -19,10 +18,8 @@ namespace ResourceManagment.Windows.ManagePeople
             _role = Role.NONE;
         }
 
-        [SqlColumnBinding("id")]
         public int Id { get; set; }
 
-        [SqlColumnBinding("first_name")]
         public string FirstName
         {
             get { return _firstName; }
@@ -33,7 +30,6 @@ namespace ResourceManagment.Windows.ManagePeople
             }
         }
 
-        [SqlColumnBinding("last_name")]
         public string LastName
         {
             get { return _lastName; }
@@ -54,7 +50,6 @@ namespace ResourceManagment.Windows.ManagePeople
             set { }
         }
 
-        [SqlColumnBinding("role")]
         public Role Role
         {
             get { return this._role; }

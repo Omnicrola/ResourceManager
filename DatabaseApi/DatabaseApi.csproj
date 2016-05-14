@@ -55,6 +55,7 @@
     <Compile Include="SqlLite\Api\SqlIntegerColumn.cs" />
     <Compile Include="SqlLite\Api\SqlStringColumn.cs" />
     <Compile Include="SqlLite\Api\SqlTable.cs" />
+    <Compile Include="SqlLite\Api\SqlTableBindingAttribute.cs" />
     <Compile Include="SqlLite\DatabaseSchema.cs" />
     <Compile Include="SqlLite\MetadataTable.cs" />
     <Compile Include="SqlLite\SqlSchemaVerifier.cs" />

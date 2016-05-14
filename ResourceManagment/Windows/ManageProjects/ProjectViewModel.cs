@@ -1,9 +1,10 @@
 ﻿using System.Windows.Media;
+using ResourceManagment.Data.Models;
 using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManageProjects
 {
-    public class ProjectViewModel : ViewModel
+    public class ProjectViewModel : ViewModel, IProject
     {
         private string _name;
         private Brush _color;
@@ -21,6 +22,7 @@ namespace ResourceManagment.Windows.ManageProjects
                 FireOnPropertyChanged("Name");
             }
         }
+
         public Brush Color
         {
             get
