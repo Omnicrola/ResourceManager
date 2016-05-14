@@ -1,12 +1,20 @@
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 
 namespace DatabaseApi.SqlLite.Api
 {
     public abstract class SqlTable : ISqlTable
     {
+        public SQLiteConnection Connection { get; set; }
         protected List<ISqlColumn> Columns;
         protected List<SqlForeignKey> ForeignKeys = new List<SqlForeignKey>();
+        protected DatabaseSchema DatabaseSchema { get; }
+
+        protected SqlTable(DatabaseSchema databaseSchema)
+        {
+            DatabaseSchema = databaseSchema;
+        }
 
         public string BuildCreateQuery()
         {

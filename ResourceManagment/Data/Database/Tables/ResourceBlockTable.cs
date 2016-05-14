@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.SQLite;
 using DatabaseApi.SqlLite.Api;
 
 namespace ResourceManagment.Data.Database.Tables

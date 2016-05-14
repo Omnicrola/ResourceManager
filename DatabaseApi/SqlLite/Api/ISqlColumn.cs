@@ -4,5 +4,6 @@
     {
         string BuildCreateQuery();
         string Name { get; }
+        string EncapsulateValue(object value);
     }
 }

@@ -28,6 +28,13 @@ namespace DatabaseApi.SqlLite
                     .Aggregate((cumulative, current) => cumulative + "; " + current);
         }
 
+        public int ExecuteNonQuery(string query)
+        {
+            var sqLiteConnection = GetConnection();
+            var sqLiteCommand = new SQLiteCommand(query, sqLiteConnection);
+            return sqLiteCommand.ExecuteNonQuery();
+        }
+
         public SQLiteConnection GetConnection()
         {
             OpenConnection();

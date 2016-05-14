@@ -8,10 +8,10 @@ namespace ResourceManagment.Data.Database
         public ResourceManagerDatabaseSchema(string databaseLocation, SqlSchemaVerifier schemaVerifier)
             : base(databaseLocation, schemaVerifier)
         {
-            ProjectTable = new ProjectTable();
-            PersonTable = new PersonTable();
-            WeeklyScheduleTable = new WeeklyScheduleTable();
-            ResourceBlockTable = new ResourceBlockTable();
+            ProjectTable = new ProjectTable(this);
+            PersonTable = new PersonTable(this);
+            WeeklyScheduleTable = new WeeklyScheduleTable(this);
+            ResourceBlockTable = new ResourceBlockTable(this);
 
             SqlTables.Add(ProjectTable);
             SqlTables.Add(PersonTable);
