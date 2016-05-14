@@ -5,19 +5,25 @@ namespace ResourceManagment.Data.Database.Tables
 {
     public class ProjectTable : SqlTable
     {
-        public static SqlIntegerColumn ID = new SqlIntegerColumn("id", true);
+        public const string TableName = "projects";
+
+        public static SqlIntegerColumn Id = new SqlIntegerColumn("id", true);
         public static SqlStringColumn Name = new SqlStringColumn("name", 32);
         public static SqlStringColumn Color = new SqlStringColumn("color", 8);
 
         public ProjectTable()
         {
-            TableName = "projects";
             Columns = new List<ISqlColumn>
             {
-                ID,
+                Id,
                 Name,
                 Color
             };
+        }
+
+        public override string GetTableName()
+        {
+            return TableName;
         }
     }
 }

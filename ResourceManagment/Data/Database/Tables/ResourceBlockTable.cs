@@ -5,6 +5,7 @@ namespace ResourceManagment.Data.Database.Tables
 {
     public class ResourceBlockTable : SqlTable
     {
+        public const string TableName = "resources";
 
         public static SqlIntegerColumn Id = new SqlIntegerColumn("id", true);
         public static SqlDateTimeColumn DateTime = new SqlDateTimeColumn("datetime");
@@ -13,7 +14,7 @@ namespace ResourceManagment.Data.Database.Tables
 
         public ResourceBlockTable()
         {
-            TableName = "resources";
+
             Columns = new List<ISqlColumn>
             {
                 Id,
@@ -21,21 +22,13 @@ namespace ResourceManagment.Data.Database.Tables
                 FkPerson,
                 FkProject
             };
-        }
-    }
-
-    public class SqlDateTimeColumn : ISqlColumn
-    {
-        private readonly string _name;
-
-        public SqlDateTimeColumn(string name)
-        {
-            _name = name;
+            ForeignKeys.Add(new SqlForeignKey(FkPerson, PersonTable.TableName, PersonTable.Id));
+            ForeignKeys.Add(new SqlForeignKey(FkProject, ProjectTable.TableName, ProjectTable.Id));
         }
 
-        public string BuildCreateQuery()
+        public override string GetTableName()
         {
-            return _name + " datetime NOT NULL";
+            return TableName;
         }
     }
 }

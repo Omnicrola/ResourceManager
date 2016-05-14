@@ -6,15 +6,21 @@ namespace ResourceManagment.Data.Database.Tables
 {
     public abstract class SqlTable : ISqlTable
     {
-        public string TableName { get; protected set; }
         protected List<ISqlColumn> Columns;
+        protected List<SqlForeignKey> ForeignKeys = new List<SqlForeignKey>();
 
         public string BuildCreateQuery()
         {
             string columns = Columns.Select(c => c.BuildCreateQuery())
                 .Aggregate((total, next) => total + ", " + next);
-            string creationQuery = "CREATE TABLE " + TableName + " (" + columns + ");";
+
+            string foreignKeys = ForeignKeys.Select(f => f.BuildCreateQuery())
+                .Aggregate((total, next) => total + " " + next);
+
+            string creationQuery = "CREATE TABLE " + GetTableName() + " (" + columns + ");";
             return creationQuery;
         }
+
+        public abstract string GetTableName();
     }
 }
