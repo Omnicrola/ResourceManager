@@ -120,7 +120,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\Converters\ColorToBrushConverter.cs" />
+    <Compile Include="Data\DatabaseMediator.cs" />
+    <Compile Include="Data\DatabaseSchema.cs" />
+    <Compile Include="Data\Database\Tables\SqlTable.cs" />
     <Compile Include="Data\Filtering\ResourceFilters\Role.cs" />
+    <Compile Include="Data\Database\Schema\ISqlColumn.cs" />
+    <Compile Include="Data\Database\Schema\ISqlTable.cs" />
+    <Compile Include="Data\Database\Tables\PersonTable.cs" />
+    <Compile Include="Data\Database\Schema\SqlIntegerColumn.cs" />
+    <Compile Include="Data\Database\Schema\SqlStringColumn.cs" />
     <Compile Include="Windows\ManageWeeklySchedule\EditableWeeklyScheduleViewModel.cs" />
     <Compile Include="Windows\ManageWeeklySchedule\IWeekScheduleViewModel.cs" />
     <Compile Include="Windows\ManageProjects\ProjectViewModel.cs" />
