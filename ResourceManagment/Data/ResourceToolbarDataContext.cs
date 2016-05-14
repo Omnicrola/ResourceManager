@@ -1,4 +1,4 @@
-﻿namespace ResourceManagment
+﻿namespace ResourceManagment.Data
 {
     public class ResourceToolbarDataContext : ViewModel
     {

@@ -1,16 +1,17 @@
-﻿using ResourceManagment.Data.ViewModels;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
+using ResourceManagment.Data.ViewModels;
 
-namespace ResourceManagment.Windows
+namespace ResourceManagment.Data
 {
     public class AlterBlockDataContext
     {
         private ResourceBlockViewModel _resourceBlock;
 
-        public AlterBlockDataContext(ObservableCollection<PersonViewModel> people, 
-            ObservableCollection<ProjectViewModel> projects, 
-            ResourceBlockViewModel resourceBlock) {
+        public AlterBlockDataContext(ObservableCollection<PersonViewModel> people,
+            ObservableCollection<ProjectViewModel> projects,
+            ResourceBlockViewModel resourceBlock)
+        {
             People = people;
             Projects = projects;
             _resourceBlock = resourceBlock;
@@ -38,7 +39,7 @@ namespace ResourceManagment.Windows
             get
             {
                 var date = _resourceBlock.Date;
-                string morningEvening =date.Hour < 12 ? "Morning" : "Afternoon";
+                string morningEvening = date.Hour < 12 ? "Morning" : "Afternoon";
                 string dayOfWeek = date.DayOfWeek.ToString();
                 int dayOfMonth = date.Day;
                 int month = date.Month;
