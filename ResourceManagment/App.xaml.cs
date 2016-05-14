@@ -1,12 +1,9 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Configuration;
 using System.Windows;
 using System.Windows.Media;
 using DatabaseApi.SqlLite;
-using ResourceManagment.Data;
 using ResourceManagment.Data.Database;
-using ResourceManagment.Data.Database.Tables;
 using ResourceManagment.Operations;
 using ResourceManagment.Windows.Main;
 using ResourceManagment.Windows.ManagePeople;

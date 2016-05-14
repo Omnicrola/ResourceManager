@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using DatabaseApi.SqlLite;
 using DatabaseApi.SqlLite.Api;
+using ResourceManagment.Data.Model;
 using ResourceManagment.Windows.ManageProjects;
 
 namespace ResourceManagment.Data.Database.Tables
 {
-    public class ProjectTable : SqlTable<ProjectViewModel>
+    public class ProjectTable : SqlTable<IProject>
     {
         public const string TableName = "projects";
 

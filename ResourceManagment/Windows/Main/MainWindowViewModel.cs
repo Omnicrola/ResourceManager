@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
-using ResourceManagment.Data;
 using ResourceManagment.Data.Database;
 using ResourceManagment.Data.Filtering.ResourceFilters;
 using ResourceManagment.Windows.ManagePeople;

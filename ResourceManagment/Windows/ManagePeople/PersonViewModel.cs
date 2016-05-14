@@ -6,6 +6,7 @@ using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManagePeople
 {
+    [SqlTableBinding("people")]
     public class PersonViewModel : ViewModel, IPerson
     {
         private string _firstName;

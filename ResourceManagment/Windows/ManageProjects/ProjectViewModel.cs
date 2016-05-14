@@ -1,8 +1,10 @@
 ﻿using System.Windows.Media;
+using DatabaseApi.SqlLite.Api;
 using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManageProjects
 {
+    [SqlTableBinding("projects")]
     public class ProjectViewModel : ViewModel
     {
         private string _name;

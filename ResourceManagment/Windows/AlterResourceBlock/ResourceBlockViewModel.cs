@@ -1,10 +1,12 @@
 ﻿using System;
+using DatabaseApi.SqlLite.Api;
 using ResourceManagment.Windows.ManagePeople;
 using ResourceManagment.Windows.ManageProjects;
 using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.AlterResourceBlock
 {
+    [SqlTableBinding("resources")]
     public class ResourceBlockViewModel : ViewModel
     {
         private ProjectViewModel _project;

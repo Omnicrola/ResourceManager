@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using DatabaseApi.SqlLite;
 using DatabaseApi.SqlLite.Api;
+using ResourceManagment.Data.Model;
 using ResourceManagment.Windows.ManageWeeklySchedule;
 
 namespace ResourceManagment.Data.Database.Tables
 {
-    public class WeeklyScheduleTable : SqlTable<WeekScheduleViewModel>
+    public class WeeklyScheduleTable : SqlTable<IWeeklySchedule>
     {
         public const string TableName = "weekly_schedules";
         public static SqlIntegerColumn Id = new SqlIntegerColumn("id", true);

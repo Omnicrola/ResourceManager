@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Data.SQLite;
 using DatabaseApi.SqlLite;
 using DatabaseApi.SqlLite.Api;
+using ResourceManagment.Data.Model;
 using ResourceManagment.Windows.AlterResourceBlock;
 
 namespace ResourceManagment.Data.Database.Tables
 {
-    public class ResourceBlockTable : SqlTable<ResourceBlockViewModel>
+    public class ResourceBlockTable : SqlTable<IResourceBlock>
     {
         public const string TableName = "resources";
 

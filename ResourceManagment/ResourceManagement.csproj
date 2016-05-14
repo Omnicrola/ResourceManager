@@ -126,6 +126,9 @@
     <Compile Include="Data\Database\Tables\WeeklyScheduleTable.cs" />
     <Compile Include="Data\Filtering\ResourceFilters\Role.cs" />
     <Compile Include="Data\Database\Tables\PersonTable.cs" />
+    <Compile Include="Data\Model\IProject.cs" />
+    <Compile Include="Data\Model\IResourceBlock.cs" />
+    <Compile Include="Data\Model\IWeeklySchedule.cs" />
     <Compile Include="Operations\IDiscreetOperation.cs" />
     <Compile Include="Operations\OperationEventArgs.cs" />
     <Compile Include="Operations\OperationsQueue.cs" />
