@@ -127,6 +127,7 @@
     <Compile Include="Data\Database\Schema\SqlDateTimeColumn.cs" />
     <Compile Include="Data\Database\Tables\SqlForeignKey.cs" />
     <Compile Include="Data\Database\Tables\SqlTable.cs" />
+    <Compile Include="Data\Database\Tables\WeeklyScheduleTable.cs" />
     <Compile Include="Data\Filtering\ResourceFilters\Role.cs" />
     <Compile Include="Data\Database\Schema\ISqlColumn.cs" />
     <Compile Include="Data\Database\Schema\ISqlTable.cs" />

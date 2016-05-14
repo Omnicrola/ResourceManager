@@ -1,24 +1,22 @@
 ﻿using System.Collections.Generic;
-using System.Data.SqlTypes;
 using ResourceManagment.Data.Database.Schema;
 
 namespace ResourceManagment.Data.Database.Tables
 {
-    public class PersonTable : SqlTable
+    public class WeeklyScheduleTable : SqlTable
     {
-        public const string TableName = "people";
-
+        public const string TableName = "weekly_schedules";
         public static SqlIntegerColumn Id = new SqlIntegerColumn("id", true);
-        public static SqlStringColumn FirstName = new SqlStringColumn("first_name", 32);
-        public static SqlStringColumn LastName = new SqlStringColumn("last_name", 32);
+        public static SqlDateTimeColumn WeekEnding = new SqlDateTimeColumn("week_ending");
+        public static SqlStringColumn Color = new SqlStringColumn("color", 8);
 
-        public PersonTable()
+        public WeeklyScheduleTable()
         {
             Columns = new List<ISqlColumn>
             {
                 Id,
-                FirstName,
-                LastName
+                WeekEnding,
+                Color
             };
         }
 
