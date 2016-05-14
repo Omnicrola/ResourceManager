@@ -16,5 +16,9 @@
         }
 
         public string Name { get; }
+        public string EncapsulateValue(object value)
+        {
+            return value.ToString();
+        }
     }
 }

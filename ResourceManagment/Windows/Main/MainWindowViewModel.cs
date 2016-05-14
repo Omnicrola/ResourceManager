@@ -33,7 +33,7 @@ namespace ResourceManagment.Windows.Main
 
         private void PersistPerson(object sender, NotifyCollectionChangedEventArgs e)
         {
-            _databaseSchema.PersonTable.Create(e.NewItems.Cast<IPerson>());
+            _databaseSchema.PersonTable.Create(e.NewItems.Cast<IPerson>().ToList());
         }
 
 

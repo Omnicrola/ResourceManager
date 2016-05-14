@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Data.SQLite;
+using DatabaseApi.SqlLite;
 using DatabaseApi.SqlLite.Api;
+using ResourceManagment.Windows.AlterResourceBlock;
 
 namespace ResourceManagment.Data.Database.Tables
 {
-    public class ResourceBlockTable : SqlTable
+    public class ResourceBlockTable : SqlTable<ResourceBlockViewModel>
     {
         public const string TableName = "resources";
 
@@ -14,7 +16,7 @@ namespace ResourceManagment.Data.Database.Tables
         public static SqlIntegerColumn FkProject = new SqlIntegerColumn("fk_project", false);
         public static SqlIntegerColumn FkSchedule = new SqlIntegerColumn("fk_schedule", false);
 
-        public ResourceBlockTable()
+        public ResourceBlockTable(DatabaseSchema databaseSchema) : base(databaseSchema)
         {
 
             Columns = new List<ISqlColumn>

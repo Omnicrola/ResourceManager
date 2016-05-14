@@ -17,7 +17,7 @@ namespace DatabaseApi.SqlLite
         {
             _databaseLocation = databaseLocation;
             _schemaVerifier = schemaVerifier;
-            SqlTables.Add(new MetadataTable());
+            SqlTables.Add(new MetadataTable(this));
         }
 
 
