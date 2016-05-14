@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using DatabaseApi.SqlLite.Api;
+using ResourceManagment.Windows.Main;
 
 namespace ResourceManagment.Data.Database.Tables
 {
@@ -25,5 +27,17 @@ namespace ResourceManagment.Data.Database.Tables
         {
             return TableName;
         }
+
+        public void Create(IEnumerable<IPerson> people)
+        {
+            people.ToList().ForEach(p => CreateSingle(p));
+        }
+
+        private void CreateSingle(object dataToSave)
+        {
+            var properties = dataToSave.GetType().GetProperties();
+        }
     }
+
+
 }

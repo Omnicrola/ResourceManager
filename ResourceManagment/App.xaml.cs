@@ -1,7 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Windows;
 using System.Windows.Media;
+using DatabaseApi.SqlLite;
+using ResourceManagment.Data;
+using ResourceManagment.Data.Database;
+using ResourceManagment.Data.Database.Tables;
 using ResourceManagment.Operations;
 using ResourceManagment.Windows.Main;
 using ResourceManagment.Windows.ManagePeople;
@@ -18,30 +23,37 @@ namespace ResourceManagment
     {
         private void Application_Start(object sender, StartupEventArgs args)
         {
-            var dataContext = createDataContext();
-            var mainWindow = new MainWindow(dataContext, new OperationsQueue());
+            var schemaVersion = ConfigurationManager.AppSettings["sql.schema.version"];
+
+            var sqlSchemaVerifier = new SqlSchemaVerifier(schemaVersion);
+            var databaseLocation = Environment.ExpandEnvironmentVariables(ConfigurationManager.AppSettings["sql.database.location"]);
+            var databaseSchema = new ResourceManagerDatabaseSchema(databaseLocation, sqlSchemaVerifier);
+
+            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel(databaseSchema);
+
+            var mainViewModel = CreateMainViewModel(mainWindowViewModel);
+            var mainWindow = new MainWindow(mainViewModel, new OperationsQueue(Dispatcher));
             mainWindow.Show();
         }
 
-        private MainWindowViewModel createDataContext()
+        private static MainWindowViewModel CreateMainViewModel(MainWindowViewModel mainWindowViewModel)
         {
-            MainWindowViewModel resourceDataContext = new MainWindowViewModel();
             var wilmut = new ProjectViewModel("Wilmut") { Color = new SolidColorBrush(Colors.LightBlue) };
             var dragonfly = new ProjectViewModel("Dragonfly") { Color = new SolidColorBrush(Colors.LemonChiffon) };
-            resourceDataContext.Projects.Add(wilmut);
-            resourceDataContext.Projects.Add(dragonfly);
+            mainWindowViewModel.Projects.Add(wilmut);
+            mainWindowViewModel.Projects.Add(dragonfly);
 
             var esch = new PersonViewModel("Eric", "Schreffler");
             var bvil = new PersonViewModel("Bob", "Vila");
             var kbec = new PersonViewModel("Kent", "Beck");
-            resourceDataContext.People.Add(esch);
-            resourceDataContext.People.Add(bvil);
-            resourceDataContext.People.Add(kbec);
+            mainWindowViewModel.People.Add(esch);
+            mainWindowViewModel.People.Add(bvil);
+            mainWindowViewModel.People.Add(kbec);
 
             WeekScheduleViewModel weekSchedule = new WeekScheduleViewModel(new DateTime(2016, 4, 1));
             weekSchedule.RequiredProjectResources.Add(new RequiredResourceViewModel(wilmut, 2));
             weekSchedule.RequiredProjectResources.Add(new RequiredResourceViewModel(dragonfly, 1));
-            resourceDataContext.AllSchedules.Add(weekSchedule);
+            mainWindowViewModel.AllSchedules.Add(weekSchedule);
 
             var eschPersonalSchedule = new PersonalScheduleViewModel(new DateTime(2016, 4, 8), esch);
 
@@ -113,7 +125,7 @@ namespace ResourceManagment
             weekSchedule.Schedules.Add(eschPersonalSchedule);
             weekSchedule.Schedules.Add(bvilPersonalSchedule);
             weekSchedule.Schedules.Add(kbecPersonalSchedule);
-            return resourceDataContext;
+            return mainWindowViewModel;
         }
 
 

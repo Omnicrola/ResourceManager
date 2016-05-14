@@ -5,14 +5,26 @@ namespace ResourceManagment.Data.Database
 {
     public class ResourceManagerDatabaseSchema : DatabaseSchema
     {
-
-        public ResourceManagerDatabaseSchema() : base()
+        public ResourceManagerDatabaseSchema(string databaseLocation, SqlSchemaVerifier schemaVerifier)
+            : base(databaseLocation, schemaVerifier)
         {
-            SqlTables.Add(new ProjectTable());
-            SqlTables.Add(new PersonTable());
-            SqlTables.Add(new WeeklyScheduleTable());
-            SqlTables.Add(new ResourceBlockTable());
+            ProjectTable = new ProjectTable();
+            PersonTable = new PersonTable();
+            WeeklyScheduleTable = new WeeklyScheduleTable();
+            ResourceBlockTable = new ResourceBlockTable();
 
+            SqlTables.Add(ProjectTable);
+            SqlTables.Add(PersonTable);
+            SqlTables.Add(WeeklyScheduleTable);
+            SqlTables.Add(ResourceBlockTable);
         }
+
+        public ResourceBlockTable ResourceBlockTable { get; }
+
+        public WeeklyScheduleTable WeeklyScheduleTable { get; }
+
+        public PersonTable PersonTable { get; }
+
+        public ProjectTable ProjectTable { get; }
     }
 }

@@ -46,6 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlLite\Api\ISqlColumn.cs" />
     <Compile Include="SqlLite\Api\ISqlTable.cs" />
+    <Compile Include="SqlLite\Api\SqlColumnBindingAttribute.cs" />
     <Compile Include="SqlLite\Api\SqlDateTimeColumn.cs" />
     <Compile Include="SqlLite\Api\SqlForeignKey.cs" />
     <Compile Include="SqlLite\Api\SqlIntegerColumn.cs" />

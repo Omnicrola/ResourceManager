@@ -4,6 +4,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using ResourceManagment.Operations;
 using ResourceManagment.Windows.AlterResourceBlock;
 using ResourceManagment.Windows.Help;
@@ -20,7 +21,6 @@ namespace ResourceManagment.Windows.Main
     {
         private readonly MainWindowViewModel _resourceDataContext;
         private readonly OperationsQueue _operationsQueue;
-        private readonly ResourceDragDropHandler _resourceDragDropHandler;
 
         public MainWindow(MainWindowViewModel resourceDataContext, OperationsQueue operationsQueue)
         {
@@ -31,7 +31,7 @@ namespace ResourceManagment.Windows.Main
 
             _resourceDataContext = resourceDataContext;
             _operationsQueue = operationsQueue;
-            _resourceDragDropHandler = new ResourceDragDropHandler();
+
         }
 
         private void buttonAddWeek_Click(object sender, RoutedEventArgs e)
@@ -96,11 +96,6 @@ namespace ResourceManagment.Windows.Main
             editWeeklyScheduleWindow.ShowDialog();
         }
 
-        private void RunBackgroundOp(object sender, RoutedEventArgs e)
-        {
-            _operationsQueue.AddOperation(new UnreasonablyLongTask());
-        }
-
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
@@ -108,13 +103,5 @@ namespace ResourceManagment.Windows.Main
         }
     }
 
-    internal class UnreasonablyLongTask : IDiscreetOperation
-    {
-        public void DoWork()
-        {
-            Console.WriteLine("Starting task!");
-            Thread.Sleep(2000);
-            Console.WriteLine("Task finished!");
-        }
-    }
+
 }

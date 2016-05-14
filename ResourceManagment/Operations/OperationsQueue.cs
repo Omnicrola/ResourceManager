@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace ResourceManagment.Operations
 {
@@ -11,11 +12,16 @@ namespace ResourceManagment.Operations
 
         private readonly Queue<IDiscreetOperation> _operationsToDo = new Queue<IDiscreetOperation>();
         private readonly Queue<IDiscreetOperation> _newOperations = new Queue<IDiscreetOperation>();
+        private readonly Dispatcher _mainThreadDispatcher;
         private readonly Thread _thread;
         private bool _isRunning;
 
-        public OperationsQueue()
+        public EventHandler<OperationEventArgs> OperationStarted;
+        public EventHandler<OperationEventArgs> OperationFinished;
+
+        public OperationsQueue(Dispatcher mainThreadDispatcher)
         {
+            _mainThreadDispatcher = mainThreadDispatcher;
             _isRunning = true;
             _thread = new Thread(ProcessQueue);
             _thread.Name = "Operations Queue";
@@ -38,7 +44,7 @@ namespace ResourceManagment.Operations
             {
                 LoadNewOperationsIntoQueue();
                 ProcessNextTask();
-                Thread.Sleep(100);
+                Thread.Sleep(25);
             }
         }
 
@@ -57,8 +63,10 @@ namespace ResourceManagment.Operations
         {
             if (_operationsToDo.Count > 0)
             {
-                var operation = _operationsToDo.Dequeue();
-                operation.DoWork();
+                var currentOperation = _operationsToDo.Dequeue();
+                _mainThreadDispatcher.InvokeAsync(() => OperationStarted.Invoke(currentOperation, new OperationEventArgs(currentOperation)));
+                currentOperation.DoWork();
+                _mainThreadDispatcher.InvokeAsync(() => OperationFinished.Invoke(currentOperation, new OperationEventArgs(currentOperation)));
             }
 
         }

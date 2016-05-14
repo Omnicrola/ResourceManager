@@ -138,7 +138,6 @@
                         </WrapPanel>
                     </Button>
                     <Separator/>
-                    <Button Click="RunBackgroundOp">Run Op</Button>
                 </ToolBar>
                 <local:ResourceDataGrid  x:Name="ResourceDataGrid" DataContext="{Binding SelectedSchedule}"></local:ResourceDataGrid>
             </StackPanel>
