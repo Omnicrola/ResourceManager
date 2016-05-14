@@ -1,18 +1,16 @@
-﻿using ResourceManagment.Data.ViewModels;
-using System.Windows;
-using ResourceManagment.Data;
+﻿using System.Windows;
 
-namespace ResourceManagment.Windows
+namespace ResourceManagment.Windows.AlterResourceBlock
 {
     /// <summary>
     /// Interaction logic for AlterResourceBlockWindow.xaml
     /// </summary>
     public partial class AlterResourceBlockWindow : Window
     {
-        private AlterBlockDataContext _alterBlockDataContext;
+        private AlterBlockViewModel _alterBlockDataContext;
         private ResourceBlockViewModel _resourceBlock;
 
-        public AlterResourceBlockWindow(AlterBlockDataContext alterBlockDataContext, ResourceBlockViewModel resourceBlock)
+        public AlterResourceBlockWindow(AlterBlockViewModel alterBlockDataContext, ResourceBlockViewModel resourceBlock)
         {
             InitializeComponent();
             DataContext = alterBlockDataContext;

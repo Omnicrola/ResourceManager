@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManageProjects
 {

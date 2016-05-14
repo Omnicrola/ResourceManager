@@ -1,5 +1,7 @@
-﻿using ResourceManagment.Data.ViewModels;
-namespace ResourceManagment
+﻿using ResourceManagment.Windows.AlterResourceBlock;
+using ResourceManagment.Windows.ManageWeeklySchedule;
+
+namespace ResourceManagment.Data.Filtering.ResourceFilters
 {
     public interface IResourceFilter
     {

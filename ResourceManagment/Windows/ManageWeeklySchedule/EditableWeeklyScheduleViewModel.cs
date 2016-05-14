@@ -2,8 +2,9 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Media;
+using ResourceManagment.Windows.ViewModels;
 
-namespace ResourceManagment.Data.ViewModels
+namespace ResourceManagment.Windows.ManageWeeklySchedule
 {
     internal class EditableWeeklyScheduleViewModel : ViewModel, IWeekScheduleViewModel
     {

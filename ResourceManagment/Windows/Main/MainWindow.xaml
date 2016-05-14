@@ -4,14 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ResourceManagment.Windows.Main"
-        xmlns:viewModels="clr-namespace:ResourceManagment.Data.ViewModels"
         xmlns:data="clr-namespace:ResourceManagment.Data"
         xmlns:converters="clr-namespace:ResourceManagment.Data.Converters"
         
         mc:Ignorable="d"
         Title="Resource Schedule" 
         Height="800" Width="898"  
-        Margin="5" d:DataContext="{d:DesignInstance data:ResourceDataContext}">
+        Margin="5" d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
 
     <Window.Resources>
         <BitmapImage x:Key="Gear16" UriSource="../../Assets/Icons/gear16.png" />

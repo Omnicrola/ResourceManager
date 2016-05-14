@@ -1,9 +1,12 @@
 ﻿using System.Collections.ObjectModel;
-using ResourceManagment.Data.ViewModels;
+using ResourceManagment.Windows.ManagePeople;
+using ResourceManagment.Windows.ManageProjects;
+using ResourceManagment.Windows.ManageWeeklySchedule;
+using ResourceManagment.Windows.ViewModels;
 
-namespace ResourceManagment.Data
+namespace ResourceManagment.Windows.Main
 {
-    public class ResourceDataContext : ViewModel
+    public class MainWindowViewModel : ViewModel
     {
         private WeekScheduleViewModel _selectedSchedule;
 
@@ -16,14 +19,12 @@ namespace ResourceManagment.Data
 
         public ObservableCollection<ProjectViewModel> Projects { get; internal set; }
         public ObservableCollection<PersonViewModel> People { get; internal set; }
-        public ResourceToolbarDataContext ResourceToolbarContext { get; private set; }
 
-        public ResourceDataContext()
+        public MainWindowViewModel()
         {
             AllSchedules = new ObservableCollection<WeekScheduleViewModel>();
             Projects = new ObservableCollection<ProjectViewModel>();
             People = new ObservableCollection<PersonViewModel>();
-            ResourceToolbarContext = new ResourceToolbarDataContext();
         }
     }
 }

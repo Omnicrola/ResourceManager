@@ -14,6 +14,9 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -26,11 +29,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -62,6 +62,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.101.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.101.0\lib\net451\System.Data.SQLite.dll</HintPath>
@@ -75,6 +76,7 @@
       <HintPath>..\packages\System.Data.SQLite.Linq.1.0.101.0\lib\net451\System.Data.SQLite.Linq.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -119,19 +121,18 @@
     </ApplicationDefinition>
     <Compile Include="Data\Converters\ColorToBrushConverter.cs" />
     <Compile Include="Data\Filtering\ResourceFilters\Role.cs" />
-    <Compile Include="Data\ResourceToolbarDataContext.cs" />
-    <Compile Include="Data\ViewModels\EditableWeeklyScheduleViewModel.cs" />
-    <Compile Include="Data\ViewModels\IWeekScheduleViewModel.cs" />
-    <Compile Include="Data\ViewModels\ProjectViewModel.cs" />
-    <Compile Include="Data\ResourceDataContext.cs" />
-    <Compile Include="Data\ViewModels\PersonalScheduleViewModel.cs" />
-    <Compile Include="Data\ViewModels\PersonViewModel.cs" />
-    <Compile Include="Data\ViewModels\RequiredResourceViewModel.cs" />
-    <Compile Include="Data\ViewModels\ResourceBlockViewModel.cs" />
-    <Compile Include="Data\ViewModels\WeekScheduleViewModel.cs" />
-    <Compile Include="Data\ViewModels\WorkDayViewModel.cs" />
-    <Compile Include="Data\ViewModels\ViewModel.cs" />
-    <Compile Include="Data\AlterBlockDataContext.cs" />
+    <Compile Include="Windows\ManageWeeklySchedule\EditableWeeklyScheduleViewModel.cs" />
+    <Compile Include="Windows\ManageWeeklySchedule\IWeekScheduleViewModel.cs" />
+    <Compile Include="Windows\ManageProjects\ProjectViewModel.cs" />
+    <Compile Include="Windows\Main\MainWindowViewModel.cs" />
+    <Compile Include="Windows\ManageWeeklySchedule\PersonalScheduleViewModel.cs" />
+    <Compile Include="Windows\ManagePeople\PersonViewModel.cs" />
+    <Compile Include="Windows\ViewModels\RequiredResourceViewModel.cs" />
+    <Compile Include="Windows\AlterResourceBlock\ResourceBlockViewModel.cs" />
+    <Compile Include="Windows\ManageWeeklySchedule\WeekScheduleViewModel.cs" />
+    <Compile Include="Windows\AlterResourceBlock\WorkDayViewModel.cs" />
+    <Compile Include="Windows\ViewModels\ViewModel.cs" />
+    <Compile Include="Windows\AlterResourceBlock\AlterBlockViewModel.cs" />
     <Compile Include="Windows\Help\HelpWindow.xaml.cs">
       <DependentUpon>HelpWindow.xaml</DependentUpon>
     </Compile>
@@ -143,7 +144,7 @@
     <Compile Include="Windows\AddResourceWindow.xaml.cs">
       <DependentUpon>AddResourceWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\AlterResourceBlockWindow.xaml.cs">
+    <Compile Include="Windows\AlterResourceBlock\AlterResourceBlockWindow.xaml.cs">
       <DependentUpon>AlterResourceBlockWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\Filtering\ResourceFilters\RoleFilter.cs" />
@@ -155,7 +156,7 @@
       <DependentUpon>ManageProjectsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ManageProjects\AllProjectsViewModel.cs" />
-    <Compile Include="Data\ViewModels\SelectablePersonViewModel.cs" />
+    <Compile Include="Windows\ManagePeople\SelectablePersonViewModel.cs" />
     <Compile Include="Windows\Main\ResourceDragDropHandler.cs" />
     <Compile Include="Windows\ManageWeeklySchedule\EditWeeklyScheduleWindow.xaml.cs">
       <DependentUpon>EditWeeklyScheduleWindow.xaml</DependentUpon>
@@ -164,7 +165,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\AlterResourceBlockWindow.xaml">
+    <Page Include="Windows\AlterResourceBlock\AlterResourceBlockWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

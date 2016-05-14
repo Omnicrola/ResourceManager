@@ -1,6 +1,8 @@
 ﻿using System;
+using ResourceManagment.Data.Filtering.ResourceFilters;
+using ResourceManagment.Windows.ViewModels;
 
-namespace ResourceManagment
+namespace ResourceManagment.Windows.ManagePeople
 {
     public class PersonViewModel : ViewModel
     {

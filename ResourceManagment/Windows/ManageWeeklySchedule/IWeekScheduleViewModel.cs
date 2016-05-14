@@ -1,8 +1,9 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Windows.Media;
+using ResourceManagment.Windows.ViewModels;
 
-namespace ResourceManagment.Data.ViewModels
+namespace ResourceManagment.Windows.ManageWeeklySchedule
 {
     public interface IWeekScheduleViewModel
     {

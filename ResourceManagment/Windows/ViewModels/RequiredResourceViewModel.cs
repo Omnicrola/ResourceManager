@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using ResourceManagment.Windows.ManageProjects;
+using ResourceManagment.Windows.ManageWeeklySchedule;
 
-namespace ResourceManagment.Data.ViewModels
+namespace ResourceManagment.Windows.ViewModels
 {
     public class RequiredResourceViewModel : ViewModel
     {

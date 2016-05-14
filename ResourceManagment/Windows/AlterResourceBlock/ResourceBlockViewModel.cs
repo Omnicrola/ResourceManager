@@ -1,6 +1,9 @@
 ﻿using System;
+using ResourceManagment.Windows.ManagePeople;
+using ResourceManagment.Windows.ManageProjects;
+using ResourceManagment.Windows.ViewModels;
 
-namespace ResourceManagment.Data.ViewModels
+namespace ResourceManagment.Windows.AlterResourceBlock
 {
     public class ResourceBlockViewModel : ViewModel
     {

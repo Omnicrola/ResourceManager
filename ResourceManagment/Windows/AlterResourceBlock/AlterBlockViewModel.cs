@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using ResourceManagment.Data.ViewModels;
+using ResourceManagment.Windows.ManagePeople;
+using ResourceManagment.Windows.ManageProjects;
 
-namespace ResourceManagment.Data
+namespace ResourceManagment.Windows.AlterResourceBlock
 {
-    public class AlterBlockDataContext
+    public class AlterBlockViewModel
     {
         private ResourceBlockViewModel _resourceBlock;
 
-        public AlterBlockDataContext(ObservableCollection<PersonViewModel> people,
+        public AlterBlockViewModel(ObservableCollection<PersonViewModel> people,
             ObservableCollection<ProjectViewModel> projects,
             ResourceBlockViewModel resourceBlock)
         {

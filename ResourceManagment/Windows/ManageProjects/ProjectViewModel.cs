@@ -1,6 +1,7 @@
 ﻿using System.Windows.Media;
+using ResourceManagment.Windows.ViewModels;
 
-namespace ResourceManagment
+namespace ResourceManagment.Windows.ManageProjects
 {
     public class ProjectViewModel : ViewModel
     {

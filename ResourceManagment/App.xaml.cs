@@ -1,8 +1,12 @@
-﻿using ResourceManagment.Data.ViewModels;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Media;
 using ResourceManagment.Data;
+using ResourceManagment.Windows.Main;
+using ResourceManagment.Windows.ManagePeople;
+using ResourceManagment.Windows.ManageProjects;
+using ResourceManagment.Windows.ManageWeeklySchedule;
+using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment
 {
@@ -18,9 +22,9 @@ namespace ResourceManagment
             mainWindow.Show();
         }
 
-        private ResourceDataContext createDataContext()
+        private MainWindowViewModel createDataContext()
         {
-            ResourceDataContext resourceDataContext = new ResourceDataContext();
+            MainWindowViewModel resourceDataContext = new MainWindowViewModel();
             var wilmut = new ProjectViewModel("Wilmut") { Color = new SolidColorBrush(Colors.LightBlue) };
             var dragonfly = new ProjectViewModel("Dragonfly") { Color = new SolidColorBrush(Colors.LemonChiffon) };
             resourceDataContext.Projects.Add(wilmut);

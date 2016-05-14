@@ -1,7 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using System;
+﻿using System;
+using System.Collections.ObjectModel;
+using ResourceManagment.Windows.AlterResourceBlock;
+using ResourceManagment.Windows.ManagePeople;
+using ResourceManagment.Windows.ViewModels;
 
-namespace ResourceManagment.Data.ViewModels
+namespace ResourceManagment.Windows.ManageWeeklySchedule
 {
     public class PersonalScheduleViewModel : ViewModel
     {

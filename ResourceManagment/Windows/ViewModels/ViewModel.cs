@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace ResourceManagment
+namespace ResourceManagment.Windows.ViewModels
 {
     public abstract class ViewModel : INotifyPropertyChanged
     {

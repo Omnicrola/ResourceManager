@@ -1,6 +1,7 @@
-﻿using ResourceManagment.Data.ViewModels;
+﻿using ResourceManagment.Windows.AlterResourceBlock;
+using ResourceManagment.Windows.ManageWeeklySchedule;
 
-namespace ResourceManagment
+namespace ResourceManagment.Data.Filtering.ResourceFilters
 {
     public class RoleFilter : IResourceFilter
     {

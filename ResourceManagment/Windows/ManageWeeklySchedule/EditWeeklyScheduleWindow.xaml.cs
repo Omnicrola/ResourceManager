@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using ResourceManagment.Data.ViewModels;
 
 namespace ResourceManagment.Windows.ManageWeeklySchedule
 {

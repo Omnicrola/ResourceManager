@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ResourceManagment.Data;
-using ResourceManagment.Data.ViewModels;
+using ResourceManagment.Windows.AlterResourceBlock;
 using ResourceManagment.Windows.Help;
 using ResourceManagment.Windows.ManagePeople;
 using ResourceManagment.Windows.ManageProjects;
@@ -16,10 +16,10 @@ namespace ResourceManagment.Windows.Main
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ResourceDataContext _resourceDataContext;
+        private MainWindowViewModel _resourceDataContext;
         private ResourceDragDropHandler _resourceDragDropHandler;
 
-        public MainWindow(ResourceDataContext resourceDataContext)
+        public MainWindow(MainWindowViewModel resourceDataContext)
         {
             InitializeComponent();
             DataContext = resourceDataContext;
@@ -82,8 +82,8 @@ namespace ResourceManagment.Windows.Main
         private void Button_AlterResourceBlock(object sender, RoutedEventArgs e)
         {
             ResourceBlockViewModel resourceBlock = (sender as Button).DataContext as ResourceBlockViewModel;
-            AlterBlockDataContext alterBlockDataContext = new AlterBlockDataContext(_resourceDataContext.People, _resourceDataContext.Projects, resourceBlock);
-            var alterBlockWindow = new AlterResourceBlockWindow(alterBlockDataContext, resourceBlock);
+            AlterBlockViewModel alterBlockDataContext = new AlterBlockViewModel(_resourceDataContext.People, _resourceDataContext.Projects, resourceBlock);
+            var alterBlockWindow = new AlterResourceBlock.AlterResourceBlockWindow(alterBlockDataContext, resourceBlock);
             alterBlockWindow.Owner = this;
             alterBlockWindow.ShowDialog();
         }

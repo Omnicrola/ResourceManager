@@ -5,11 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:ResourceManagment.Windows.ManageWeeklySchedule"
-        xmlns:viewModel="clr-namespace:ResourceManagment.Data.ViewModels"
         xmlns:converters="clr-namespace:ResourceManagment.Data.Converters"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
-        d:DataContext="{d:DesignInstance viewModel:IWeekScheduleViewModel}"
+        d:DataContext="{d:DesignInstance local:IWeekScheduleViewModel}"
         Title="Edit Schedule Details" Height="328.195" Width="446.617">
     <Window.Resources>
         <converters:ColorToBrushConverter x:Key="ColorToBrushConverter"/>

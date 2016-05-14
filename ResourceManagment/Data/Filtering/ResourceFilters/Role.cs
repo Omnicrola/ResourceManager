@@ -1,4 +1,4 @@
-﻿namespace ResourceManagment
+﻿namespace ResourceManagment.Data.Filtering.ResourceFilters
 {
     public enum Role
     {

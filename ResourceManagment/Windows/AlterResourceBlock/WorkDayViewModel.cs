@@ -1,7 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using ResourceManagment.Windows.ManagePeople;
 
-namespace ResourceManagment.Data.ViewModels
+namespace ResourceManagment.Windows.AlterResourceBlock
 {
     public class WorkDayViewModel
     {
