@@ -19,7 +19,7 @@ namespace DatabaseApi.SqlLite.Api
         public string Name { get; }
         public string EncapsulateValue(object value)
         {
-            return value.ToString();
+            return $"'{value.ToString()}'";
         }
     }
 }

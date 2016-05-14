@@ -42,7 +42,7 @@ namespace DatabaseApi.SqlLite.Api
                 stringBuilder.Append($"({columnNames}) ");
 
                 string data = dataObjects.Select(p => CreateSingle(p, sqlColumnBindings)).Implode(", ");
-                stringBuilder.Append(data);
+                stringBuilder.Append($" VALUES ({data})");
                 stringBuilder.Append(";");
 
                 var query = stringBuilder.ToString();
