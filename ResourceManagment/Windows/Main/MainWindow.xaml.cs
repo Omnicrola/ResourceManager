@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ResourceManagment.Operations;
 using ResourceManagment.Windows.AlterResourceBlock;
 using ResourceManagment.Windows.Help;
 using ResourceManagment.Windows.ManagePeople;
@@ -17,13 +19,18 @@ namespace ResourceManagment.Windows.Main
     public partial class MainWindow : Window
     {
         private readonly MainWindowViewModel _resourceDataContext;
+        private readonly OperationsQueue _operationsQueue;
         private readonly ResourceDragDropHandler _resourceDragDropHandler;
 
-        public MainWindow(MainWindowViewModel resourceDataContext)
+        public MainWindow(MainWindowViewModel resourceDataContext, OperationsQueue operationsQueue)
         {
             InitializeComponent();
             DataContext = resourceDataContext;
+            ResourceDataGrid.People = resourceDataContext.People;
+            ResourceDataGrid.Projects = resourceDataContext.Projects;
+
             _resourceDataContext = resourceDataContext;
+            _operationsQueue = operationsQueue;
             _resourceDragDropHandler = new ResourceDragDropHandler();
         }
 
@@ -79,60 +86,6 @@ namespace ResourceManagment.Windows.Main
 
         }
 
-        private void Button_AlterResourceBlock(object sender, RoutedEventArgs e)
-        {
-            ResourceBlockViewModel resourceBlock = (sender as Button).DataContext as ResourceBlockViewModel;
-            AlterBlockViewModel alterBlockDataContext = new AlterBlockViewModel(_resourceDataContext.People, _resourceDataContext.Projects, resourceBlock);
-            var alterBlockWindow = new AlterResourceBlock.AlterResourceBlockWindow(alterBlockDataContext, resourceBlock);
-            alterBlockWindow.Owner = this;
-            alterBlockWindow.ShowDialog();
-        }
-
-
-        private void ResourceBlock_LeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            _resourceDragDropHandler.StartDragging(e);
-        }
-
-        private void ResourceBlock_MouseMove(object sender, MouseEventArgs e)
-        {
-            var isPressed = e.LeftButton == MouseButtonState.Pressed;
-            if (isPressed)
-            {
-                _resourceDragDropHandler.DragTo(e);
-            }
-        }
-
-        private void ResourceBlock_Drop(object sender, DragEventArgs e)
-        {
-            _resourceDragDropHandler.Drop(e);
-            e.Handled = true;
-        }
-
-        private void ResourceBlock_DragEnter(object sender, DragEventArgs e)
-        {
-            _resourceDragDropHandler.DragOver(sender, e);
-            e.Handled = true;
-        }
-
-        private void ToggleResourceDragMode(object sender, MouseEventArgs e)
-        {
-            var ctrlIsPressed = (Keyboard.Modifiers & ModifierKeys.Control) != 0;
-            var shiftIsPressed = (Keyboard.Modifiers & ModifierKeys.Shift) != 0;
-            if (ctrlIsPressed)
-            {
-                _resourceDragDropHandler.Mode = DragDropMode.SINGLE;
-            }
-            else if (shiftIsPressed)
-            {
-                _resourceDragDropHandler.Mode = DragDropMode.PAINT;
-            }
-            else
-            {
-                _resourceDragDropHandler.Mode = DragDropMode.NONE;
-            }
-
-        }
 
         private void EditWeeklySchedule_Click(object sender, RoutedEventArgs e)
         {
@@ -143,5 +96,25 @@ namespace ResourceManagment.Windows.Main
             editWeeklyScheduleWindow.ShowDialog();
         }
 
+        private void RunBackgroundOp(object sender, RoutedEventArgs e)
+        {
+            _operationsQueue.AddOperation(new UnreasonablyLongTask());
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            _operationsQueue.Dispose();
+        }
+    }
+
+    internal class UnreasonablyLongTask : IDiscreetOperation
+    {
+        public void DoWork()
+        {
+            Console.WriteLine("Starting task!");
+            Thread.Sleep(2000);
+            Console.WriteLine("Task finished!");
+        }
     }
 }

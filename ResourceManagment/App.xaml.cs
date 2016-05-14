@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
+using ResourceManagment.Operations;
 using ResourceManagment.Windows.Main;
 using ResourceManagment.Windows.ManagePeople;
 using ResourceManagment.Windows.ManageProjects;
@@ -18,7 +19,7 @@ namespace ResourceManagment
         private void Application_Start(object sender, StartupEventArgs args)
         {
             var dataContext = createDataContext();
-            var mainWindow = new MainWindow(dataContext);
+            var mainWindow = new MainWindow(dataContext, new OperationsQueue());
             mainWindow.Show();
         }
 

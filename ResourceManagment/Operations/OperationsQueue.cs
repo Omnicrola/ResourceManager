@@ -1,19 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ResourceManagment.Operations
 {
-    public class OperationsQueue
+    public class OperationsQueue : IDisposable
     {
         private readonly object MUTEX = new object();
 
         private readonly Queue<IDiscreetOperation> _operationsToDo = new Queue<IDiscreetOperation>();
         private readonly Queue<IDiscreetOperation> _newOperations = new Queue<IDiscreetOperation>();
+        private readonly Thread _thread;
+        private bool _isRunning;
 
         public OperationsQueue()
         {
-            var task = new Task(ProcessQueue);
-            task.Start();
+            _isRunning = true;
+            _thread = new Thread(ProcessQueue);
+            _thread.Name = "Operations Queue";
+            _thread.Priority = ThreadPriority.BelowNormal;
+            _thread.Start();
 
         }
 
@@ -27,8 +34,12 @@ namespace ResourceManagment.Operations
 
         private void ProcessQueue()
         {
-            LoadNewOperationsIntoQueue();
-            ProcessNextTask();
+            while (_isRunning)
+            {
+                LoadNewOperationsIntoQueue();
+                ProcessNextTask();
+                Thread.Sleep(100);
+            }
         }
 
         private void LoadNewOperationsIntoQueue()
@@ -50,6 +61,12 @@ namespace ResourceManagment.Operations
                 operation.DoWork();
             }
 
+        }
+
+        public void Dispose()
+        {
+            _isRunning = false;
+            _thread.Abort();
         }
     }
 }
