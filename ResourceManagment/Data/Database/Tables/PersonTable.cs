@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Data.SqlTypes;
-using ResourceManagment.Data.Database.Schema;
+using DatabaseApi.SqlLite.Api;
 
 namespace ResourceManagment.Data.Database.Tables
 {

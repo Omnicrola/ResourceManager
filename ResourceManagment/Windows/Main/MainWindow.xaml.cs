@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ResourceManagment.Data;
 using ResourceManagment.Windows.AlterResourceBlock;
 using ResourceManagment.Windows.Help;
 using ResourceManagment.Windows.ManagePeople;

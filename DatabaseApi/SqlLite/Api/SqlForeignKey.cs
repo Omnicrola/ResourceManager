@@ -1,6 +1,4 @@
-using ResourceManagment.Data.Database.Schema;
-
-namespace ResourceManagment.Data.Database.Tables
+namespace DatabaseApi.SqlLite.Api
 {
     public class SqlForeignKey
     {

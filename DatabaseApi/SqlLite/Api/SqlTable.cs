@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using ResourceManagment.Data.Database.Schema;
 
-namespace ResourceManagment.Data.Database.Tables
+namespace DatabaseApi.SqlLite.Api
 {
     public abstract class SqlTable : ISqlTable
     {
@@ -15,9 +14,9 @@ namespace ResourceManagment.Data.Database.Tables
                 .Aggregate((total, next) => total + ", " + next);
 
             string foreignKeys = ForeignKeys.Select(f => f.BuildCreateQuery())
-                .Aggregate((total, next) => total + " " + next);
+                .Aggregate((total, next) => total + ", " + next);
 
-            string creationQuery = "CREATE TABLE " + GetTableName() + " (" + columns + ");";
+            string creationQuery = $"CREATE TABLE {GetTableName()}  ({columns}, {foreignKeys});";
             return creationQuery;
         }
 

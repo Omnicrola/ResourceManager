@@ -1,4 +1,4 @@
-﻿namespace ResourceManagment.Data.Database.Schema
+﻿namespace DatabaseApi.SqlLite.Api
 {
     public class SqlStringColumn : ISqlColumn
     {
