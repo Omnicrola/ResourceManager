@@ -26,7 +26,9 @@ namespace ResourceManagment.Data
         {
             if (_sqLiteConnection == null)
             {
-                string connectionString = ConfigurationManager.AppSettings["sql.connection.string"];
+                var databaseLocation = Environment.ExpandEnvironmentVariables(ConfigurationManager.AppSettings["sql.database.location"]);
+                string connectionString = $"Data Source={databaseLocation}ResourceManagement.sqlite; Version = 3;";
+
                 _sqLiteConnection = new SQLiteConnection(connectionString);
                 _sqLiteConnection.Open();
                 VerifyStructure();

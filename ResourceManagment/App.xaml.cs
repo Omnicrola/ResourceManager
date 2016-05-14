@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
 using ResourceManagment.Windows.Main;
@@ -17,7 +18,7 @@ namespace ResourceManagment
         private void Application_Start(object sender, StartupEventArgs args)
         {
             var dataContext = createDataContext();
-            var mainWindow = new Windows.Main.MainWindow(dataContext);
+            var mainWindow = new MainWindow(dataContext);
             mainWindow.Show();
         }
 

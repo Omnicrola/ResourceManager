@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,8 +16,8 @@ namespace ResourceManagment.Windows.Main
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MainWindowViewModel _resourceDataContext;
-        private ResourceDragDropHandler _resourceDragDropHandler;
+        private readonly MainWindowViewModel _resourceDataContext;
+        private readonly ResourceDragDropHandler _resourceDragDropHandler;
 
         public MainWindow(MainWindowViewModel resourceDataContext)
         {
