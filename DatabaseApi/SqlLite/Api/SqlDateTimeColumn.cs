@@ -16,6 +16,8 @@ namespace DatabaseApi.SqlLite.Api
         }
 
         public string Name { get; }
+        public bool IsPrimaryKey => false;
+
         public string EncapsulateValue(object value)
         {
             string formattedValue = value.ToString();

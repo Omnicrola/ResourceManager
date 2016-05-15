@@ -2,21 +2,22 @@ namespace DatabaseApi.SqlLite.Api
 {
     public class SqlIntegerColumn : ISqlColumn
     {
-        private readonly bool _isPrimaryKey;
 
         public SqlIntegerColumn(string name, bool isPrimaryKey)
         {
             Name = name;
-            _isPrimaryKey = isPrimaryKey;
+            IsPrimaryKey = isPrimaryKey;
         }
 
         public string BuildCreateQuery()
         {
-            string pk = _isPrimaryKey ? "PRIMARY KEY" : "";
+            string pk = IsPrimaryKey ? "PRIMARY KEY" : "";
             return $"{Name} int {pk}";
         }
 
         public string Name { get; }
+        public bool IsPrimaryKey { get; }
+
         public string EncapsulateValue(object value)
         {
             return $"'{value.ToString()}'";

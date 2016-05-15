@@ -36,7 +36,7 @@ namespace DatabaseApi.SqlLite.Api
             if (dataObjects.Any())
             {
                 var sqlColumnBindings = GetColumnBindings(dataObjects[0]);
-                string columnNames = sqlColumnBindings.Select(b => b.Column.Name).Implode(", ");
+                string columnNames = sqlColumnBindings.Where(b => !b.Column.IsPrimaryKey).Select(b => b.Column.Name).Implode(", ");
                 var stringBuilder = new StringBuilder();
                 stringBuilder.Append($"INSERT INTO {GetTableName()} ");
                 stringBuilder.Append($"({columnNames}) ");
@@ -53,6 +53,7 @@ namespace DatabaseApi.SqlLite.Api
         private static string CreateSingle(object dataObject, List<SqlColumnBinding> sqlColumnBindings)
         {
             return sqlColumnBindings
+                .Where(b => !b.Column.IsPrimaryKey)
                 .Select(b =>
                 {
                     var value = b.PropertyInfo.GetValue(dataObject);

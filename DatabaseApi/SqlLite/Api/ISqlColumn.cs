@@ -4,6 +4,7 @@
     {
         string BuildCreateQuery();
         string Name { get; }
+        bool IsPrimaryKey { get; }
         string EncapsulateValue(object value);
     }
 }
