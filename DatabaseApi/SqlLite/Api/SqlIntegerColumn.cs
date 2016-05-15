@@ -11,12 +11,14 @@ namespace DatabaseApi.SqlLite.Api
 
         public string BuildCreateQuery()
         {
-            string pk = IsPrimaryKey ? "PRIMARY KEY" : "";
-            return $"{Name} int {pk}";
+            string pk = IsPrimaryKey ? "PRIMARY KEY AUTOINCREMENT" : "";
+            string nullable = Nullable ? "" : "NOT NULL";
+            return $"{Name} INTEGER {pk} {nullable}";
         }
 
         public string Name { get; }
         public bool IsPrimaryKey { get; }
+        public bool Nullable => false;
 
         public string EncapsulateValue(object value)
         {

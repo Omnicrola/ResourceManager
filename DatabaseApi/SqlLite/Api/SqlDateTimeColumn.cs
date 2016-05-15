@@ -12,11 +12,13 @@ namespace DatabaseApi.SqlLite.Api
 
         public string BuildCreateQuery()
         {
-            return Name + " datetime NOT NULL";
+            string nullable = Nullable ? "" : "NOT NULL";
+            return $"{Name} datetime {nullable}";
         }
 
         public string Name { get; }
         public bool IsPrimaryKey => false;
+        public bool Nullable => false;
 
         public string EncapsulateValue(object value)
         {
