@@ -1,16 +1,24 @@
 ﻿using System.Windows.Media;
 using DatabaseApi.SqlLite.Api;
+using ResourceManagment.Data.Model;
 using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManageProjects
 {
     [SqlTableBinding("projects")]
-    public class ProjectViewModel : ViewModel
+    public class ProjectViewModel : ViewModel, IProject
     {
         private string _name;
         private Brush _color;
         public static ProjectViewModel Empty { get { return new ProjectViewModel("None") { Color = Brushes.Gray }; } }
 
+        public ProjectViewModel(string name)
+        {
+            _name = name;
+            Color = new SolidColorBrush(Colors.LightCoral);
+        }
+
+        [SqlColumnBinding("name")]
         public string Name
         {
             get
@@ -23,6 +31,8 @@ namespace ResourceManagment.Windows.ManageProjects
                 FireOnPropertyChanged("Name");
             }
         }
+
+        [SqlColumnBinding("color")]
         public Brush Color
         {
             get
@@ -36,11 +46,7 @@ namespace ResourceManagment.Windows.ManageProjects
             }
         }
 
-        public ProjectViewModel(string name)
-        {
-            _name = name;
-            Color = new SolidColorBrush(Colors.LightCoral);
-        }
+
 
         public override string ToString()
         {

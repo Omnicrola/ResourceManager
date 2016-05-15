@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using ResourceManagment.Data.Database;
 using ResourceManagment.Data.Filtering.ResourceFilters;
+using ResourceManagment.Data.Model;
 using ResourceManagment.Windows.ManagePeople;
 using ResourceManagment.Windows.ManageProjects;
 using ResourceManagment.Windows.ManageWeeklySchedule;
@@ -28,6 +29,18 @@ namespace ResourceManagment.Windows.Main
             People = new ObservableCollection<PersonViewModel>();
 
             People.CollectionChanged += PersistPerson;
+            Projects.CollectionChanged += PersistProject;
+            AllSchedules.CollectionChanged += PersistSchedules;
+        }
+
+        private void PersistSchedules(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            _databaseSchema.WeeklyScheduleTable.Create(e.NewItems.Cast<IWeeklySchedule>().ToList());
+        }
+
+        private void PersistProject(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            _databaseSchema.ProjectTable.Create(e.NewItems.Cast<IProject>().ToList());
         }
 
         private void PersistPerson(object sender, NotifyCollectionChangedEventArgs e)

@@ -3,12 +3,13 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows.Media;
 using DatabaseApi.SqlLite.Api;
+using ResourceManagment.Data.Model;
 using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManageWeeklySchedule
 {
     [SqlTableBinding("weekly_schedules")]
-    public class WeekScheduleViewModel : ViewModel, IWeekScheduleViewModel
+    public class WeekScheduleViewModel : ViewModel, IWeekScheduleViewModel, IWeeklySchedule
     {
         private DateTime _weekEnding;
         private string _notes;
@@ -17,8 +18,12 @@ namespace ResourceManagment.Windows.ManageWeeklySchedule
 
         public ObservableCollection<PersonalScheduleViewModel> Schedules { get; set; }
         public ObservableCollection<RequiredResourceViewModel> RequiredProjectResources { get; set; }
+
+        [SqlColumnBinding("week_ending")]
         public DateTime WeekEnding { get { return _weekEnding; } set { SetPropertyField(ref _weekEnding, value); } }
         public string Notes { get { return _notes; } set { SetPropertyField(ref _notes, value); } }
+
+        [SqlColumnBinding("color")]
         public Color WeekColor { get { return _weekColor; } set { SetPropertyField(ref _weekColor, value); } }
 
 
