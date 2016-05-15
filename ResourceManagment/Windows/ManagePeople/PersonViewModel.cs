@@ -1,6 +1,7 @@
 ﻿using System;
 using DatabaseApi.SqlLite.Api;
 using ResourceManagment.Data.Filtering.ResourceFilters;
+using ResourceManagment.Data.Model;
 using ResourceManagment.Windows.Main;
 using ResourceManagment.Windows.ViewModels;
 

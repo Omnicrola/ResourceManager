@@ -120,12 +120,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\Converters\ColorToBrushConverter.cs" />
+    <Compile Include="Data\Database\ModelDataBinder.cs" />
     <Compile Include="Data\Database\ResourceManagerDatabaseSchema.cs" />
     <Compile Include="Data\Database\Tables\ProjectTable.cs" />
     <Compile Include="Data\Database\Tables\ResourceBlockTable.cs" />
     <Compile Include="Data\Database\Tables\WeeklyScheduleTable.cs" />
     <Compile Include="Data\Filtering\ResourceFilters\Role.cs" />
     <Compile Include="Data\Database\Tables\PersonTable.cs" />
+    <Compile Include="Data\Model\IPerson.cs" />
     <Compile Include="Data\Model\IProject.cs" />
     <Compile Include="Data\Model\IResourceBlock.cs" />
     <Compile Include="Data\Model\IWeeklySchedule.cs" />

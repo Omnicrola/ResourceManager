@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using DatabaseApi.SqlLite;
 using DatabaseApi.SqlLite.Api;
 using ResourceManagment.Data.Model;
@@ -30,5 +31,6 @@ namespace ResourceManagment.Data.Database.Tables
         {
             return TableName;
         }
+
     }
 }

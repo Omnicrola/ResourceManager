@@ -26,7 +26,7 @@ namespace ResourceManagment
             var databaseLocation = Environment.ExpandEnvironmentVariables(ConfigurationManager.AppSettings["sql.database.location"]);
             var databaseSchema = new ResourceManagerDatabaseSchema(databaseLocation, sqlSchemaVerifier);
 
-            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel(databaseSchema);
+            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel(new ModelDataBinder(databaseSchema));
 
             var mainViewModel = CreateMainViewModel(mainWindowViewModel);
             var mainWindow = new MainWindow(mainViewModel, new OperationsQueue(Dispatcher));

@@ -46,8 +46,6 @@ namespace ResourceManagment.Windows.ManageProjects
             }
         }
 
-
-
         public override string ToString()
         {
             return Name;

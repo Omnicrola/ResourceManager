@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.SQLite;
 using System.Linq;
 using System.Text;
@@ -49,6 +50,17 @@ namespace DatabaseApi.SqlLite.Api
                 DatabaseSchema.ExecuteNonQuery(query);
             }
         }
+
+        public void DataChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var propertyName = e.PropertyName;
+            var propertyThatChanged = sender.GetType().GetProperty(propertyName);
+            var newValue = propertyThatChanged?.GetValue(sender);
+            var sqlColumnBindings = GetColumnBindings(sender);
+            var sqlColumnBinding = sqlColumnBindings.FirstOrDefault(b => b.PropertyInfo.Equals(propertyThatChanged));
+
+        }
+
 
         private static string CreateSingle(object dataObject, List<SqlColumnBinding> sqlColumnBindings)
         {
