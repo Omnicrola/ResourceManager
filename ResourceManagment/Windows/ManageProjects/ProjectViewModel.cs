@@ -18,6 +18,9 @@ namespace ResourceManagment.Windows.ManageProjects
             Color = new SolidColorBrush(Colors.LightCoral);
         }
 
+        [SqlColumnBinding("id")]
+        public int Id { get; set; }
+
         [SqlColumnBinding("name")]
         public string Name
         {

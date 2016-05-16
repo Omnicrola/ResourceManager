@@ -44,6 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
+    <Compile Include="Logging\DatabaseLogger.cs" />
+    <Compile Include="Logging\ExceptionLogEventArgs.cs" />
+    <Compile Include="Logging\LoggingEventArgs.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlLite\Api\InvalidSqlBindingException.cs" />
     <Compile Include="SqlLite\Api\ISqlColumn.cs" />
