@@ -26,11 +26,6 @@ namespace ResourceManagment.Data.Database
             projects.ForEach(p => p.PropertyChanged += _databaseSchema.ProjectTable.DataChanged);
         }
 
-        private void BindProject(IProject project)
-        {
-            project.PropertyChanged += UpdateProject;
-        }
-
         public void PersistPerson(object sender, NotifyCollectionChangedEventArgs e)
         {
             _databaseSchema.PersonTable.Create(e.NewItems.Cast<IPerson>().ToList());

@@ -6,6 +6,7 @@ namespace DatabaseApi.SqlLite.Api
     {
         public InvalidSqlBindingException(string errorMessage) : base(errorMessage)
         {
+
         }
     }
 }

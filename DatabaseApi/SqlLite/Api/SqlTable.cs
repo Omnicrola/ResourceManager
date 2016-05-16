@@ -51,14 +51,36 @@ namespace DatabaseApi.SqlLite.Api
             }
         }
 
-        public void DataChanged(object sender, PropertyChangedEventArgs e)
+        public void DataChanged(object valueObject, PropertyChangedEventArgs e)
         {
             var propertyName = e.PropertyName;
-            var propertyThatChanged = sender.GetType().GetProperty(propertyName);
-            var newValue = propertyThatChanged?.GetValue(sender);
-            var sqlColumnBindings = GetColumnBindings(sender);
+            var propertyThatChanged = valueObject.GetType().GetProperty(propertyName);
+            var newValue = propertyThatChanged.GetValue(valueObject);
+            var sqlColumnBindings = GetColumnBindings(valueObject);
             var sqlColumnBinding = sqlColumnBindings.FirstOrDefault(b => b.PropertyInfo.Equals(propertyThatChanged));
+            var primaryKeyBinding = sqlColumnBindings.FirstOrDefault(b => b.Column.IsPrimaryKey);
 
+            if (sqlColumnBinding == null)
+            {
+                string errorMessage = $"Attepted to update a property, but table '{GetTableName()}' does not have a column bound " +
+                                      $"to the property '{propertyName}'";
+                throw new InvalidSqlBindingException(errorMessage);
+            }
+            if (primaryKeyBinding == null)
+            {
+                string errorMessage = $"Attempted to update property '{propertyName}' " +
+                                      $"in table '{GetTableName()}', but the table schema has no primary key " +
+                                      $"column or one is not defined on the model class.";
+                throw new InvalidSqlBindingException(errorMessage);
+            }
+
+            var valueString = primaryKeyBinding?.Column.EncapsulateValue(newValue);
+            var columnName = primaryKeyBinding?.Column.Name;
+            var primaryKey = sqlColumnBinding?.Column.Name;
+            var pkValue = primaryKeyBinding?.PropertyInfo.GetValue(valueObject);
+
+            string query = $"UPDATE {GetTableName()} SET {columnName} = {valueString} WHERE {primaryKey} = {pkValue}";
+            DatabaseSchema.ExecuteNonQuery(query);
         }
 
 
