@@ -9,7 +9,6 @@ namespace DatabaseApi.SqlLite.Api
 {
     public abstract class SqlTable<T> : ISqlTable
     {
-        public SQLiteConnection Connection { get; set; }
         protected List<ISqlColumn> Columns;
         protected List<SqlForeignKey> ForeignKeys = new List<SqlForeignKey>();
         protected DatabaseSchema DatabaseSchema { get; }
@@ -38,7 +37,8 @@ namespace DatabaseApi.SqlLite.Api
             if (dataObjects.Any())
             {
                 var sqlColumnBindings = GetColumnBindings(dataObjects[0]);
-                string columnNames = sqlColumnBindings.Where(b => !b.Column.IsPrimaryKey).Select(b => b.Column.Name).Implode(", ");
+                string columnNames =
+                    sqlColumnBindings.Where(b => !b.Column.IsPrimaryKey).Select(b => b.Column.Name).Implode(", ");
                 var stringBuilder = new StringBuilder();
                 stringBuilder.Append($"INSERT INTO {GetTableName()} ");
                 stringBuilder.Append($"({columnNames}) ");
@@ -48,11 +48,42 @@ namespace DatabaseApi.SqlLite.Api
                 stringBuilder.Append(";");
 
                 var query = stringBuilder.ToString();
-                DatabaseLogger.Instance.Log(query, LogLevel.INFO);
-                var result = DatabaseSchema.ExecuteNonQuery(query);
-                DatabaseLogger.Instance.Log("Rows affected: " + result, LogLevel.INFO);
+                DatabaseSchema.ExecuteNonQuery(query);
+
+                dataObjects.ForEach(d => GetPrimaryKeyFor(d, sqlColumnBindings));
             }
         }
+
+        private void GetPrimaryKeyFor(T dataObject, List<SqlColumnBinding> sqlColumnBindings)
+        {
+            var primaryKeyColumn = sqlColumnBindings.FirstOrDefault(b => b.Column.IsPrimaryKey);
+
+
+            var stringBuilder = new StringBuilder();
+            stringBuilder.Append("SELECT ");
+            stringBuilder.Append(primaryKeyColumn.Column.Name);
+            stringBuilder.Append(" FROM ");
+            stringBuilder.Append(GetTableName());
+            stringBuilder.Append(" WHERE ");
+
+            List<string> columnNameValuePairs = new List<string>();
+            foreach (var sqlColumnBinding in sqlColumnBindings)
+            {
+                if (!sqlColumnBinding.Column.IsPrimaryKey)
+                {
+                    string columnName = sqlColumnBinding.Column.Name;
+                    string value = sqlColumnBinding.EncapsulateValue(dataObject);
+                    columnNameValuePairs.Add($"{columnName} = {value}");
+                }
+            }
+            string conditions = columnNameValuePairs.Implode(" AND ");
+            stringBuilder.Append(conditions);
+            stringBuilder.Append(";");
+            string query = stringBuilder.ToString();
+            int pkValue = int.Parse(DatabaseSchema.ExecuteScalar(query).ToString());
+            primaryKeyColumn.SetValue(dataObject, pkValue);
+        }
+
 
         public void DataChanged(object valueObject, PropertyChangedEventArgs e)
         {
@@ -63,7 +94,7 @@ namespace DatabaseApi.SqlLite.Api
                 var newValue = propertyThatChanged.GetValue(valueObject);
                 var sqlColumnBindings = GetColumnBindings(valueObject);
                 var sqlColumnBinding = sqlColumnBindings.FirstOrDefault(b => b.PropertyInfo.Equals(propertyThatChanged));
-                var primaryKeyBinding = sqlColumnBindings.FirstOrDefault(b => b.Column.IsPrimaryKey);
+                var primaryKeyBinding = GetPrimaryKeyBinding(sqlColumnBindings);
 
                 if (sqlColumnBinding == null)
                 {
@@ -72,29 +103,33 @@ namespace DatabaseApi.SqlLite.Api
                         $"to the property '{propertyName}'";
                     throw new InvalidSqlBindingException(errorMessage);
                 }
-                if (primaryKeyBinding == null)
-                {
-                    string errorMessage = $"Attempted to update property '{propertyName}' " +
-                                          $"in table '{GetTableName()}', but the table schema has no primary key " +
-                                          $"column or one is not defined on the model class.";
-                    throw new InvalidSqlBindingException(errorMessage);
-                }
 
                 var valueString = primaryKeyBinding?.Column.EncapsulateValue(newValue);
-                var columnName = primaryKeyBinding?.Column.Name;
-                var primaryKey = sqlColumnBinding?.Column.Name;
+                var columnName = sqlColumnBinding?.Column.Name;
+                var primaryKey = primaryKeyBinding?.Column.Name;
                 var pkValue = primaryKeyBinding?.PropertyInfo.GetValue(valueObject);
 
                 string query =
                     $"UPDATE {GetTableName()} SET {columnName} = {valueString} WHERE {primaryKey} = {pkValue}";
-                DatabaseLogger.Instance.Log(query, LogLevel.INFO);
                 int result = DatabaseSchema.ExecuteNonQuery(query);
-                DatabaseLogger.Instance.Log("Rows affected: " + result, LogLevel.INFO);
             }
             catch (InvalidSqlBindingException exception)
             {
                 DatabaseLogger.Instance.Log(exception);
             }
+        }
+
+        private SqlColumnBinding GetPrimaryKeyBinding(List<SqlColumnBinding> sqlColumnBindings)
+        {
+            var primaryKeyBinding = sqlColumnBindings.FirstOrDefault(b => b.Column.IsPrimaryKey);
+            if (primaryKeyBinding == null)
+            {
+                string errorMessage = $"Attempted to use primary key " +
+                                      $"in table '{GetTableName()}', but the table schema has no primary key " +
+                                      $"column or one is not defined on the model class.";
+                throw new InvalidSqlBindingException(errorMessage);
+            }
+            return primaryKeyBinding;
         }
 
 

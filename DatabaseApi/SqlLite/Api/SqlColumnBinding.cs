@@ -16,5 +16,16 @@ namespace DatabaseApi.SqlLite.Api
             PropertyInfo = propertyInfo;
             Column = column;
         }
+
+        public string EncapsulateValue(object dataObject)
+        {
+            var value = PropertyInfo.GetValue(dataObject);
+            return Column.EncapsulateValue(value);
+        }
+
+        public void SetValue(object dataObject, object newValue)
+        {
+            PropertyInfo.SetValue(dataObject, newValue);
+        }
     }
 }

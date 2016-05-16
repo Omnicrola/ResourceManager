@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Linq;
+using DatabaseApi.Logging;
 using DatabaseApi.SqlLite.Api;
 
 namespace DatabaseApi.SqlLite
@@ -30,9 +32,15 @@ namespace DatabaseApi.SqlLite
 
         public int ExecuteNonQuery(string query)
         {
+            DatabaseLogger.Instance.Log(query, LogLevel.INFO);
+
             var sqLiteConnection = GetConnection();
             var sqLiteCommand = new SQLiteCommand(query, sqLiteConnection);
-            return sqLiteCommand.ExecuteNonQuery();
+            var result = sqLiteCommand.ExecuteNonQuery();
+
+            DatabaseLogger.Instance.Log("Rows affected: " + result, LogLevel.INFO);
+
+            return result;
         }
 
         public SQLiteConnection GetConnection()
@@ -77,6 +85,26 @@ namespace DatabaseApi.SqlLite
         {
             _sqLiteConnection?.Close();
             _sqLiteConnection = null;
+        }
+
+        public int GetLastInsertRowId()
+        {
+            string query = "SELECT last_insert_rowid();";
+            DatabaseLogger.Instance.Log(query, LogLevel.INFO);
+            var sqLiteCommand = new SQLiteCommand(query, _sqLiteConnection);
+            int result = int.Parse(sqLiteCommand.ExecuteScalar(CommandBehavior.SingleResult).ToString());
+
+            DatabaseLogger.Instance.Log("Last new rowid: " + result, LogLevel.INFO);
+            return result;
+        }
+
+        public object ExecuteScalar(string query)
+        {
+            DatabaseLogger.Instance.Log(query, LogLevel.INFO);
+            var sqLiteCommand = new SQLiteCommand(query, _sqLiteConnection);
+            object result = sqLiteCommand.ExecuteScalar(CommandBehavior.SingleResult);
+            DatabaseLogger.Instance.Log(result?.ToString(), LogLevel.INFO);
+            return result;
         }
     }
 }
