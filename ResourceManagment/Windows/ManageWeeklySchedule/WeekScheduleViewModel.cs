@@ -19,12 +19,15 @@ namespace ResourceManagment.Windows.ManageWeeklySchedule
         public ObservableCollection<PersonalScheduleViewModel> Schedules { get; set; }
         public ObservableCollection<RequiredResourceViewModel> RequiredProjectResources { get; set; }
 
+        [SqlColumnBinding("id")]
+        public int Id { get; set; }
         [SqlColumnBinding("week_ending")]
         public DateTime WeekEnding { get { return _weekEnding; } set { SetPropertyField(ref _weekEnding, value); } }
-        public string Notes { get { return _notes; } set { SetPropertyField(ref _notes, value); } }
-
         [SqlColumnBinding("color")]
         public Color WeekColor { get { return _weekColor; } set { SetPropertyField(ref _weekColor, value); } }
+
+        public string Notes { get { return _notes; } set { SetPropertyField(ref _notes, value); } }
+
 
 
         public Action BlockChanged { get; set; }

@@ -16,7 +16,9 @@ namespace ResourceManagment.Data.Database
 
         public void PersistSchedules(object sender, NotifyCollectionChangedEventArgs e)
         {
-            _databaseSchema.WeeklyScheduleTable.Create(e.NewItems.Cast<IWeeklySchedule>().ToList());
+            var weeklySchedules = e.NewItems.Cast<IWeeklySchedule>().ToList();
+            _databaseSchema.WeeklyScheduleTable.Create(weeklySchedules);
+            weeklySchedules.ForEach(s => s.PropertyChanged += _databaseSchema.WeeklyScheduleTable.DataChanged);
         }
 
         public void PersistProject(object sender, NotifyCollectionChangedEventArgs e)
@@ -28,9 +30,9 @@ namespace ResourceManagment.Data.Database
 
         public void PersistPerson(object sender, NotifyCollectionChangedEventArgs e)
         {
-            _databaseSchema.PersonTable.Create(e.NewItems.Cast<IPerson>().ToList());
+            var people = e.NewItems.Cast<IPerson>().ToList();
+            _databaseSchema.PersonTable.Create(people);
+            people.ForEach(p => p.PropertyChanged += _databaseSchema.PersonTable.DataChanged);
         }
-
-
     }
 }
