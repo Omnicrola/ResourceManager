@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using DatabaseApi.Logging;

@@ -128,7 +128,7 @@
                     <Separator Margin="10,0"/>
                     <TextBlock VerticalAlignment="Center">
                         <Run>Week Ending: </Run>
-                        <Run Text="{Binding SelectedSchedule.WeekEnding, StringFormat=MMMM dd YYYY}"/>
+                        <Run Text="{Binding SelectedSchedule.WeekEnding, StringFormat=MMMM dd yyyy}"/>
                     </TextBlock>
                     <Separator Margin="10,0"/>
                     <Button Click="AddResource_Click">
