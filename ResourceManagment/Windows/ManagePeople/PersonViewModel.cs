@@ -7,12 +7,19 @@ using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManagePeople
 {
-
+    [SqlTableBinding("people")]
     public class PersonViewModel : ViewModel, IPerson
     {
         private string _firstName;
         private string _lastName;
         private Role _role;
+
+        public PersonViewModel()
+        {
+            _firstName = "";
+            _lastName = "";
+            _role = Role.NONE;
+        }
 
         public PersonViewModel(string firstName, string lastName)
         {
@@ -21,10 +28,10 @@ namespace ResourceManagment.Windows.ManagePeople
             _role = Role.NONE;
         }
 
-
+        [SqlColumnBinding("id")]
         public int ID { get; set; }
 
-
+        [SqlColumnBinding("first_name")]
         public string FirstName
         {
             get { return _firstName; }
@@ -35,7 +42,7 @@ namespace ResourceManagment.Windows.ManagePeople
             }
         }
 
-
+        [SqlColumnBinding("last_name")]
         public string LastName
         {
             get { return _lastName; }
@@ -56,13 +63,13 @@ namespace ResourceManagment.Windows.ManagePeople
             set { }
         }
 
-
+        [SqlColumnBinding("role")]
         public Role Role
         {
             get { return this._role; }
             set
             {
-                this.Role = value;
+                this._role = value;
                 FireOnPropertyChanged("Role");
             }
         }

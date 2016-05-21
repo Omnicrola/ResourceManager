@@ -7,5 +7,6 @@
         bool IsPrimaryKey { get; }
         bool Nullable { get; }
         string EncapsulateValue(object value);
+        object ParseValue(object valueFromSql);
     }
 }

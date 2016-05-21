@@ -26,5 +26,10 @@
         {
             return $"'{value.ToString()}'";
         }
+
+        public object ParseValue(object valueFromSql)
+        {
+            return valueFromSql;
+        }
     }
 }

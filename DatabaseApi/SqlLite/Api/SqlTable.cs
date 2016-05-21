@@ -36,16 +36,26 @@ namespace DatabaseApi.SqlLite.Api
         public abstract string GetTableName();
 
         #region SqlTable Data Retrieval
-        public void GetAll()
+        public List<K> GetAll<K>()
         {
-            var sqlColumnBindings = GetColumnBindings(typeof(T));
+            var sqlColumnBindings = GetColumnBindings(typeof(K));
             string columnNames = sqlColumnBindings.Select(b => b.Column.Name).Implode(", ");
             string query = $"SELECT {columnNames} FROM {GetTableName()}";
             SQLiteDataReader result = DatabaseSchema.ExecuteQuery(query);
+            var allTableData = new List<K>();
             while (result.Read())
             {
-                Console.WriteLine("DATA? " + result["ID"]);
+                K dataObject = Activator.CreateInstance<K>();
+                sqlColumnBindings.ForEach(b =>
+                {
+                    string columnName = b.Column.Name;
+                    var value = b.Column.ParseValue(result[columnName]);
+                    b.PropertyInfo.SetValue(dataObject, value);
+
+                });
+                allTableData.Add(dataObject);
             }
+            return allTableData;
         }
 
         #endregion
@@ -55,7 +65,7 @@ namespace DatabaseApi.SqlLite.Api
         {
             if (dataObjects.Any())
             {
-                var sqlColumnBindings = GetColumnBindings(typeof(T));
+                var sqlColumnBindings = GetColumnBindings(dataObjects[0].GetType());
                 string columnNames =
                     sqlColumnBindings.Where(b => !b.Column.IsPrimaryKey).Select(b => b.Column.Name).Implode(", ");
                 var stringBuilder = new StringBuilder();

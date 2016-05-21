@@ -58,6 +58,7 @@
     <Compile Include="SqlLite\Api\SqlColumnBinding.cs" />
     <Compile Include="SqlLite\Api\SqlColumnBindingAttribute.cs" />
     <Compile Include="SqlLite\Api\SqlDateTimeColumn.cs" />
+    <Compile Include="SqlLite\Api\SqlEnumColumn.cs" />
     <Compile Include="SqlLite\Api\SqlForeignKey.cs" />
     <Compile Include="SqlLite\Api\SqlIntegerColumn.cs" />
     <Compile Include="SqlLite\Api\SqlStringColumn.cs" />

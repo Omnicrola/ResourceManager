@@ -1,3 +1,5 @@
+using System;
+
 namespace DatabaseApi.SqlLite.Api
 {
     public class SqlIntegerColumn : ISqlColumn
@@ -23,6 +25,11 @@ namespace DatabaseApi.SqlLite.Api
         public string EncapsulateValue(object value)
         {
             return $"'{value.ToString()}'";
+        }
+
+        public object ParseValue(object valueFromSql)
+        {
+            return Convert.ToInt32(valueFromSql);
         }
     }
 }

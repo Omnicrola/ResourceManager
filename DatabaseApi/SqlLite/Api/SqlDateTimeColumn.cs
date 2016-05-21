@@ -30,5 +30,10 @@ namespace DatabaseApi.SqlLite.Api
             }
             return formattedValue;
         }
+
+        public object ParseValue(object valueFromSql)
+        {
+            return valueFromSql;
+        }
     }
 }
