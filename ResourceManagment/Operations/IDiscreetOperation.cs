@@ -1,8 +1,15 @@
-﻿namespace ResourceManagment.Operations
+﻿using System;
+using System.Windows.Threading;
+
+namespace ResourceManagment.Operations
 {
+
     public interface IDiscreetOperation
     {
-        void DoWork();
+        event EventHandler<OperationEventArgs> OperationStarted;
+        event EventHandler<OperationEventArgs> OperationFinished;
+
+        void DoWork(Dispatcher mainThreadDispatcher);
 
         string Description { get; }
     }

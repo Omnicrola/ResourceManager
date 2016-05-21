@@ -104,7 +104,9 @@
     <Compile Include="Data\Model\IProject.cs" />
     <Compile Include="Data\Model\IResourceBlock.cs" />
     <Compile Include="Data\Model\IWeeklySchedule.cs" />
+    <Compile Include="Operations\AsyncDiscreetOperation.cs" />
     <Compile Include="Operations\IDiscreetOperation.cs" />
+    <Compile Include="Operations\LoadInitialDataOperation.cs" />
     <Compile Include="Operations\OperationEventArgs.cs" />
     <Compile Include="Operations\OperationsQueue.cs" />
     <Compile Include="Windows\ManageWeeklySchedule\EditableWeeklyScheduleViewModel.cs" />

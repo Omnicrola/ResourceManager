@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Threading;
 using DatabaseApi.SqlLite;
 using ResourceManagment.Data.Database;
 using ResourceManagment.Operations;
@@ -28,11 +29,18 @@ namespace ResourceManagment
 
             MainWindowViewModel mainWindowViewModel = new MainWindowViewModel(new ModelDataBinder(databaseSchema));
 
-            var mainWindow = new MainWindow(mainWindowViewModel, new OperationsQueue(Dispatcher));
+            var operationsQueue = new OperationsQueue(Dispatcher);
+            var mainWindow = new MainWindow(mainWindowViewModel, operationsQueue);
             mainWindow.Show();
+
+            var loadInitialDataOperation = new LoadInitialDataOperation(databaseSchema);
+            loadInitialDataOperation.OperationFinished += (op, eventArgs) =>
+            {
+                loadInitialDataOperation.Populate(mainWindowViewModel);
+            };
+            operationsQueue.AddOperation(loadInitialDataOperation);
+
         }
-
-
 
     }
 }

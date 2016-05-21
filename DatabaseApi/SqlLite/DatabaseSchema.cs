@@ -23,13 +23,6 @@ namespace DatabaseApi.SqlLite
         }
 
 
-        public string BuildCreateQuery()
-        {
-            return
-                SqlTables.Select(t => t.BuildCreateQuery())
-                    .Aggregate((cumulative, current) => cumulative + "; " + current);
-        }
-
         public int ExecuteNonQuery(string query)
         {
             DatabaseLogger.Instance.Log(query, LogLevel.INFO);
@@ -65,10 +58,11 @@ namespace DatabaseApi.SqlLite
 
         private void VerifyStructure()
         {
-            var result = _schemaVerifier.Verify(_sqLiteConnection);
-            if (result == null)
+            bool result = _schemaVerifier.Verify(_sqLiteConnection);
+            if (!result)
             {
                 CreateSchema();
+                _schemaVerifier.SetCurrentVersion(_sqLiteConnection);
             }
         }
 
@@ -89,6 +83,7 @@ namespace DatabaseApi.SqlLite
 
         public int GetLastInsertRowId()
         {
+            OpenConnection();
             string query = "SELECT last_insert_rowid();";
             DatabaseLogger.Instance.Log(query, LogLevel.INFO);
             var sqLiteCommand = new SQLiteCommand(query, _sqLiteConnection);
@@ -100,11 +95,23 @@ namespace DatabaseApi.SqlLite
 
         public object ExecuteScalar(string query)
         {
+            OpenConnection();
             DatabaseLogger.Instance.Log(query, LogLevel.INFO);
             var sqLiteCommand = new SQLiteCommand(query, _sqLiteConnection);
             object result = sqLiteCommand.ExecuteScalar(CommandBehavior.SingleResult);
             DatabaseLogger.Instance.Log(result?.ToString(), LogLevel.INFO);
             return result;
         }
+
+        public SQLiteDataReader ExecuteQuery(string query)
+        {
+            OpenConnection();
+            DatabaseLogger.Instance.Log(query, LogLevel.INFO);
+            var sqLiteCommand = new SQLiteCommand(query, _sqLiteConnection);
+            var sqLiteDataReader = sqLiteCommand.ExecuteReader();
+            DatabaseLogger.Instance.Log($"Query executed, returned rows : " + sqLiteDataReader.RecordsAffected, LogLevel.INFO);
+            return sqLiteDataReader;
+        }
+
     }
 }

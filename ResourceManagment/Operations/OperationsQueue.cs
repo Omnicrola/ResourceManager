@@ -15,8 +15,6 @@ namespace ResourceManagment.Operations
         private readonly Thread _thread;
         private bool _isRunning;
 
-        public EventHandler<OperationEventArgs> OperationStarted;
-        public EventHandler<OperationEventArgs> OperationFinished;
 
         public OperationsQueue(Dispatcher mainThreadDispatcher)
         {
@@ -63,9 +61,7 @@ namespace ResourceManagment.Operations
             if (_operationsToDo.Count > 0)
             {
                 var currentOperation = _operationsToDo.Dequeue();
-                _mainThreadDispatcher.InvokeAsync(() => OperationStarted.Invoke(currentOperation, new OperationEventArgs(currentOperation)));
-                currentOperation.DoWork();
-                _mainThreadDispatcher.InvokeAsync(() => OperationFinished.Invoke(currentOperation, new OperationEventArgs(currentOperation)));
+                currentOperation.DoWork(_mainThreadDispatcher);
             }
 
         }

@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using DatabaseApi.Logging;
@@ -16,7 +19,7 @@ namespace DatabaseApi.SqlLite.Api
         {
             DatabaseSchema = databaseSchema;
         }
-
+        #region SqlTable Creation
         public string BuildCreateQuery()
         {
             List<string> columnsAndKeys = new List<string>();
@@ -28,14 +31,31 @@ namespace DatabaseApi.SqlLite.Api
             string creationQuery = $"CREATE TABLE IF NOT EXISTS {GetTableName()}  ({columns});";
             return creationQuery;
         }
+        #endregion
 
         public abstract string GetTableName();
 
+        #region SqlTable Data Retrieval
+        public void GetAll()
+        {
+            var sqlColumnBindings = GetColumnBindings(typeof(T));
+            string columnNames = sqlColumnBindings.Select(b => b.Column.Name).Implode(", ");
+            string query = $"SELECT {columnNames} FROM {GetTableName()}";
+            SQLiteDataReader result = DatabaseSchema.ExecuteQuery(query);
+            while (result.Read())
+            {
+                Console.WriteLine("DATA? " + result["ID"]);
+            }
+        }
+
+        #endregion
+
+        #region SqlTable Data Creation
         public void Create(List<T> dataObjects)
         {
             if (dataObjects.Any())
             {
-                var sqlColumnBindings = GetColumnBindings(dataObjects[0]);
+                var sqlColumnBindings = GetColumnBindings(typeof(T));
                 string columnNames =
                     sqlColumnBindings.Where(b => !b.Column.IsPrimaryKey).Select(b => b.Column.Name).Implode(", ");
                 var stringBuilder = new StringBuilder();
@@ -53,6 +73,21 @@ namespace DatabaseApi.SqlLite.Api
             }
         }
 
+        private static string CreateSingle(object dataObject, List<SqlColumnBinding> sqlColumnBindings)
+        {
+            return sqlColumnBindings
+                .Where(b => !b.Column.IsPrimaryKey)
+                .Select(b =>
+                {
+                    var value = b.PropertyInfo.GetValue(dataObject);
+                    return b.Column.EncapsulateValue(value);
+                })
+                .Implode(", ");
+        }
+
+        #endregion
+
+        #region SqlTable Utility Methods
         private void GetPrimaryKeyFor(T dataObject, List<SqlColumnBinding> sqlColumnBindings)
         {
             var primaryKeyColumn = sqlColumnBindings.FirstOrDefault(b => b.Column.IsPrimaryKey);
@@ -84,40 +119,6 @@ namespace DatabaseApi.SqlLite.Api
         }
 
 
-        public void DataChanged(object valueObject, PropertyChangedEventArgs e)
-        {
-            try
-            {
-                var propertyName = e.PropertyName;
-                var propertyThatChanged = valueObject.GetType().GetProperty(propertyName);
-                var newValue = propertyThatChanged.GetValue(valueObject);
-                var sqlColumnBindings = GetColumnBindings(valueObject);
-                var sqlColumnBinding = sqlColumnBindings.FirstOrDefault(b => b.PropertyInfo.Equals(propertyThatChanged));
-                var primaryKeyBinding = GetPrimaryKeyBinding(sqlColumnBindings);
-
-                if (sqlColumnBinding == null)
-                {
-                    string errorMessage =
-                        $"Attepted to update a property, but table '{GetTableName()}' does not have a column bound " +
-                        $"to the property '{propertyName}'";
-                    throw new InvalidSqlBindingException(errorMessage);
-                }
-
-                var valueString = primaryKeyBinding?.Column.EncapsulateValue(newValue);
-                var columnName = sqlColumnBinding?.Column.Name;
-                var primaryKey = primaryKeyBinding?.Column.Name;
-                var pkValue = primaryKeyBinding?.PropertyInfo.GetValue(valueObject);
-
-                string query =
-                    $"UPDATE {GetTableName()} SET {columnName} = {valueString} WHERE {primaryKey} = {pkValue}";
-                int result = DatabaseSchema.ExecuteNonQuery(query);
-            }
-            catch (InvalidSqlBindingException exception)
-            {
-                DatabaseLogger.Instance.Log(exception);
-            }
-        }
-
         private SqlColumnBinding GetPrimaryKeyBinding(List<SqlColumnBinding> sqlColumnBindings)
         {
             var primaryKeyBinding = sqlColumnBindings.FirstOrDefault(b => b.Column.IsPrimaryKey);
@@ -132,22 +133,10 @@ namespace DatabaseApi.SqlLite.Api
         }
 
 
-        private static string CreateSingle(object dataObject, List<SqlColumnBinding> sqlColumnBindings)
-        {
-            return sqlColumnBindings
-                .Where(b => !b.Column.IsPrimaryKey)
-                .Select(b =>
-                {
-                    var value = b.PropertyInfo.GetValue(dataObject);
-                    return b.Column.EncapsulateValue(value);
-                })
-                .Implode(", ");
-        }
-
-        private List<SqlColumnBinding> GetColumnBindings(object dataToSave)
+        private List<SqlColumnBinding> GetColumnBindings(Type objectType)
         {
             var sqlColumnBindings = new List<SqlColumnBinding>();
-            var properties = dataToSave.GetType().GetProperties();
+            var properties = objectType.GetProperties();
             foreach (var propertyInfo in properties)
             {
                 var customAttributes = propertyInfo.GetCustomAttributes(true);
@@ -177,5 +166,48 @@ namespace DatabaseApi.SqlLite.Api
         {
             return Columns.FirstOrDefault(c => c.Name.Equals(bindingAttribute.ColumnName));
         }
+        #endregion
+
+        #region SqlTable Data Update
+        public void DataChanged(object valueObject, PropertyChangedEventArgs e)
+        {
+            try
+            {
+                if (!typeof(T).Equals(valueObject.GetType()))
+                {
+                    string errorMessage = $"Attempted to update table {GetTableName()} with an object of type {valueObject.GetType()}, " +
+                                          $"however this table is bound to objects of type {typeof(T)}";
+                    throw new InvalidSqlBindingException(errorMessage);
+                }
+                var propertyName = e.PropertyName;
+                var propertyThatChanged = valueObject.GetType().GetProperty(propertyName);
+                var newValue = propertyThatChanged.GetValue(valueObject);
+                var sqlColumnBindings = GetColumnBindings(valueObject.GetType());
+                var sqlColumnBinding = sqlColumnBindings.FirstOrDefault(b => b.PropertyInfo.Equals(propertyThatChanged));
+                var primaryKeyBinding = GetPrimaryKeyBinding(sqlColumnBindings);
+
+                if (sqlColumnBinding == null)
+                {
+                    string errorMessage =
+                        $"Attepted to update a property, but table '{GetTableName()}' does not have a column bound " +
+                        $"to the property '{propertyName}'";
+                    throw new InvalidSqlBindingException(errorMessage);
+                }
+
+                var valueString = primaryKeyBinding?.Column.EncapsulateValue(newValue);
+                var columnName = sqlColumnBinding?.Column.Name;
+                var primaryKey = primaryKeyBinding?.Column.Name;
+                var pkValue = primaryKeyBinding?.PropertyInfo.GetValue(valueObject);
+
+                string query =
+                    $"UPDATE {GetTableName()} SET {columnName} = {valueString} WHERE {primaryKey} = {pkValue}";
+                int result = DatabaseSchema.ExecuteNonQuery(query);
+            }
+            catch (InvalidSqlBindingException exception)
+            {
+                DatabaseLogger.Instance.Log(exception);
+            }
+        }
+        #endregion
     }
 }
