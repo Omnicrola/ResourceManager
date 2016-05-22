@@ -17,6 +17,7 @@ namespace ResourceManagment.Windows.Main
         private readonly ResourceDragDropHandler _resourceDragDropHandler;
 
         public event Action AddResourceToSchedule;
+        public event Action<AlterResourceBlockArgs> ClickAlterResourceBlock;
 
         public ObservableCollection<PersonViewModel> People { get; set; }
         public ObservableCollection<ProjectViewModel> Projects { get; set; }
@@ -35,12 +36,7 @@ namespace ResourceManagment.Windows.Main
         private void Button_AlterResourceBlock(object sender, RoutedEventArgs e)
         {
             ResourceBlockViewModel resourceBlock = (sender as Button).DataContext as ResourceBlockViewModel;
-            AlterBlockViewModel alterBlockDataContext = new AlterBlockViewModel(People, Projects, resourceBlock);
-            var alterBlockWindow = new AlterResourceBlockWindow(alterBlockDataContext, resourceBlock)
-            {
-                Owner = Window.GetWindow(this)
-            };
-            alterBlockWindow.ShowDialog();
+            ClickAlterResourceBlock?.Invoke(new AlterResourceBlockArgs(resourceBlock));
         }
 
 
@@ -92,6 +88,16 @@ namespace ResourceManagment.Windows.Main
         private void AddResource_Click(object sender, RoutedEventArgs e)
         {
             AddResourceToSchedule?.Invoke();
+        }
+    }
+
+    public class AlterResourceBlockArgs : EventArgs
+    {
+        public ResourceBlockViewModel ResourceBlock { get; }
+
+        public AlterResourceBlockArgs(ResourceBlockViewModel resourceBlock)
+        {
+            ResourceBlock = resourceBlock;
         }
     }
 }

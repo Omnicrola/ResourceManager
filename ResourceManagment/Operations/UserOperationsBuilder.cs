@@ -1,5 +1,6 @@
 ﻿using System;
 using ResourceManagment.Data.Database;
+using ResourceManagment.Windows.AlterResourceBlock;
 using ResourceManagment.Windows.ManagePeople;
 using ResourceManagment.Windows.ManageProjects;
 using ResourceManagment.Windows.ManageWeeklySchedule;
@@ -44,6 +45,30 @@ namespace ResourceManagment.Operations
         {
             var savePersonalScheduleOperation = new SavePersonalScheduleOperation(selectedSchedule, personalSchedule, _databaseSchema);
             _operationsQueue.AddOperation(savePersonalScheduleOperation);
+        }
+
+        public void SaveResourceBlock(ResourceBlockViewModel resourceBlock)
+        {
+            var saveResourceBlockOperation = new SaveResourceBlockOperation(resourceBlock, _databaseSchema);
+            _operationsQueue.AddOperation(saveResourceBlockOperation);
+        }
+    }
+
+    public class SaveResourceBlockOperation : AsyncDiscreetOperation
+    {
+        private readonly ResourceBlockViewModel _resourceBlock;
+        private readonly ResourceManagerDatabaseSchema _databaseSchema;
+
+        public SaveResourceBlockOperation(ResourceBlockViewModel resourceBlock, ResourceManagerDatabaseSchema databaseSchema)
+        {
+            _resourceBlock = resourceBlock;
+            _databaseSchema = databaseSchema;
+        }
+
+        public override string Description => "Saving resource block.";
+        protected override void DoWorkInternal()
+        {
+            _databaseSchema.ResourceBlockTable.Save(_resourceBlock);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using ResourceManagment.Operations;
+using ResourceManagment.Windows.AlterResourceBlock;
 using ResourceManagment.Windows.Help;
 using ResourceManagment.Windows.ManagePeople;
 using ResourceManagment.Windows.ManageProjects;
@@ -15,23 +16,23 @@ namespace ResourceManagment.Windows.Main
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly MainWindowViewModel _resourceDataContext;
+        private readonly MainWindowViewModel _mainWindowViewModel;
         private readonly UserOperationsBuilder _userOperationsBuilder;
 
-        public MainWindow(MainWindowViewModel resourceDataContext, UserOperationsBuilder userOperationsBuilder)
+        public MainWindow(MainWindowViewModel mainWindowViewModel, UserOperationsBuilder userOperationsBuilder)
         {
             InitializeComponent();
-            DataContext = resourceDataContext;
-            ResourceDataGrid.People = resourceDataContext.People;
-            ResourceDataGrid.Projects = resourceDataContext.Projects;
+            DataContext = mainWindowViewModel;
+            ResourceDataGrid.People = mainWindowViewModel.People;
+            ResourceDataGrid.Projects = mainWindowViewModel.Projects;
 
-            _resourceDataContext = resourceDataContext;
+            _mainWindowViewModel = mainWindowViewModel;
             _userOperationsBuilder = userOperationsBuilder;
         }
 
         private void listOfWeeks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _resourceDataContext.SelectedSchedule = (listOfWeeks.SelectedItem as WeekScheduleViewModel);
+            _mainWindowViewModel.SelectedSchedule = (listOfWeeks.SelectedItem as WeekScheduleViewModel);
         }
 
         private void MenuItemQuit_Click(object sender, RoutedEventArgs e)
@@ -41,14 +42,14 @@ namespace ResourceManagment.Windows.Main
 
         private void MenuItemManagePeople_Click(object sender, RoutedEventArgs e)
         {
-            var peopleWindow = new ManagePeopleWindow(new AllPeopleViewModel(_resourceDataContext.People), _userOperationsBuilder);
+            var peopleWindow = new ManagePeopleWindow(new AllPeopleViewModel(_mainWindowViewModel.People), _userOperationsBuilder);
             peopleWindow.Owner = this;
             peopleWindow.ShowDialog();
         }
 
         private void MenuItemManageProjects_Click(object sender, RoutedEventArgs e)
         {
-            var projectsWindow = new ManageProjects.ManageProjectsWindow(new AllProjectsViewModel(_resourceDataContext.Projects), _userOperationsBuilder);
+            var projectsWindow = new ManageProjects.ManageProjectsWindow(new AllProjectsViewModel(_mainWindowViewModel.Projects), _userOperationsBuilder);
             projectsWindow.Owner = this;
             projectsWindow.ShowDialog();
         }
@@ -71,9 +72,9 @@ namespace ResourceManagment.Windows.Main
 
         private void AddResourceToCurrentSchedule()
         {
-            var selectedSchedule = _resourceDataContext.SelectedSchedule;
+            var selectedSchedule = _mainWindowViewModel.SelectedSchedule;
             var addResourceWindow =
-                new AddResourceWindow(new AddResourceViewModel(_resourceDataContext.People, selectedSchedule), selectedSchedule, _userOperationsBuilder);
+                new AddResourceWindow(new AddResourceViewModel(_mainWindowViewModel.People, selectedSchedule), selectedSchedule, _userOperationsBuilder);
             addResourceWindow.Owner = this;
             addResourceWindow.ShowDialog();
         }
@@ -85,7 +86,7 @@ namespace ResourceManagment.Windows.Main
             var editWeeklyScheduleWindow = new EditWeeklyScheduleWindow(editableModel, _userOperationsBuilder) { Owner = this };
             editWeeklyScheduleWindow.ScheduleSaved = () =>
             {
-                _resourceDataContext.AllSchedules.Add(weekScheduleViewModel);
+                _mainWindowViewModel.AllSchedules.Add(weekScheduleViewModel);
             };
             editWeeklyScheduleWindow.ShowDialog();
 
@@ -106,6 +107,17 @@ namespace ResourceManagment.Windows.Main
             _userOperationsBuilder.Dispose();
         }
 
+        private void ResourceDataGrid_OnClickAlterResourceBlock(AlterResourceBlockArgs eventArgs)
+        {
+            var resourceBlockViewModel = eventArgs.ResourceBlock;
+            AlterBlockViewModel alterBlockDataContext = new AlterBlockViewModel(_mainWindowViewModel.People, _mainWindowViewModel.Projects, resourceBlockViewModel);
+            var alterBlockWindow = new AlterResourceBlockWindow(alterBlockDataContext, resourceBlockViewModel, _userOperationsBuilder)
+            {
+                Owner = Window.GetWindow(this)
+            };
+            alterBlockWindow.ShowDialog();
+
+        }
     }
 
 
