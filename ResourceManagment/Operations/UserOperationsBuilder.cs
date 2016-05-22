@@ -2,6 +2,7 @@
 using ResourceManagment.Data.Database;
 using ResourceManagment.Windows.ManagePeople;
 using ResourceManagment.Windows.ManageProjects;
+using ResourceManagment.Windows.ManageWeeklySchedule;
 
 namespace ResourceManagment.Operations
 {
@@ -31,6 +32,12 @@ namespace ResourceManagment.Operations
         {
             var saveProjectOperation = new SaveProjectOperation(selectedProject, _databaseSchema);
             _operationsQueue.AddOperation(saveProjectOperation);
+        }
+
+        public void SaveWeeklySchedule(WeekScheduleViewModel weekScheduleViewModel)
+        {
+            var saveWeeklyScheduleOperation = new SaveWeeklyScheduleOperation(weekScheduleViewModel, _databaseSchema);
+            _operationsQueue.AddOperation(saveWeeklyScheduleOperation);
         }
     }
 }

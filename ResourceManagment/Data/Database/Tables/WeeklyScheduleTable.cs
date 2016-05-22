@@ -11,7 +11,7 @@ namespace ResourceManagment.Data.Database.Tables
         public const string TableName = "weekly_schedules";
         public static SqlIntegerColumn Id = new SqlIntegerColumn("id", true);
         public static SqlDateTimeColumn WeekEnding = new SqlDateTimeColumn("week_ending");
-        public static SqlStringColumn Color = new SqlStringColumn("color", 8);
+        public static SqlColorColumn Color = new SqlColorColumn("color");
 
         public WeeklyScheduleTable(DatabaseSchema databaseSchema) : base(databaseSchema)
         {

@@ -37,6 +37,7 @@ namespace ResourceManagment.Windows.Main
             editWeeklyScheduleWindow.ScheduleSaved = () =>
             {
                 _resourceDataContext.AllSchedules.Add(weekScheduleViewModel);
+                _userOperationsBuilder.SaveWeeklySchedule(weekScheduleViewModel);
             };
             editWeeklyScheduleWindow.ShowDialog();
 
