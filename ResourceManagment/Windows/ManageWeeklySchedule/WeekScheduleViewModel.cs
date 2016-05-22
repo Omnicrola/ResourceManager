@@ -9,7 +9,7 @@ using ResourceManagment.Windows.ViewModels;
 namespace ResourceManagment.Windows.ManageWeeklySchedule
 {
     [SqlTableBinding("weekly_schedules")]
-    public class WeekScheduleViewModel : ViewModel, IWeekScheduleViewModel, IWeeklySchedule
+    public class WeekScheduleViewModel : ViewModel, IWeeklySchedule
     {
         private DateTime _weekEnding;
         private string _notes;

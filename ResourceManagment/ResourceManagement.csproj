@@ -114,7 +114,6 @@
     <Compile Include="Operations\SaveWeeklyScheduleOperation.cs" />
     <Compile Include="Operations\UserOperationsBuilder.cs" />
     <Compile Include="Windows\ManageWeeklySchedule\EditableWeeklyScheduleViewModel.cs" />
-    <Compile Include="Windows\ManageWeeklySchedule\IWeekScheduleViewModel.cs" />
     <Compile Include="Windows\ManageProjects\ProjectViewModel.cs" />
     <Compile Include="Windows\Main\MainWindowViewModel.cs" />
     <Compile Include="Windows\ManageWeeklySchedule\PersonalScheduleViewModel.cs" />

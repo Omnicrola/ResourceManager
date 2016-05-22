@@ -29,20 +29,6 @@ namespace ResourceManagment.Windows.Main
             _userOperationsBuilder = userOperationsBuilder;
         }
 
-        private void buttonAddWeek_Click(object sender, RoutedEventArgs e)
-        {
-            var weekScheduleViewModel = new WeekScheduleViewModel(DateTime.Now);
-            var editableModel = new EditableWeeklyScheduleViewModel(weekScheduleViewModel);
-            var editWeeklyScheduleWindow = new EditWeeklyScheduleWindow(editableModel) { Owner = this };
-            editWeeklyScheduleWindow.ScheduleSaved = () =>
-            {
-                _resourceDataContext.AllSchedules.Add(weekScheduleViewModel);
-                _userOperationsBuilder.SaveWeeklySchedule(weekScheduleViewModel);
-            };
-            editWeeklyScheduleWindow.ShowDialog();
-
-        }
-
         private void listOfWeeks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _resourceDataContext.SelectedSchedule = (listOfWeeks.SelectedItem as WeekScheduleViewModel);
@@ -82,13 +68,25 @@ namespace ResourceManagment.Windows.Main
 
         }
 
+        private void buttonAddWeek_Click(object sender, RoutedEventArgs e)
+        {
+            var weekScheduleViewModel = new WeekScheduleViewModel(DateTime.Now);
+            var editableModel = new EditableWeeklyScheduleViewModel(weekScheduleViewModel);
+            var editWeeklyScheduleWindow = new EditWeeklyScheduleWindow(editableModel, _userOperationsBuilder) { Owner = this };
+            editWeeklyScheduleWindow.ScheduleSaved = () =>
+            {
+                _resourceDataContext.AllSchedules.Add(weekScheduleViewModel);
+            };
+            editWeeklyScheduleWindow.ShowDialog();
+
+        }
 
         private void EditWeeklySchedule_Click(object sender, RoutedEventArgs e)
         {
             var button = e.Source as Button;
-            var targetSchedule = button.DataContext as WeekScheduleViewModel;
+            var targetSchedule = button?.DataContext as WeekScheduleViewModel;
             var editableWeeklySchedule = new EditableWeeklyScheduleViewModel(targetSchedule);
-            var editWeeklyScheduleWindow = new EditWeeklyScheduleWindow(editableWeeklySchedule) { Owner = this };
+            var editWeeklyScheduleWindow = new EditWeeklyScheduleWindow(editableWeeklySchedule, _userOperationsBuilder) { Owner = this };
             editWeeklyScheduleWindow.ShowDialog();
         }
 

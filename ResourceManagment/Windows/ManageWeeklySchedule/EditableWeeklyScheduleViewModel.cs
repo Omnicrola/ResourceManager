@@ -6,27 +6,21 @@ using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManageWeeklySchedule
 {
-    internal class EditableWeeklyScheduleViewModel : ViewModel, IWeekScheduleViewModel
+    public class EditableWeeklyScheduleViewModel : ViewModel
     {
-        private readonly IWeekScheduleViewModel _selectedSchedule;
+        public WeekScheduleViewModel ScheduleBeingEdited { get; }
         private string _notes;
         private DateTime _weekEnding;
         private Color _weekColor;
 
-        public EditableWeeklyScheduleViewModel(IWeekScheduleViewModel selectedSchedule)
+        public EditableWeeklyScheduleViewModel(WeekScheduleViewModel selectedSchedule)
         {
-            _selectedSchedule = selectedSchedule;
+            ScheduleBeingEdited = selectedSchedule;
             Notes = selectedSchedule.Notes;
             WeekEnding = selectedSchedule.WeekEnding;
             WeekColor = selectedSchedule.WeekColor;
-            Schedules = new ObservableCollection<PersonalScheduleViewModel>();
-            RequiredProjectResources = new ObservableCollection<RequiredResourceViewModel>();
-            selectedSchedule.Schedules.ToList().ForEach(s => Schedules.Add(s));
-            selectedSchedule.RequiredProjectResources.ToList().ForEach(r => RequiredProjectResources.Add(r));
         }
 
-        public ObservableCollection<PersonalScheduleViewModel> Schedules { get; set; }
-        public ObservableCollection<RequiredResourceViewModel> RequiredProjectResources { get; set; }
 
         public string Notes
         {
@@ -48,9 +42,9 @@ namespace ResourceManagment.Windows.ManageWeeklySchedule
 
         public void Save()
         {
-            _selectedSchedule.WeekEnding = _weekEnding;
-            _selectedSchedule.Notes = _notes;
-            _selectedSchedule.WeekColor = _weekColor;
+            ScheduleBeingEdited.WeekEnding = _weekEnding;
+            ScheduleBeingEdited.Notes = _notes;
+            ScheduleBeingEdited.WeekColor = _weekColor;
         }
     }
 }
