@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using ResourceManagment.Operations;
 
 namespace ResourceManagment.Windows.ManageProjects
 {
@@ -7,18 +8,21 @@ namespace ResourceManagment.Windows.ManageProjects
     /// </summary>
     public partial class ManageProjectsWindow : Window
     {
-        private AllProjectsViewModel _allProjectsViewModel;
+        private readonly AllProjectsViewModel _allProjectsViewModel;
+        private readonly UserOperationsBuilder _operationsBuilder;
 
-        public ManageProjectsWindow(AllProjectsViewModel projectDataContext)
+        public ManageProjectsWindow(AllProjectsViewModel projectDataContext, UserOperationsBuilder operationsBuilder)
         {
             InitializeComponent();
             DataContext = projectDataContext;
             _allProjectsViewModel = projectDataContext;
+            _operationsBuilder = operationsBuilder;
         }
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
             _allProjectsViewModel.SelectedProject.Name = _allProjectsViewModel.EditedProjectName;
+            _operationsBuilder.SaveProject(_allProjectsViewModel.SelectedProject);
         }
 
         private void ButtonNewProject_Click(object sender, RoutedEventArgs e)

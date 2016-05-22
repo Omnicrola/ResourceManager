@@ -110,6 +110,7 @@
     <Compile Include="Operations\OperationEventArgs.cs" />
     <Compile Include="Operations\OperationsQueue.cs" />
     <Compile Include="Operations\SavePersonOperation.cs" />
+    <Compile Include="Operations\SaveProjectOperation.cs" />
     <Compile Include="Operations\UserOperationsBuilder.cs" />
     <Compile Include="Windows\ManageWeeklySchedule\EditableWeeklyScheduleViewModel.cs" />
     <Compile Include="Windows\ManageWeeklySchedule\IWeekScheduleViewModel.cs" />

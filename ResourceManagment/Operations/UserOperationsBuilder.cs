@@ -1,6 +1,7 @@
 ﻿using System;
 using ResourceManagment.Data.Database;
 using ResourceManagment.Windows.ManagePeople;
+using ResourceManagment.Windows.ManageProjects;
 
 namespace ResourceManagment.Operations
 {
@@ -22,8 +23,14 @@ namespace ResourceManagment.Operations
 
         public void SavePerson(PersonViewModel selectedPerson)
         {
-            var savePersonCommand = new SavePersonOperation(selectedPerson, _databaseSchema);
-            _operationsQueue.AddOperation(savePersonCommand);
+            var savePersonOperation = new SavePersonOperation(selectedPerson, _databaseSchema);
+            _operationsQueue.AddOperation(savePersonOperation);
+        }
+
+        public void SaveProject(ProjectViewModel selectedProject)
+        {
+            var saveProjectOperation = new SaveProjectOperation(selectedProject, _databaseSchema);
+            _operationsQueue.AddOperation(saveProjectOperation);
         }
     }
 }

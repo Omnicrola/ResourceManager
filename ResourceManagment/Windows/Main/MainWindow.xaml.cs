@@ -61,7 +61,7 @@ namespace ResourceManagment.Windows.Main
 
         private void MenuItemManageProjects_Click(object sender, RoutedEventArgs e)
         {
-            var projectsWindow = new ManageProjects.ManageProjectsWindow(new AllProjectsViewModel(_resourceDataContext.Projects));
+            var projectsWindow = new ManageProjects.ManageProjectsWindow(new AllProjectsViewModel(_resourceDataContext.Projects), _userOperationsBuilder);
             projectsWindow.Owner = this;
             projectsWindow.ShowDialog();
         }

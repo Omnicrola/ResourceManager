@@ -19,7 +19,7 @@ namespace ResourceManagment.Windows.ManageProjects
         }
 
         [SqlColumnBinding("id")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [SqlColumnBinding("name")]
         public string Name
