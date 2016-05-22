@@ -29,7 +29,7 @@ namespace ResourceManagment.Windows.ManagePeople
         }
 
         [SqlColumnBinding("id")]
-        public int ID { get; set; }
+        public int? ID { get; set; }
 
         [SqlColumnBinding("first_name")]
         public string FirstName

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using DatabaseApi.Logging;
 
@@ -72,7 +73,7 @@ namespace DatabaseApi.SqlLite.Api
                 stringBuilder.Append($"INSERT INTO {GetTableName()} ");
                 stringBuilder.Append($"({columnNames}) ");
 
-                string data = dataObjects.Select(p => CreateSingle(p, sqlColumnBindings)).Implode(", ");
+                string data = dataObjects.Select(p => CreateQueryForSingleInsert(p, sqlColumnBindings)).Implode(", ");
                 stringBuilder.Append($" VALUES ({data})");
                 stringBuilder.Append(";");
 
@@ -84,7 +85,7 @@ namespace DatabaseApi.SqlLite.Api
         }
 
 
-        private static string CreateSingle(object dataObject, List<SqlColumnBinding> sqlColumnBindings)
+        private static string CreateQueryForSingleInsert(object dataObject, List<SqlColumnBinding> sqlColumnBindings)
         {
             return sqlColumnBindings
                 .Where(b => !b.Column.IsPrimaryKey)
@@ -148,9 +149,10 @@ namespace DatabaseApi.SqlLite.Api
         {
             var sqlColumnBindings = new List<SqlColumnBinding>();
             var properties = objectType.GetProperties();
-            foreach (var propertyInfo in properties)
+            foreach (PropertyInfo propertyInfo in properties)
             {
                 var customAttributes = propertyInfo.GetCustomAttributes(true);
+
                 foreach (var customAttribute in customAttributes)
                 {
                     var bindingAttribute = customAttribute as SqlColumnBindingAttribute;
@@ -159,6 +161,16 @@ namespace DatabaseApi.SqlLite.Api
                         ISqlColumn column = FindColumn(bindingAttribute);
                         if (column != null)
                         {
+                            bool isNullable = propertyInfo.PropertyType.IsGenericType &&
+                                propertyInfo.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>);
+                            if (column.IsPrimaryKey && !isNullable)
+                            {
+                                string errorMessage = $"The Property {propertyInfo.Name} is attempting to bind to column " +
+                                                      $"{column.Name} in table {GetTableName()}. This column is" +
+                                                      $"designated as the primary key, but the property is not nullable. This is required" +
+                                                      $"for detecting insertions and updates.";
+                                throw new InvalidSqlBindingException(errorMessage);
+                            }
                             sqlColumnBindings.Add(new SqlColumnBinding(bindingAttribute, propertyInfo, column));
                         }
                         else
@@ -185,9 +197,24 @@ namespace DatabaseApi.SqlLite.Api
         {
             var sqlColumnBindings = GetColumnBindings(dataObject.GetType());
             var primaryKeyBinding = GetPrimaryKeyBinding(sqlColumnBindings);
-            var primaryKeyValue = primaryKeyBinding.Column.EncapsulateValue(primaryKeyBinding.PropertyInfo.GetValue(dataObject));
+            var primaryKeyValue = primaryKeyBinding.PropertyInfo.GetValue(dataObject);
             var pkColumnName = primaryKeyBinding.Column.Name;
 
+            if (primaryKeyValue == null)
+            {
+                Create(new List<T> { dataObject });
+            }
+            else
+            {
+                var primaryKeyValueString = primaryKeyBinding.Column.EncapsulateValue(primaryKeyValue);
+                string query = BuildUpdateQuery(dataObject, sqlColumnBindings, pkColumnName, primaryKeyValueString);
+                DatabaseSchema.ExecuteNonQuery(query);
+            }
+
+        }
+
+        private string BuildUpdateQuery(T dataObject, List<SqlColumnBinding> sqlColumnBindings, string pkColumnName, string primaryKeyValue)
+        {
             string setters = sqlColumnBindings
                 .Where(b => !b.Column.IsPrimaryKey)
                 .Select(b =>
@@ -199,7 +226,7 @@ namespace DatabaseApi.SqlLite.Api
                 .Implode(", ");
 
             string query = $"UPDATE {GetTableName()} SET {setters} WHERE {pkColumnName} = {primaryKeyValue}";
-            DatabaseSchema.ExecuteNonQuery(query);
+            return query;
         }
 
         public void DataChanged(object valueObject, PropertyChangedEventArgs e)
