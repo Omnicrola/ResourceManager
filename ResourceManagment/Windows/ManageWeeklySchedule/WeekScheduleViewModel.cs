@@ -31,13 +31,17 @@ namespace ResourceManagment.Windows.ManageWeeklySchedule
 
         public Action BlockChanged { get; set; }
 
-        public WeekScheduleViewModel(DateTime weekEnding)
+        public WeekScheduleViewModel()
         {
             Schedules = new ObservableCollection<PersonalScheduleViewModel>();
             RequiredProjectResources = new ObservableCollection<RequiredResourceViewModel>();
-            WeekEnding = weekEnding;
             WeekColor = Colors.Blue;
             Schedules.CollectionChanged += UpdateObservers;
+        }
+
+        public WeekScheduleViewModel(DateTime weekEnding) : this()
+        {
+            WeekEnding = weekEnding;
         }
 
         public void Save()
