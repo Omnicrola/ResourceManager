@@ -61,11 +61,16 @@ namespace ResourceManagment.Windows.Main
 
         public void AddResource_Click(object sender, RoutedEventArgs e)
         {
+            AddResourceToCurrentSchedule();
+        }
+
+        private void AddResourceToCurrentSchedule()
+        {
             var selectedSchedule = _resourceDataContext.SelectedSchedule;
-            var addResourceWindow = new AddResourceWindow(new AddResourceViewModel(_resourceDataContext.People, selectedSchedule), selectedSchedule);
+            var addResourceWindow =
+                new AddResourceWindow(new AddResourceViewModel(_resourceDataContext.People, selectedSchedule), selectedSchedule);
             addResourceWindow.Owner = this;
             addResourceWindow.ShowDialog();
-
         }
 
         private void buttonAddWeek_Click(object sender, RoutedEventArgs e)
@@ -94,6 +99,11 @@ namespace ResourceManagment.Windows.Main
         {
             base.OnClosing(e);
             _userOperationsBuilder.Dispose();
+        }
+
+        private void ResourceDataGrid_OnAddResourceToSchedule()
+        {
+            AddResourceToCurrentSchedule();
         }
     }
 

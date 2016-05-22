@@ -20,7 +20,7 @@ namespace ResourceManagment.Windows
 
         private ObservableCollection<SelectablePersonViewModel> FilterAvailableResources(ObservableCollection<PersonViewModel> people)
         {
-            List<PersonViewModel> peopleAlreadyScheduled = selectedSchedule.Schedules
+            List<PersonViewModel> peopleAlreadyScheduled = selectedSchedule.PersonalSchedules
                                                                 .Select(s => s.Person)
                                                                 .ToList();
             var peopleNotScheduled = people.Where(p => !peopleAlreadyScheduled.Contains(p)).ToList();

@@ -14,8 +14,9 @@ namespace ResourceManagment.Windows.ManageWeeklySchedule
         private DateTime _weekEnding;
         private string _notes;
         private Color _weekColor;
+        private bool _hasResources;
 
-        public ObservableCollection<PersonalScheduleViewModel> Schedules { get; set; }
+        public ObservableCollection<PersonalScheduleViewModel> PersonalSchedules { get; set; }
         public ObservableCollection<RequiredResourceViewModel> RequiredProjectResources { get; set; }
 
         [SqlColumnBinding("id")]
@@ -29,14 +30,20 @@ namespace ResourceManagment.Windows.ManageWeeklySchedule
 
         public string Notes { get { return _notes; } set { SetPropertyField(ref _notes, value); } }
 
+        public bool HasResources
+        {
+            get { return _hasResources; }
+            set { SetPropertyField(ref _hasResources, value); }
+        }
+
         public Action BlockChanged { get; set; }
 
         public WeekScheduleViewModel()
         {
-            Schedules = new ObservableCollection<PersonalScheduleViewModel>();
+            PersonalSchedules = new ObservableCollection<PersonalScheduleViewModel>();
             RequiredProjectResources = new ObservableCollection<RequiredResourceViewModel>();
             WeekColor = Colors.Blue;
-            Schedules.CollectionChanged += UpdateObservers;
+            PersonalSchedules.CollectionChanged += UpdateObservers;
         }
 
         public WeekScheduleViewModel(DateTime weekEnding) : this()
@@ -55,6 +62,7 @@ namespace ResourceManagment.Windows.ManageWeeklySchedule
             {
                 item.ResourceBlockChanged += UpdateRequireResources;
             }
+            HasResources = PersonalSchedules.Count > 0;
         }
 
         private void UpdateRequireResources()

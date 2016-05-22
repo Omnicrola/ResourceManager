@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,6 +15,8 @@ namespace ResourceManagment.Windows.Main
     public partial class ResourceDataGrid : UserControl
     {
         private readonly ResourceDragDropHandler _resourceDragDropHandler;
+
+        public event Action AddResourceToSchedule;
 
         public ObservableCollection<PersonViewModel> People { get; set; }
         public ObservableCollection<ProjectViewModel> Projects { get; set; }
@@ -86,5 +89,9 @@ namespace ResourceManagment.Windows.Main
 
         }
 
+        private void AddResource_Click(object sender, RoutedEventArgs e)
+        {
+            AddResourceToSchedule?.Invoke();
+        }
     }
 }

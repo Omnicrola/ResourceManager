@@ -22,7 +22,7 @@ namespace ResourceManagment.Windows.ViewModels
 
         public void Recalculate(WeekScheduleViewModel schedule)
         {
-            var blocksMatchingProject = schedule.Schedules
+            var blocksMatchingProject = schedule.PersonalSchedules
                 .SelectMany(s => s.Days)
                 .SelectMany(d => new[] { d.Morning, d.Afternoon })
                 .ToList()

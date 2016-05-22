@@ -13,6 +13,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <BitmapImage x:Key="Pencil16" UriSource="../../Assets/Icons/pencil16.png" />
+        <BitmapImage x:Key="Plus128" UriSource="../../Assets/Icons/green-plus-128.png" />
 
         <converters:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
 
@@ -115,11 +116,44 @@
         </ControlTemplate>
 
 
+        <Style x:Key="ShowWhenNoResources" TargetType="FrameworkElement">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding HasResources}" Value="False">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="HideWhenNoResources" TargetType="FrameworkElement">
+            <Setter Property="Visibility" Value="Visible"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding HasResources}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
     </UserControl.Resources>
     <Canvas>
-        <DataGrid ItemsSource="{Binding Schedules}"
+        <WrapPanel>
+            <Button Margin="100,100"
+                    Style="{StaticResource ShowWhenNoResources}"
+                    Click="AddResource_Click"
+                    FontSize="24">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="64" Margin="16" Source="{StaticResource Plus128}"></Image>
+                    <StackPanel>
+                        <TextBlock Margin="16,16,16,0">Click to</TextBlock>
+                        <TextBlock Margin="16,0,16,16">add resource</TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </Button>
+        </WrapPanel>
+        <DataGrid ItemsSource="{Binding PersonalSchedules}"
                           CanUserAddRows="False"
                           Name="ScheduleDataGrid"
+                          Style="{StaticResource HideWhenNoResources}"
                           IsReadOnly="True"
                           CanUserDeleteRows="False"
                           CanUserReorderColumns="False"

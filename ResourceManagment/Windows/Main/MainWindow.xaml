@@ -151,7 +151,9 @@
                     </Button>
                     <Separator/>
                 </ToolBar>
-                <local:ResourceDataGrid  x:Name="ResourceDataGrid" DataContext="{Binding SelectedSchedule}"></local:ResourceDataGrid>
+                <local:ResourceDataGrid  x:Name="ResourceDataGrid" 
+                                         DataContext="{Binding SelectedSchedule}"
+                                         AddResourceToSchedule="ResourceDataGrid_OnAddResourceToSchedule"></local:ResourceDataGrid>
             </StackPanel>
         </Grid>
     </DockPanel>
