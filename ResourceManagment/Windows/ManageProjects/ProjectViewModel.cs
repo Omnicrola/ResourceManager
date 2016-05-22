@@ -13,6 +13,7 @@ namespace ResourceManagment.Windows.ManageProjects
         private string _hexColor;
         public static ProjectViewModel Empty { get { return new ProjectViewModel("None") { Color = Brushes.Gray }; } }
 
+        public ProjectViewModel() { }
         public ProjectViewModel(string name)
         {
             _name = name;
@@ -43,7 +44,6 @@ namespace ResourceManagment.Windows.ManageProjects
             set
             {
                 _hexColor = value;
-
                 var brushConverter = new BrushConverter();
                 Color = (SolidColorBrush)brushConverter.ConvertFrom(_hexColor);
             }

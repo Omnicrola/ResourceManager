@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Media;
 using ResourceManagment.Operations;
 
 namespace ResourceManagment.Windows.ManageProjects
@@ -22,6 +23,12 @@ namespace ResourceManagment.Windows.ManageProjects
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
             _allProjectsViewModel.SelectedProject.Name = _allProjectsViewModel.EditedProjectName;
+            if (_allProjectsViewModel.EditedColor.HasValue)
+            {
+                _allProjectsViewModel.SelectedProject.Color =
+                    new SolidColorBrush(_allProjectsViewModel.EditedColor.Value);
+            }
+
             _operationsBuilder.SaveProject(_allProjectsViewModel.SelectedProject);
         }
 

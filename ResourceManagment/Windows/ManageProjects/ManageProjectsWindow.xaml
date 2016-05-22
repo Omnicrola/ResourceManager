@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ResourceManagment.Windows"
         xmlns:manageProjects="clr-namespace:ResourceManagment.Windows.ManageProjects"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="Manage Projects"
         WindowStartupLocation="CenterOwner"
@@ -39,7 +40,8 @@
         <Canvas Grid.Column="2" Margin="5">
             <Grid >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="75"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
@@ -55,6 +57,14 @@
                     Margin="10"
                     x:Name ="textboxProjectName"  
                     Text="{Binding EditedProjectName, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Grid.Row="2" Grid.Column="0" Margin="10">Color:</Label>
+                <xctk:ColorPicker
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="10"
+                    Name="ColorPicker"
+                    DisplayColorAndName="True"
+                    SelectedColor="{Binding EditedColor, UpdateSourceTrigger=PropertyChanged}"/>
                 <Button
                     Grid.Row="3"
                     Grid.Column="1"
