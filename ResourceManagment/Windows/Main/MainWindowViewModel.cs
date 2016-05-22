@@ -12,7 +12,6 @@ namespace ResourceManagment.Windows.Main
 {
     public class MainWindowViewModel : ViewModel
     {
-        private readonly ModelDataBinder _modelBinder;
         private WeekScheduleViewModel _selectedSchedule;
 
 
@@ -20,16 +19,11 @@ namespace ResourceManagment.Windows.Main
         public ObservableCollection<ProjectViewModel> Projects { get; internal set; }
         public ObservableCollection<PersonViewModel> People { get; internal set; }
 
-        public MainWindowViewModel(ModelDataBinder modelBinder)
+        public MainWindowViewModel()
         {
-            _modelBinder = modelBinder;
             AllSchedules = new ObservableCollection<WeekScheduleViewModel>();
             Projects = new ObservableCollection<ProjectViewModel>();
             People = new ObservableCollection<PersonViewModel>();
-
-            People.CollectionChanged += _modelBinder.PersistPerson;
-            Projects.CollectionChanged += _modelBinder.PersistProject;
-            AllSchedules.CollectionChanged += _modelBinder.PersistSchedules;
         }
 
         public WeekScheduleViewModel SelectedSchedule

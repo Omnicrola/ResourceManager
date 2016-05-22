@@ -26,10 +26,11 @@ namespace ResourceManagment
             var sqlSchemaVerifier = new SqlSchemaVerifier(schemaVersion);
             var databaseLocation = Environment.ExpandEnvironmentVariables(ConfigurationManager.AppSettings["sql.database.location"]);
             var databaseSchema = new ResourceManagerDatabaseSchema(databaseLocation, sqlSchemaVerifier);
-
-            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel(new ModelDataBinder(databaseSchema));
-
             var operationsQueue = new OperationsQueue(Dispatcher);
+
+
+            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
+
             var mainWindow = new MainWindow(mainWindowViewModel, operationsQueue);
             mainWindow.Show();
 
