@@ -12,7 +12,8 @@ namespace ResourceManagment.Data.Database.Tables
 
         public static SqlIntegerColumn Id = new SqlIntegerColumn("id", true, false);
         public static SqlDateTimeColumn DateTime = new SqlDateTimeColumn("datetime");
-        public static SqlIntegerColumn FkPerson = new SqlIntegerColumn("fk_pair_partner", false, true);
+        public static SqlIntegerColumn FkPairPartner = new SqlIntegerColumn("fk_pair_partner", false, true);
+        public static SqlIntegerColumn FkPerson = new SqlIntegerColumn("fk_person", false, true);
         public static SqlIntegerColumn FkProject = new SqlIntegerColumn("fk_project", false, true);
         public static SqlIntegerColumn FkSchedule = new SqlIntegerColumn("fk_schedule", false, false);
 
@@ -24,6 +25,7 @@ namespace ResourceManagment.Data.Database.Tables
                 Id,
                 DateTime,
                 FkPerson,
+                FkPairPartner,
                 FkProject,
                 FkSchedule
             };

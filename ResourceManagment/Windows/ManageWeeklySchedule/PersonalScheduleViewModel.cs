@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using ResourceManagment.Windows.AlterResourceBlock;
 using ResourceManagment.Windows.ManagePeople;
 using ResourceManagment.Windows.ViewModels;
@@ -66,6 +67,12 @@ namespace ResourceManagment.Windows.ManageWeeklySchedule
         private void IndividualBlockChanged()
         {
             ResourceBlockChanged?.Invoke();
+        }
+
+        public void OverwriteBlock(ResourceBlockViewModel resourceBlock)
+        {
+            var workDay = _workDays.FirstOrDefault(d => d.Date.DayOfWeek == resourceBlock.Date.DayOfWeek);
+            workDay?.OverwriteBlock(resourceBlock);
         }
     }
 }

@@ -104,6 +104,7 @@
     <Compile Include="Data\Model\IProject.cs" />
     <Compile Include="Data\Model\IResourceBlock.cs" />
     <Compile Include="Data\Model\IWeeklySchedule.cs" />
+    <Compile Include="Data\Model\ResourceBlockModel.cs" />
     <Compile Include="Operations\AsyncDiscreetOperation.cs" />
     <Compile Include="Operations\IDiscreetOperation.cs" />
     <Compile Include="Operations\LoadInitialDataOperation.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Operations\SavePersonalScheduleOperation.cs" />
     <Compile Include="Operations\SavePersonOperation.cs" />
     <Compile Include="Operations\SaveProjectOperation.cs" />
+    <Compile Include="Operations\SaveResourceBlockOperation.cs" />
     <Compile Include="Operations\SaveWeeklyScheduleOperation.cs" />
     <Compile Include="Operations\UserOperationsBuilder.cs" />
     <Compile Include="Windows\ManageWeeklySchedule\EditableWeeklyScheduleViewModel.cs" />

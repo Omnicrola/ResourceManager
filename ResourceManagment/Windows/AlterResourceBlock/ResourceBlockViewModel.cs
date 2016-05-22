@@ -7,13 +7,10 @@ using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.AlterResourceBlock
 {
-    [SqlTableBinding("resources")]
-    public class ResourceBlockViewModel : ViewModel, IResourceBlock
+    public class ResourceBlockViewModel : ViewModel
     {
         private ProjectViewModel _project;
         private PersonViewModel _pairPartner;
-        private int? _fkPairPartner;
-        private int? _fkProject;
 
         public ResourceBlockViewModel(PersonViewModel person, DateTime dateTime)
         {
@@ -22,32 +19,31 @@ namespace ResourceManagment.Windows.AlterResourceBlock
             Project = ProjectViewModel.Empty;
         }
 
-        [SqlColumnBinding("id")]
         public int? Id { get; set; }
-
-        [SqlColumnBinding("datetime")]
+        public int? ScheduleId { get; set; }
         public DateTime Date { get; private set; }
-
-        [SqlColumnBinding("fk_pair_partner")]
-        public int? FkPairPartner
-        {
-            get { return PairPartner?.ID; }
-            set { _fkPairPartner = value; }
-        }
-
-        [SqlColumnBinding("fk_project")]
-        public int? FkProject
-        {
-            get { return Project?.Id; }
-            set { _fkProject = value; }
-        }
-
-        [SqlColumnBinding("fk_schedule")]
-        public int? FkSchedule { get; set; }
-
-        public ProjectViewModel Project { get { return _project; } set { _project = value; FireOnPropertyChanged("Project"); } }
-        public PersonViewModel PairPartner { get { return _pairPartner; } set { _pairPartner = value; FireOnPropertyChanged("PairPartner"); } }
-
         public PersonViewModel Person { get; private set; }
+
+        public ProjectViewModel Project
+        {
+            get { return _project; }
+            set
+            {
+                SetPropertyField(ref _project, value);
+            }
+        }
+
+        public PersonViewModel PairPartner
+        {
+            get
+            {
+                return _pairPartner;
+            }
+            set
+            {
+                SetPropertyField(ref _pairPartner, value);
+            }
+        }
+
     }
 }

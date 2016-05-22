@@ -34,6 +34,11 @@ namespace DatabaseApi.SqlLite.Api
 
         public object ParseValue(object valueFromSql)
         {
+
+            if (valueFromSql == DBNull.Value)
+            {
+                return null;
+            }
             return Convert.ToInt32(valueFromSql);
         }
     }

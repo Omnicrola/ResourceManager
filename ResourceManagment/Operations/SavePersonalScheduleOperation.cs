@@ -31,16 +31,26 @@ namespace ResourceManagment.Operations
             var allDays = new List<IResourceBlock>();
             foreach (var workDayViewModel in _personalSchedule.Days)
             {
-                var morning = workDayViewModel.Morning;
-                var afternoon = workDayViewModel.Afternoon;
-
-                morning.FkSchedule = _selectedSchedule.Id;
-                afternoon.FkSchedule = _selectedSchedule.Id;
+                var morning = ConvertModel(workDayViewModel.Morning);
+                var afternoon = ConvertModel(workDayViewModel.Afternoon);
 
                 allDays.Add(morning);
                 allDays.Add(afternoon);
             }
             _databaseSchema.ResourceBlockTable.SaveAll(allDays);
+        }
+
+        private ResourceBlockModel ConvertModel(ResourceBlockViewModel resourceBlock)
+        {
+            return new ResourceBlockModel()
+            {
+                Id = resourceBlock.Id,
+                PairPartnerId = resourceBlock.PairPartner?.ID,
+                PersonId = resourceBlock.Person.ID.Value,
+                WeeklyScheduleId = _selectedSchedule.Id,
+                ProjectId = resourceBlock.Project.Id,
+                Date = resourceBlock.Date
+            };
         }
     }
 }

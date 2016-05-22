@@ -27,5 +27,17 @@ namespace ResourceManagment.Windows.AlterResourceBlock
         }
 
 
+        public void OverwriteBlock(ResourceBlockViewModel resourceBlock)
+        {
+            var difference = Afternoon.Date.Subtract(resourceBlock.Date).TotalMilliseconds;
+            if (difference >= 0)
+            {
+                Afternoon = resourceBlock;
+            }
+            else
+            {
+                Morning = resourceBlock;
+            }
+        }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Windows.Media;
 using DatabaseApi.SqlLite.Api;
 using ResourceManagment.Data.Model;
+using ResourceManagment.Windows.AlterResourceBlock;
 using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManageWeeklySchedule
@@ -48,7 +50,7 @@ namespace ResourceManagment.Windows.ManageWeeklySchedule
 
         public WeekScheduleViewModel(DateTime weekEnding) : this()
         {
-            WeekEnding = weekEnding;
+            WeekEnding = new DateTime(weekEnding.Year, weekEnding.Month, weekEnding.Day);
         }
 
         public void Save()
@@ -73,5 +75,15 @@ namespace ResourceManagment.Windows.ManageWeeklySchedule
             }
         }
 
+        public void OverwriteBlock(ResourceBlockViewModel resourceBlock)
+        {
+            var personalSchedule = PersonalSchedules.FirstOrDefault(p => p.Person.ID == resourceBlock.Person.ID);
+            if (personalSchedule == null)
+            {
+                personalSchedule = new PersonalScheduleViewModel(WeekEnding, resourceBlock.Person);
+                PersonalSchedules.Add(personalSchedule);
+            }
+            personalSchedule?.OverwriteBlock(resourceBlock);
+        }
     }
 }

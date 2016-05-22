@@ -53,22 +53,4 @@ namespace ResourceManagment.Operations
             _operationsQueue.AddOperation(saveResourceBlockOperation);
         }
     }
-
-    public class SaveResourceBlockOperation : AsyncDiscreetOperation
-    {
-        private readonly ResourceBlockViewModel _resourceBlock;
-        private readonly ResourceManagerDatabaseSchema _databaseSchema;
-
-        public SaveResourceBlockOperation(ResourceBlockViewModel resourceBlock, ResourceManagerDatabaseSchema databaseSchema)
-        {
-            _resourceBlock = resourceBlock;
-            _databaseSchema = databaseSchema;
-        }
-
-        public override string Description => "Saving resource block.";
-        protected override void DoWorkInternal()
-        {
-            _databaseSchema.ResourceBlockTable.Save(_resourceBlock);
-        }
-    }
 }
