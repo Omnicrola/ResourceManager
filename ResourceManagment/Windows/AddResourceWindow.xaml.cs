@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using ResourceManagment.Operations;
 using ResourceManagment.Windows.ManageWeeklySchedule;
 
 namespace ResourceManagment.Windows
@@ -8,15 +9,17 @@ namespace ResourceManagment.Windows
     /// </summary>
     public partial class AddResourceWindow : Window
     {
-        private WeekScheduleViewModel _selectedSchedule;
-        private AddResourceViewModel _windowViewModel;
+        private readonly WeekScheduleViewModel _selectedSchedule;
+        private readonly UserOperationsBuilder _userOperationsBuilder;
+        private readonly AddResourceViewModel _windowViewModel;
 
-        public AddResourceWindow(AddResourceViewModel addResourceViewModel, WeekScheduleViewModel selectedSchedule)
+        public AddResourceWindow(AddResourceViewModel addResourceViewModel, WeekScheduleViewModel selectedSchedule, UserOperationsBuilder userOperationsBuilder)
         {
             InitializeComponent();
             DataContext = addResourceViewModel;
             _windowViewModel = addResourceViewModel;
             _selectedSchedule = selectedSchedule;
+            _userOperationsBuilder = userOperationsBuilder;
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -26,6 +29,7 @@ namespace ResourceManagment.Windows
             {
                 var personalSchedule = new PersonalScheduleViewModel(_selectedSchedule.WeekEnding, selectedPerson.Person);
                 _selectedSchedule.PersonalSchedules.Add(personalSchedule);
+                _userOperationsBuilder.SavePersonalSchedule(personalSchedule, _selectedSchedule);
                 Close();
             }
         }

@@ -119,14 +119,16 @@ namespace DatabaseApi.SqlLite.Api
                 {
                     string columnName = sqlColumnBinding.Column.Name;
                     string value = sqlColumnBinding.EncapsulateValue(dataObject);
-                    columnNameValuePairs.Add($"{columnName} = {value}");
+                    string eq = value.Equals("NULL") ? "IS" : "=";
+                    columnNameValuePairs.Add($"{columnName} {eq} {value}");
                 }
             }
             string conditions = columnNameValuePairs.Implode(" AND ");
             stringBuilder.Append(conditions);
             stringBuilder.Append(";");
             string query = stringBuilder.ToString();
-            int pkValue = int.Parse(DatabaseSchema.ExecuteScalar(query).ToString());
+            var result = DatabaseSchema.ExecuteScalar(query);
+            int pkValue = int.Parse(result.ToString());
             primaryKeyColumn.SetValue(dataObject, pkValue);
         }
 
@@ -192,6 +194,11 @@ namespace DatabaseApi.SqlLite.Api
         #endregion
 
         #region SqlTable Data Update
+
+        public void SaveAll(List<T> dataObjects)
+        {
+            dataObjects.ForEach(Save);
+        }
 
         public void Save(T dataObject)
         {

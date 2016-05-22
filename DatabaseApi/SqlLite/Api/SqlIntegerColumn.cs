@@ -5,10 +5,11 @@ namespace DatabaseApi.SqlLite.Api
     public class SqlIntegerColumn : ISqlColumn
     {
 
-        public SqlIntegerColumn(string name, bool isPrimaryKey)
+        public SqlIntegerColumn(string name, bool isPrimaryKey, bool nullable)
         {
             Name = name;
             IsPrimaryKey = isPrimaryKey;
+            Nullable = nullable;
         }
 
         public string BuildCreateQuery()
@@ -20,10 +21,14 @@ namespace DatabaseApi.SqlLite.Api
 
         public string Name { get; }
         public bool IsPrimaryKey { get; }
-        public bool Nullable => false;
+        public bool Nullable { get; }
 
         public string EncapsulateValue(object value)
         {
+            if (value == null)
+            {
+                return "NULL";
+            }
             return $"'{value.ToString()}'";
         }
 

@@ -64,11 +64,16 @@ namespace ResourceManagment.Windows.Main
             AddResourceToCurrentSchedule();
         }
 
+        private void ResourceDataGrid_OnAddResourceToSchedule()
+        {
+            AddResourceToCurrentSchedule();
+        }
+
         private void AddResourceToCurrentSchedule()
         {
             var selectedSchedule = _resourceDataContext.SelectedSchedule;
             var addResourceWindow =
-                new AddResourceWindow(new AddResourceViewModel(_resourceDataContext.People, selectedSchedule), selectedSchedule);
+                new AddResourceWindow(new AddResourceViewModel(_resourceDataContext.People, selectedSchedule), selectedSchedule, _userOperationsBuilder);
             addResourceWindow.Owner = this;
             addResourceWindow.ShowDialog();
         }
@@ -101,10 +106,6 @@ namespace ResourceManagment.Windows.Main
             _userOperationsBuilder.Dispose();
         }
 
-        private void ResourceDataGrid_OnAddResourceToSchedule()
-        {
-            AddResourceToCurrentSchedule();
-        }
     }
 
 

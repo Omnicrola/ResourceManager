@@ -10,11 +10,11 @@ namespace ResourceManagment.Data.Database.Tables
     {
         public const string TableName = "resources";
 
-        public static SqlIntegerColumn Id = new SqlIntegerColumn("id", true);
+        public static SqlIntegerColumn Id = new SqlIntegerColumn("id", true, false);
         public static SqlDateTimeColumn DateTime = new SqlDateTimeColumn("datetime");
-        public static SqlIntegerColumn FkPerson = new SqlIntegerColumn("fk_person", false);
-        public static SqlIntegerColumn FkProject = new SqlIntegerColumn("fk_project", false);
-        public static SqlIntegerColumn FkSchedule = new SqlIntegerColumn("fk_schedule", false);
+        public static SqlIntegerColumn FkPerson = new SqlIntegerColumn("fk_pair_partner", false, true);
+        public static SqlIntegerColumn FkProject = new SqlIntegerColumn("fk_project", false, true);
+        public static SqlIntegerColumn FkSchedule = new SqlIntegerColumn("fk_schedule", false, false);
 
         public ResourceBlockTable(DatabaseSchema databaseSchema) : base(databaseSchema)
         {

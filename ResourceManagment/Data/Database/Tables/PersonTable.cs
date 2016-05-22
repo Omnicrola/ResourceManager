@@ -11,7 +11,7 @@ namespace ResourceManagment.Data.Database.Tables
     {
         public const string TableName = "people";
 
-        public static SqlIntegerColumn Id = new SqlIntegerColumn("id", true);
+        public static SqlIntegerColumn Id = new SqlIntegerColumn("id", true, false);
         public static SqlStringColumn FirstName = new SqlStringColumn("first_name", 32);
         public static SqlStringColumn LastName = new SqlStringColumn("last_name", 32);
         public static SqlEnumColumn Role = new SqlEnumColumn("role", typeof(Role));

@@ -109,6 +109,7 @@
     <Compile Include="Operations\LoadInitialDataOperation.cs" />
     <Compile Include="Operations\OperationEventArgs.cs" />
     <Compile Include="Operations\OperationsQueue.cs" />
+    <Compile Include="Operations\SavePersonalScheduleOperation.cs" />
     <Compile Include="Operations\SavePersonOperation.cs" />
     <Compile Include="Operations\SaveProjectOperation.cs" />
     <Compile Include="Operations\SaveWeeklyScheduleOperation.cs" />

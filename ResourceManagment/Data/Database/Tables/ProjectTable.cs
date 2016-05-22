@@ -11,7 +11,7 @@ namespace ResourceManagment.Data.Database.Tables
     {
         public const string TableName = "projects";
 
-        public static SqlIntegerColumn Id = new SqlIntegerColumn("id", true);
+        public static SqlIntegerColumn Id = new SqlIntegerColumn("id", true, false);
         public static SqlStringColumn Name = new SqlStringColumn("name", 32);
         public static SqlStringColumn Color = new SqlStringColumn("color", 8);
 

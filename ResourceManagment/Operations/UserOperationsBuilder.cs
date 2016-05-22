@@ -39,5 +39,11 @@ namespace ResourceManagment.Operations
             var saveWeeklyScheduleOperation = new SaveWeeklyScheduleOperation(weekScheduleViewModel, _databaseSchema);
             _operationsQueue.AddOperation(saveWeeklyScheduleOperation);
         }
+
+        public void SavePersonalSchedule(PersonalScheduleViewModel personalSchedule, WeekScheduleViewModel selectedSchedule)
+        {
+            var savePersonalScheduleOperation = new SavePersonalScheduleOperation(selectedSchedule, personalSchedule, _databaseSchema);
+            _operationsQueue.AddOperation(savePersonalScheduleOperation);
+        }
     }
 }
