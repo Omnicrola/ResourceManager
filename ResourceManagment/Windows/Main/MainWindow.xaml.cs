@@ -16,9 +16,9 @@ namespace ResourceManagment.Windows.Main
     public partial class MainWindow : Window
     {
         private readonly MainWindowViewModel _resourceDataContext;
-        private readonly OperationsQueue _operationsQueue;
+        private readonly UserOperationsBuilder _userOperationsBuilder;
 
-        public MainWindow(MainWindowViewModel resourceDataContext, OperationsQueue operationsQueue)
+        public MainWindow(MainWindowViewModel resourceDataContext, UserOperationsBuilder userOperationsBuilder)
         {
             InitializeComponent();
             DataContext = resourceDataContext;
@@ -26,8 +26,7 @@ namespace ResourceManagment.Windows.Main
             ResourceDataGrid.Projects = resourceDataContext.Projects;
 
             _resourceDataContext = resourceDataContext;
-            _operationsQueue = operationsQueue;
-
+            _userOperationsBuilder = userOperationsBuilder;
         }
 
         private void buttonAddWeek_Click(object sender, RoutedEventArgs e)
@@ -55,7 +54,7 @@ namespace ResourceManagment.Windows.Main
 
         private void MenuItemManagePeople_Click(object sender, RoutedEventArgs e)
         {
-            var peopleWindow = new ManagePeople.ManagePeopleWindow(new AllPeopleViewModel(_resourceDataContext.People));
+            var peopleWindow = new ManagePeopleWindow(new AllPeopleViewModel(_resourceDataContext.People), _userOperationsBuilder);
             peopleWindow.Owner = this;
             peopleWindow.ShowDialog();
         }
@@ -95,7 +94,7 @@ namespace ResourceManagment.Windows.Main
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-            _operationsQueue.Dispose();
+            _userOperationsBuilder.Dispose();
         }
     }
 

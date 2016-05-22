@@ -83,6 +83,7 @@ namespace DatabaseApi.SqlLite.Api
             }
         }
 
+
         private static string CreateSingle(object dataObject, List<SqlColumnBinding> sqlColumnBindings)
         {
             return sqlColumnBindings
@@ -179,6 +180,28 @@ namespace DatabaseApi.SqlLite.Api
         #endregion
 
         #region SqlTable Data Update
+
+        public void Save(T dataObject)
+        {
+            var sqlColumnBindings = GetColumnBindings(dataObject.GetType());
+            var primaryKeyBinding = GetPrimaryKeyBinding(sqlColumnBindings);
+            var primaryKeyValue = primaryKeyBinding.Column.EncapsulateValue(primaryKeyBinding.PropertyInfo.GetValue(dataObject));
+            var pkColumnName = primaryKeyBinding.Column.Name;
+
+            string setters = sqlColumnBindings
+                .Where(b => !b.Column.IsPrimaryKey)
+                .Select(b =>
+                {
+                    var columnName = b.Column.Name;
+                    var value = b.Column.EncapsulateValue(b.PropertyInfo.GetValue(dataObject));
+                    return $"{columnName} = {value}";
+                })
+                .Implode(", ");
+
+            string query = $"UPDATE {GetTableName()} SET {setters} WHERE {pkColumnName} = {primaryKeyValue}";
+            DatabaseSchema.ExecuteNonQuery(query);
+        }
+
         public void DataChanged(object valueObject, PropertyChangedEventArgs e)
         {
             try

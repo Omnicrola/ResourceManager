@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using ResourceManagment.Operations;
 
 namespace ResourceManagment.Windows.ManagePeople
 {
@@ -7,14 +8,16 @@ namespace ResourceManagment.Windows.ManagePeople
     /// </summary>
     public partial class ManagePeopleWindow : Window
     {
-        private AllPeopleViewModel _allPeopleViewModel;
+        private readonly AllPeopleViewModel _allPeopleViewModel;
+        private readonly UserOperationsBuilder _userOperationsBuilder;
 
-        public ManagePeopleWindow(AllPeopleViewModel peopleViewModel)
+        public ManagePeopleWindow(AllPeopleViewModel peopleViewModel,
+            UserOperationsBuilder userOperationsBuilder)
         {
             InitializeComponent();
             DataContext = peopleViewModel;
             _allPeopleViewModel = peopleViewModel;
-
+            _userOperationsBuilder = userOperationsBuilder;
         }
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
@@ -22,6 +25,7 @@ namespace ResourceManagment.Windows.ManagePeople
             _allPeopleViewModel.SelectedPerson.FirstName = _allPeopleViewModel.EditedFirstName;
             _allPeopleViewModel.SelectedPerson.LastName = _allPeopleViewModel.EditedLastName;
             _allPeopleViewModel.DataHasChanged = false;
+            _userOperationsBuilder.SavePerson(_allPeopleViewModel.SelectedPerson);
         }
 
         private void ButtonNewProject_Click(object sender, RoutedEventArgs e)

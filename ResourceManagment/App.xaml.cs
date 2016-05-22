@@ -30,8 +30,9 @@ namespace ResourceManagment
 
 
             MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
+            var userOperationsFactory = new UserOperationsBuilder(operationsQueue, databaseSchema);
 
-            var mainWindow = new MainWindow(mainWindowViewModel, operationsQueue);
+            var mainWindow = new MainWindow(mainWindowViewModel, userOperationsFactory);
             mainWindow.Show();
 
             var loadInitialDataOperation = new LoadInitialDataOperation(databaseSchema);
