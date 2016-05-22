@@ -16,6 +16,18 @@
         <BitmapImage x:Key="Gear16" UriSource="../../Assets/Icons/gear16.png" />
         <BitmapImage x:Key="GreenPlus" UriSource="../../Assets/Icons/plus16.png" />
 
+
+        <Style x:Key="HideWhenNull" TargetType="FrameworkElement">
+            <Setter Property="Visibility" Value="Visible"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding SelectedSchedule}" Value="{x:Null}">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="HideButtonWhenNull" BasedOn="{StaticResource HideWhenNull}" TargetType="Button"/>
+        <Style x:Key="HideTextWhenNull" BasedOn="{StaticResource HideWhenNull}" TargetType="TextBlock"/>
+
     </Window.Resources>
 
     <DockPanel>
@@ -126,12 +138,12 @@
                 <ToolBar >
                     <TextBlock Text="Resources" Margin="4" FontSize="20" FontWeight="Bold"/>
                     <Separator Margin="10,0"/>
-                    <TextBlock VerticalAlignment="Center">
+                    <TextBlock VerticalAlignment="Center" Style="{StaticResource HideTextWhenNull}">
                         <Run>Week Ending: </Run>
                         <Run Text="{Binding SelectedSchedule.WeekEnding, StringFormat=MMMM dd yyyy}"/>
                     </TextBlock>
                     <Separator Margin="10,0"/>
-                    <Button Click="AddResource_Click">
+                    <Button Click="AddResource_Click" Style="{StaticResource HideButtonWhenNull}">
                         <WrapPanel Margin="5">
                             <Image Margin="5,0" Source="{StaticResource GreenPlus}"/>
                             <TextBlock Text="Add Resource"/>
