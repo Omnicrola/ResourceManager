@@ -49,8 +49,10 @@ namespace ResourceManagment.Windows.AlterResourceBlock
             Id = resourceBlock.Id;
             Person = resourceBlock.Person;
             PairPartner = resourceBlock.PairPartner;
-            Project = resourceBlock.Project;
-            //            BlockOrder = resourceBlock.BlockOrder;
+            if (resourceBlock.Project != null)
+            {
+                Project = resourceBlock.Project;
+            }
         }
     }
 }

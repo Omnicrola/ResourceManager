@@ -69,13 +69,15 @@
                         </Button.Style>
                         <Image Source="{StaticResource Pencil16}"/>
                     </Button>
-                    <TextBlock Text="{Binding Project.Name, TargetNullValue='None'}" 
+                    <StackPanel Margin="4">
+                        <TextBlock Text="{Binding Project.Name, TargetNullValue='None'}" 
                                    HorizontalAlignment="Center"
                                    Margin="2,4"/>
-                    <TextBlock HorizontalAlignment="Center" Margin="2,4">
+                        <TextBlock HorizontalAlignment="Center" Margin="2,4">
                         <Run>/w</Run>
                         <Run Text="{Binding PairPartner.FirstName}"/>
-                    </TextBlock>
+                        </TextBlock>
+                    </StackPanel>
                 </StackPanel>
             </Border>
         </ControlTemplate>
