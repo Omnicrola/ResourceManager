@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using ResourceManagment.Data.Model;
 using ResourceManagment.Windows.AlterResourceBlock;
 using ResourceManagment.Windows.ManagePeople;
 using ResourceManagment.Windows.ViewModels;
@@ -10,19 +12,19 @@ namespace ResourceManagment.Windows.ManageWeeklySchedule
     public class PersonalScheduleViewModel : ViewModel
     {
 
-        private ObservableCollection<WorkDayViewModel> _workDays;
-        private DateTime dateTime;
-        private PersonViewModel personViewModel;
+        private readonly ObservableCollection<WorkDayViewModel> _workDays;
+        private PersonViewModel _personViewModel;
+        private List<ResourceBlockViewModel> _allResourceBlocks;
 
         public PersonViewModel Person
         {
             get
             {
-                return personViewModel;
+                return _personViewModel;
             }
             set
             {
-                personViewModel = value;
+                _personViewModel = value;
                 FireOnPropertyChanged("Person");
             }
         }
@@ -43,36 +45,34 @@ namespace ResourceManagment.Windows.ManageWeeklySchedule
         public WorkDayViewModel Thursday { get { return _workDays[5]; } }
         public WorkDayViewModel Friday { get { return _workDays[6]; } }
 
-        public Action ResourceBlockChanged { get; set; }
-
-        public PersonalScheduleViewModel(DateTime dateTime, PersonViewModel personViewModel)
+        public PersonalScheduleViewModel(PersonViewModel personViewModel)
         {
-            this.dateTime = dateTime;
-            this.personViewModel = personViewModel;
+            _personViewModel = personViewModel;
             _workDays = new ObservableCollection<WorkDayViewModel>();
-            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(6)), personViewModel));
-            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(5)), personViewModel));
-            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(4)), personViewModel));
-            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(3)), personViewModel));
-            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(2)), personViewModel));
-            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(1)), personViewModel));
-            _workDays.Add(new WorkDayViewModel(dateTime.Subtract(TimeSpan.FromDays(0)), personViewModel));
+            _allResourceBlocks = new List<ResourceBlockViewModel>();
+            _workDays.Add(new WorkDayViewModel(CreateBlock(1), CreateBlock(2)));
+            _workDays.Add(new WorkDayViewModel(CreateBlock(3), CreateBlock(4)));
+            _workDays.Add(new WorkDayViewModel(CreateBlock(5), CreateBlock(6)));
+            _workDays.Add(new WorkDayViewModel(CreateBlock(7), CreateBlock(8)));
+            _workDays.Add(new WorkDayViewModel(CreateBlock(9), CreateBlock(10)));
+            _workDays.Add(new WorkDayViewModel(CreateBlock(11), CreateBlock(12)));
+            _workDays.Add(new WorkDayViewModel(CreateBlock(13), CreateBlock(14)));
 
-            foreach (var workDay in _workDays)
-            {
-                workDay.BlockChanged += IndividualBlockChanged;
-            }
+
         }
 
-        private void IndividualBlockChanged()
+        private ResourceBlockViewModel CreateBlock(int blockOrder)
         {
-            ResourceBlockChanged?.Invoke();
+            var resourceBlockViewModel = new ResourceBlockViewModel(_personViewModel, blockOrder);
+            _allResourceBlocks.Add(resourceBlockViewModel);
+            return resourceBlockViewModel;
         }
+
 
         public void OverwriteBlock(ResourceBlockViewModel resourceBlock)
         {
-            var workDay = _workDays.FirstOrDefault(d => d.Date.DayOfWeek == resourceBlock.Date.DayOfWeek);
-            workDay?.OverwriteBlock(resourceBlock);
+            var resourceBlockViewModel = _allResourceBlocks.First(vm => vm.BlockOrder == resourceBlock.BlockOrder);
+            resourceBlockViewModel.Overwrite(resourceBlock);
         }
     }
 }

@@ -45,7 +45,7 @@ namespace ResourceManagment.Windows.ManageWeeklySchedule
             PersonalSchedules = new ObservableCollection<PersonalScheduleViewModel>();
             RequiredProjectResources = new ObservableCollection<RequiredResourceViewModel>();
             WeekColor = Colors.Blue;
-            PersonalSchedules.CollectionChanged += UpdateObservers;
+            PersonalSchedules.CollectionChanged += PersonalSchedules_CollectionChanged;
         }
 
         public WeekScheduleViewModel(DateTime weekEnding) : this()
@@ -58,32 +58,21 @@ namespace ResourceManagment.Windows.ManageWeeklySchedule
 
         }
 
-        private void UpdateObservers(object sender, NotifyCollectionChangedEventArgs e)
+        private void PersonalSchedules_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            foreach (PersonalScheduleViewModel item in e.NewItems)
-            {
-                item.ResourceBlockChanged += UpdateRequireResources;
-            }
             HasResources = PersonalSchedules.Count > 0;
         }
 
-        private void UpdateRequireResources()
-        {
-            foreach (var requirement in RequiredProjectResources)
-            {
-                requirement.Recalculate(this);
-            }
-        }
 
         public void OverwriteBlock(ResourceBlockViewModel resourceBlock)
         {
             var personalSchedule = PersonalSchedules.FirstOrDefault(p => p.Person.ID == resourceBlock.Person.ID);
             if (personalSchedule == null)
             {
-                personalSchedule = new PersonalScheduleViewModel(WeekEnding, resourceBlock.Person);
+                personalSchedule = new PersonalScheduleViewModel(resourceBlock.Person);
                 PersonalSchedules.Add(personalSchedule);
             }
-            personalSchedule?.OverwriteBlock(resourceBlock);
+            personalSchedule.OverwriteBlock(resourceBlock);
         }
     }
 }

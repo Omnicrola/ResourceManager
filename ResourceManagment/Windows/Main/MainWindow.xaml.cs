@@ -111,7 +111,7 @@ namespace ResourceManagment.Windows.Main
         {
             var resourceBlockViewModel = eventArgs.ResourceBlock;
             AlterBlockViewModel alterBlockDataContext = new AlterBlockViewModel(_mainWindowViewModel.People, _mainWindowViewModel.Projects, resourceBlockViewModel);
-            var alterBlockWindow = new AlterResourceBlockWindow(alterBlockDataContext, resourceBlockViewModel, _userOperationsBuilder)
+            var alterBlockWindow = new AlterResourceBlockWindow(alterBlockDataContext, resourceBlockViewModel, _userOperationsBuilder, _mainWindowViewModel.SelectedSchedule)
             {
                 Owner = Window.GetWindow(this)
             };

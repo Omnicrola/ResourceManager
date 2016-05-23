@@ -13,7 +13,7 @@ namespace ResourceManagment.Data.Database.Tables
 
         public static SqlIntegerColumn Id = new SqlIntegerColumn("id", true, false);
         public static SqlStringColumn Name = new SqlStringColumn("name", 32);
-        public static SqlStringColumn Color = new SqlStringColumn("color", 8);
+        public static SqlColorColumn Color = new SqlColorColumn("color");
 
         public ProjectTable(DatabaseSchema databaseSchema) : base(databaseSchema)
         {

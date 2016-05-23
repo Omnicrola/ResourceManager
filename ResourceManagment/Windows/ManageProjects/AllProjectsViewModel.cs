@@ -41,7 +41,7 @@ namespace ResourceManagment.Windows.ManageProjects
         private void EvalDataChange()
         {
             if (IsDifferent(_editedProjectName, SelectedProject.Name) ||
-                IsDifferent(_editedColor, SelectedProject.Color.Color))
+                IsDifferent(_editedColor, SelectedProject.Color))
             {
                 DataHasChanged = true;
             }
@@ -69,7 +69,7 @@ namespace ResourceManagment.Windows.ManageProjects
                 if (_selectedProject != null)
                 {
                     EditedProjectName = _selectedProject.Name;
-                    EditedColor = _selectedProject.Color.Color;
+                    EditedColor = _selectedProject.Color;
                 }
                 DataHasChanged = false;
             }

@@ -12,16 +12,15 @@ namespace ResourceManagment.Windows.AlterResourceBlock
         private ProjectViewModel _project;
         private PersonViewModel _pairPartner;
 
-        public ResourceBlockViewModel(PersonViewModel person, DateTime dateTime)
+        public ResourceBlockViewModel(PersonViewModel person, int blockOrder)
         {
             Person = person;
-            Date = dateTime;
+            BlockOrder = blockOrder;
             Project = ProjectViewModel.Empty;
         }
 
         public int? Id { get; set; }
-        public int? ScheduleId { get; set; }
-        public DateTime Date { get; private set; }
+        public int BlockOrder { get; private set; }
         public PersonViewModel Person { get; private set; }
 
         public ProjectViewModel Project
@@ -45,5 +44,13 @@ namespace ResourceManagment.Windows.AlterResourceBlock
             }
         }
 
+        public void Overwrite(ResourceBlockViewModel resourceBlock)
+        {
+            Id = resourceBlock.Id;
+            Person = resourceBlock.Person;
+            PairPartner = resourceBlock.PairPartner;
+            Project = resourceBlock.Project;
+            //            BlockOrder = resourceBlock.BlockOrder;
+        }
     }
 }

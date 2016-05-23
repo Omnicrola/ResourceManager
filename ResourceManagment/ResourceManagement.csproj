@@ -116,6 +116,7 @@
     <Compile Include="Operations\SaveResourceBlockOperation.cs" />
     <Compile Include="Operations\SaveWeeklyScheduleOperation.cs" />
     <Compile Include="Operations\UserOperationsBuilder.cs" />
+    <Compile Include="Windows\AlterResourceBlock\ResourceBlockExtension.cs" />
     <Compile Include="Windows\ManageWeeklySchedule\EditableWeeklyScheduleViewModel.cs" />
     <Compile Include="Windows\ManageProjects\ProjectViewModel.cs" />
     <Compile Include="Windows\Main\MainWindowViewModel.cs" />

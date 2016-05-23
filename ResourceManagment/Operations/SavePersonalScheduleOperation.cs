@@ -31,8 +31,8 @@ namespace ResourceManagment.Operations
             var allDays = new List<IResourceBlock>();
             foreach (var workDayViewModel in _personalSchedule.Days)
             {
-                var morning = ConvertModel(workDayViewModel.Morning);
-                var afternoon = ConvertModel(workDayViewModel.Afternoon);
+                var morning = workDayViewModel.Morning.ConvertToSqlModel(_selectedSchedule.Id.Value);
+                var afternoon = workDayViewModel.Afternoon.ConvertToSqlModel(_selectedSchedule.Id.Value);
 
                 allDays.Add(morning);
                 allDays.Add(afternoon);
@@ -40,17 +40,5 @@ namespace ResourceManagment.Operations
             _databaseSchema.ResourceBlockTable.SaveAll(allDays);
         }
 
-        private ResourceBlockModel ConvertModel(ResourceBlockViewModel resourceBlock)
-        {
-            return new ResourceBlockModel()
-            {
-                Id = resourceBlock.Id,
-                PairPartnerId = resourceBlock.PairPartner?.ID,
-                PersonId = resourceBlock.Person.ID.Value,
-                WeeklyScheduleId = _selectedSchedule.Id,
-                ProjectId = resourceBlock.Project.Id,
-                Date = resourceBlock.Date
-            };
-        }
     }
 }

@@ -47,9 +47,9 @@ namespace ResourceManagment.Operations
             _operationsQueue.AddOperation(savePersonalScheduleOperation);
         }
 
-        public void SaveResourceBlock(ResourceBlockViewModel resourceBlock)
+        public void SaveResourceBlock(ResourceBlockViewModel resourceBlock, WeekScheduleViewModel parentSchedule)
         {
-            var saveResourceBlockOperation = new SaveResourceBlockOperation(resourceBlock, _databaseSchema);
+            var saveResourceBlockOperation = new SaveResourceBlockOperation(resourceBlock, _databaseSchema, parentSchedule.Id.Value);
             _operationsQueue.AddOperation(saveResourceBlockOperation);
         }
     }

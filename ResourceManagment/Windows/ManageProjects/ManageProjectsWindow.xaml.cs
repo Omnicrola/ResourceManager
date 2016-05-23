@@ -25,8 +25,7 @@ namespace ResourceManagment.Windows.ManageProjects
             _allProjectsViewModel.SelectedProject.Name = _allProjectsViewModel.EditedProjectName;
             if (_allProjectsViewModel.EditedColor.HasValue)
             {
-                _allProjectsViewModel.SelectedProject.Color =
-                    new SolidColorBrush(_allProjectsViewModel.EditedColor.Value);
+                _allProjectsViewModel.SelectedProject.Color = _allProjectsViewModel.EditedColor.Value;
             }
 
             _operationsBuilder.SaveProject(_allProjectsViewModel.SelectedProject);

@@ -16,6 +16,7 @@ namespace ResourceManagment.Operations
         private List<PersonViewModel> _personViewModels;
         private List<ProjectViewModel> _projectViewModels;
         private List<WeekScheduleViewModel> _weekScheduleViewModels;
+        private List<ResourceBlockModel> _resourceBlockModels;
 
         public LoadInitialDataOperation(ResourceManagerDatabaseSchema databaseSchema)
         {
@@ -29,9 +30,18 @@ namespace ResourceManagment.Operations
             _personViewModels = _databaseSchema.PersonTable.GetAll<PersonViewModel>();
             _projectViewModels = _databaseSchema.ProjectTable.GetAll<ProjectViewModel>();
             _weekScheduleViewModels = _databaseSchema.WeeklyScheduleTable.GetAll<WeekScheduleViewModel>();
-            _databaseSchema.ResourceBlockTable
-                .GetAll<ResourceBlockModel>()
-                .ForEach(MapResourcesToSchedules);
+            _resourceBlockModels = _databaseSchema.ResourceBlockTable
+                .GetAll<ResourceBlockModel>();
+        }
+
+
+        public void Populate(MainWindowViewModel mainWindowViewModel)
+        {
+            _resourceBlockModels.ForEach(MapResourcesToSchedules);
+
+            _personViewModels.ForEach(p => mainWindowViewModel.People.Add(p));
+            _projectViewModels.ForEach(p => mainWindowViewModel.Projects.Add(p));
+            _weekScheduleViewModels.ForEach(p => mainWindowViewModel.AllSchedules.Add(p));
         }
 
         private void MapResourcesToSchedules(ResourceBlockModel resourceBlockModel)
@@ -40,13 +50,14 @@ namespace ResourceManagment.Operations
             var pairPartner = FindPersonById(resourceBlockModel.PairPartnerId);
             var project = FindProjectById(resourceBlockModel.ProjectId);
             var weeklySchedule = FindScheduleById(resourceBlockModel.WeeklyScheduleId);
-            var resourceBlockViewModel = new ResourceBlockViewModel(person, resourceBlockModel.Date)
+            var resourceBlockViewModel = new ResourceBlockViewModel(person, resourceBlockModel.BlockOrder)
             {
                 Project = project,
                 PairPartner = pairPartner
             };
             weeklySchedule.OverwriteBlock(resourceBlockViewModel);
         }
+
 
         private WeekScheduleViewModel FindScheduleById(int? weeklyScheduleId)
         {
@@ -74,13 +85,6 @@ namespace ResourceManagment.Operations
                 return _projectViewModels.FirstOrDefault(p => p.Id == projectId.Value);
             }
             return null;
-        }
-
-        public void Populate(MainWindowViewModel mainWindowViewModel)
-        {
-            _personViewModels.ForEach(p => mainWindowViewModel.People.Add(p));
-            _projectViewModels.ForEach(p => mainWindowViewModel.Projects.Add(p));
-            _weekScheduleViewModels.ForEach(p => mainWindowViewModel.AllSchedules.Add(p));
         }
     }
 }

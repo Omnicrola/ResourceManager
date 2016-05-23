@@ -27,7 +27,7 @@ namespace ResourceManagment.Windows
             var selectedPerson = _windowViewModel.SelectedPerson;
             if (selectedPerson != null && selectedPerson.IsSelectable)
             {
-                var personalSchedule = new PersonalScheduleViewModel(_selectedSchedule.WeekEnding, selectedPerson.Person);
+                var personalSchedule = new PersonalScheduleViewModel(selectedPerson.Person);
                 _selectedSchedule.PersonalSchedules.Add(personalSchedule);
                 _userOperationsBuilder.SavePersonalSchedule(personalSchedule, _selectedSchedule);
                 Close();

@@ -9,33 +9,23 @@ namespace ResourceManagment.Operations
     {
         private readonly ResourceBlockViewModel _resourceBlock;
         private readonly ResourceManagerDatabaseSchema _databaseSchema;
+        private readonly int _scheduleId;
 
         public SaveResourceBlockOperation(ResourceBlockViewModel resourceBlock,
-            ResourceManagerDatabaseSchema databaseSchema)
+            ResourceManagerDatabaseSchema databaseSchema, int scheduleId)
         {
             _resourceBlock = resourceBlock;
             _databaseSchema = databaseSchema;
+            _scheduleId = scheduleId;
         }
 
         public override string Description => "Saving resource block.";
 
         protected override void DoWorkInternal()
         {
-            ResourceBlockModel resourceBlockModel = ConvertBlock(_resourceBlock);
+            ResourceBlockModel resourceBlockModel = _resourceBlock.ConvertToSqlModel(_scheduleId);
             _databaseSchema.ResourceBlockTable.Save(resourceBlockModel);
         }
 
-        private ResourceBlockModel ConvertBlock(ResourceBlockViewModel resourceBlockViewModel)
-        {
-            return new ResourceBlockModel()
-            {
-                Id = resourceBlockViewModel.Id,
-                Date = resourceBlockViewModel.Date,
-                PairPartnerId = resourceBlockViewModel.PairPartner?.ID,
-                PersonId = resourceBlockViewModel.Person.ID.Value,
-                ProjectId = resourceBlockViewModel.Project?.Id,
-                WeeklyScheduleId = resourceBlockViewModel.ScheduleId
-            };
-        }
     }
 }

@@ -9,15 +9,14 @@ namespace ResourceManagment.Windows.ManageProjects
     public class ProjectViewModel : ViewModel, IProject
     {
         private string _name;
-        private SolidColorBrush _color;
-        private string _hexColor;
-        public static ProjectViewModel Empty { get { return new ProjectViewModel("None") { Color = Brushes.Gray }; } }
+        private Color _color;
+        public static ProjectViewModel Empty { get { return new ProjectViewModel("None") { Color = Colors.LightGray }; } }
 
         public ProjectViewModel() { }
         public ProjectViewModel(string name)
         {
             _name = name;
-            Color = new SolidColorBrush(Colors.LightCoral);
+            Color = Colors.LightGray;
         }
 
         [SqlColumnBinding("id")]
@@ -38,18 +37,7 @@ namespace ResourceManagment.Windows.ManageProjects
         }
 
         [SqlColumnBinding("color")]
-        public string HexColor
-        {
-            get { return _hexColor; }
-            set
-            {
-                _hexColor = value;
-                var brushConverter = new BrushConverter();
-                Color = (SolidColorBrush)brushConverter.ConvertFrom(_hexColor);
-            }
-        }
-
-        public SolidColorBrush Color
+        public Color Color
         {
             get
             {
@@ -58,19 +46,8 @@ namespace ResourceManagment.Windows.ManageProjects
             set
             {
                 _color = value;
-                SaveHexValue(value);
-
                 FireOnPropertyChanged("WeekColor");
             }
-        }
-
-        private void SaveHexValue(SolidColorBrush value)
-        {
-            var myColor = value.Color;
-            _hexColor = "#" +
-                        myColor.R.ToString("X2") +
-                        myColor.G.ToString("X2") +
-                        myColor.B.ToString("X2");
         }
 
         public override string ToString()

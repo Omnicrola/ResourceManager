@@ -39,12 +39,12 @@ namespace ResourceManagment.Windows.AlterResourceBlock
         {
             get
             {
-                var date = _resourceBlock.Date;
-                string morningEvening = date.Hour < 12 ? "Morning" : "Afternoon";
-                string dayOfWeek = date.DayOfWeek.ToString();
-                int dayOfMonth = date.Day;
-                int month = date.Month;
-                return String.Format("{0} of {1} on {2}/{3}", morningEvening, dayOfWeek, month, dayOfMonth);
+                var blockOrder = _resourceBlock.BlockOrder;
+                string morningEvening = blockOrder % 2 == 0 ? "Morning" : "Afternoon";
+                string dayOfWeek = GetDayOfWeekForBlockOrder(blockOrder);
+
+
+                return $"{dayOfWeek} {morningEvening}";
             }
             set
             {
@@ -52,6 +52,42 @@ namespace ResourceManagment.Windows.AlterResourceBlock
             }
         }
 
+        private string GetDayOfWeekForBlockOrder(int blockOrder)
+        {
+            switch (blockOrder)
+            {
+                case 1:
+                    return "Saturday";
+                case 2:
+                    return "Saturday";
+                case 3:
+                    return "Sunday";
+                case 4:
+                    return "Sunday";
+                case 5:
+                    return "Monday";
+                case 6:
+                    return "Monday";
+                case 7:
+                    return "Tuesday";
+                case 8:
+                    return "Tuesday";
+                case 9:
+                    return "Wednesday";
+                case 10:
+                    return "Wednesday";
+                case 11:
+                    return "Thursday";
+                case 12:
+                    return "Thursday";
+                case 13:
+                    return "Friday";
+                case 14:
+                    return "Friday";
+                default:
+                    return "Error";
+            }
+        }
     }
 
 }
