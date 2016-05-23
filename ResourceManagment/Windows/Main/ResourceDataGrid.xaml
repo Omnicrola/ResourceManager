@@ -47,7 +47,7 @@
         <ControlTemplate x:Key="ResourceButtonTemplate" TargetType="Button">
             <Border BorderBrush="{TemplateBinding BorderBrush}" 
                     BorderThickness="{TemplateBinding BorderThickness}">
-                <StackPanel Background="{Binding Project.Color}" 
+                <StackPanel Background="{Binding Path=Project.Color, Converter={StaticResource ColorToBrushConverter}}" 
                             Margin="5" 
                             HorizontalAlignment="Stretch"
                             Orientation="Horizontal"
