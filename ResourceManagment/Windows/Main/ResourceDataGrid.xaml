@@ -101,6 +101,7 @@
                         d:DataContext="{d:DesignInstance alterResourceBlock:WorkDayViewModel }">
                 <Button PreviewMouseLeftButtonDown="ResourceBlock_LeftButtonDown" 
                         PreviewMouseMove="ResourceBlock_MouseMove" 
+                        MouseDoubleClick="Button_AlterResourceBlock"
                         Drop="ResourceBlock_Drop"
                         DragEnter="ResourceBlock_DragEnter"
                         Template="{StaticResource ResourceButtonTemplate}" 
@@ -109,6 +110,7 @@
                         />
                 <Button PreviewMouseLeftButtonDown="ResourceBlock_LeftButtonDown" 
                         PreviewMouseMove="ResourceBlock_MouseMove" 
+                        MouseDoubleClick="Button_AlterResourceBlock"
                         Drop="ResourceBlock_Drop"
                         DragEnter="ResourceBlock_DragEnter"
                         Template="{StaticResource ResourceButtonTemplate}" 
@@ -146,8 +148,8 @@
                 <StackPanel Orientation="Horizontal">
                     <Image Width="64" Margin="16" Source="{StaticResource Plus128}"></Image>
                     <StackPanel>
-                        <TextBlock Margin="16,16,16,0">Click to</TextBlock>
-                        <TextBlock Margin="16,0,16,16">add resource</TextBlock>
+                        <TextBlock Margin="16,16,16,0">Click to add a</TextBlock>
+                        <TextBlock Margin="16,0,16,16">person to this schedule</TextBlock>
                     </StackPanel>
                 </StackPanel>
             </Button>

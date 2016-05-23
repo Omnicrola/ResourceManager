@@ -181,8 +181,8 @@
                     <StackPanel Orientation="Horizontal">
                         <Image Width="64" Margin="16" Source="{StaticResource ArrowsLeft}"></Image>
                         <StackPanel>
-                            <TextBlock Margin="16,16,16,0">Choose a schedule</TextBlock>
-                            <TextBlock Margin="16,0,16,16">from the left</TextBlock>
+                            <TextBlock Margin="16,16,16,0">Choose a schedule from the left.</TextBlock>
+                            <TextBlock Margin="16,0,16,16">Or click "Add Week" to create a new one.</TextBlock>
                         </StackPanel>
                     </StackPanel>
                 </WrapPanel>
