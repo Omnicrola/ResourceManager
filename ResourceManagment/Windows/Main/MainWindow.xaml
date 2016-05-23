@@ -15,6 +15,7 @@
     <Window.Resources>
         <BitmapImage x:Key="Gear16" UriSource="../../Assets/Icons/gear16.png" />
         <BitmapImage x:Key="GreenPlus" UriSource="../../Assets/Icons/plus16.png" />
+        <BitmapImage x:Key="ArrowsLeft" UriSource="../../Assets/Icons/3-arrows-left-green.png" />
 
 
         <Style x:Key="HideWhenNull" TargetType="FrameworkElement">
@@ -27,6 +28,24 @@
         </Style>
         <Style x:Key="HideButtonWhenNull" BasedOn="{StaticResource HideWhenNull}" TargetType="Button"/>
         <Style x:Key="HideTextWhenNull" BasedOn="{StaticResource HideWhenNull}" TargetType="TextBlock"/>
+
+        <Style x:Key="ShowWhenScheduleSelectedStyle" TargetType="FrameworkElement" >
+            <Setter Property="Visibility" Value="Visible"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="HideWhenScheduleSelectedStyle" TargetType="FrameworkElement" >
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding SelectedSchedule}" Value="{x:Null}">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
 
     </Window.Resources>
 
@@ -153,9 +172,22 @@
                 </ToolBar>
                 <local:ResourceDataGrid  x:Name="ResourceDataGrid" 
                                          DataContext="{Binding SelectedSchedule}"
+                                         Style="{StaticResource ShowWhenScheduleSelectedStyle}"
                                          ClickAlterResourceBlock="ResourceDataGrid_OnClickAlterResourceBlock"
                                          AddResourceToSchedule="ResourceDataGrid_OnAddResourceToSchedule"></local:ResourceDataGrid>
+                <WrapPanel Style="{StaticResource HideWhenScheduleSelectedStyle}"
+                           Background="AliceBlue"
+                           Margin="100,100">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="64" Margin="16" Source="{StaticResource ArrowsLeft}"></Image>
+                        <StackPanel>
+                            <TextBlock Margin="16,16,16,0">Choose a schedule</TextBlock>
+                            <TextBlock Margin="16,0,16,16">from the left</TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </WrapPanel>
             </StackPanel>
         </Grid>
     </DockPanel>
 </Window>
+
