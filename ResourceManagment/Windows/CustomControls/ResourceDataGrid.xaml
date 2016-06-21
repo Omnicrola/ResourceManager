@@ -29,6 +29,8 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.RowSpan="2" 
                             Margin="4"
+                            Width="80"
+                           TextAlignment="Center"
                             Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}">
                     <TextBlock.LayoutTransform>
                         <RotateTransform Angle="-90"/>
@@ -37,10 +39,12 @@
                 <TextBlock Grid.Row="0" 
                             Grid.Column="1" 
                             Margin="4"
+                            VerticalAlignment="Center"
                             TextAlignment="Center">AM</TextBlock>
                 <TextBlock Grid.Row="1" 
                             Grid.Column="1" 
                             Margin="4"
+                            VerticalAlignment="Center"
                             TextAlignment="Center">PM</TextBlock>
             </Grid>
         </DataTemplate>
@@ -164,7 +168,10 @@
                           CanUserResizeColumns="False"
                           CanUserResizeRows="False"
                           GridLinesVisibility="Horizontal"
-                          HorizontalGridLinesBrush="LightGray"
+                          HorizontalGridLinesBrush="Black"
+                          VerticalGridLinesBrush="DarkGray"
+                          BorderBrush="DarkGray"
+                          RowHeaderWidth="0"
                           SelectionChanged="DisableDataGridSelection"
                           AutoGenerateColumns="False">
             <DataGrid.Resources>
@@ -180,6 +187,9 @@
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="{x:Type DataGridColumnHeader}"
                        BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
                     <Setter Property="LayoutTransform">
                         <Setter.Value>
                             <TransformGroup>
