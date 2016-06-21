@@ -40,7 +40,7 @@ namespace ResourceManagment.Windows.Main
             Application.Current.Shutdown(0);
         }
 
-        private void MenuItemManagePeople_Click(object sender, RoutedEventArgs e)
+        private void MenuItemManagePeople_Click(object sender, EventArgs e)
         {
             var peopleWindow = new ManagePeopleWindow(new AllPeopleViewModel(_mainWindowViewModel.People), _userOperationsBuilder);
             peopleWindow.Owner = this;
@@ -49,7 +49,7 @@ namespace ResourceManagment.Windows.Main
 
         private void MenuItemManageProjects_Click(object sender, RoutedEventArgs e)
         {
-            var projectsWindow = new ManageProjects.ManageProjectsWindow(new AllProjectsViewModel(_mainWindowViewModel.Projects), _userOperationsBuilder);
+            var projectsWindow = new ManageProjectsWindow(new AllProjectsViewModel(_mainWindowViewModel.Projects), _userOperationsBuilder);
             projectsWindow.Owner = this;
             projectsWindow.ShowDialog();
         }
@@ -76,6 +76,7 @@ namespace ResourceManagment.Windows.Main
             var addResourceWindow =
                 new AddResourceWindow(new AddResourceViewModel(_mainWindowViewModel.People, selectedSchedule), selectedSchedule, _userOperationsBuilder);
             addResourceWindow.Owner = this;
+            addResourceWindow.OpenPersonManager += MenuItemManagePeople_Click;
             addResourceWindow.ShowDialog();
         }
 

@@ -117,6 +117,11 @@
     <Compile Include="Operations\SaveWeeklyScheduleOperation.cs" />
     <Compile Include="Operations\UserOperationsBuilder.cs" />
     <Compile Include="Windows\AlterResourceBlock\ResourceBlockExtension.cs" />
+    <Compile Include="Windows\CustomControls\EmptySelectableItem.cs" />
+    <Compile Include="Windows\CustomControls\ISelectableItem.cs" />
+    <Compile Include="Windows\CustomControls\PartiallyDisabledComboBox.xaml.cs">
+      <DependentUpon>PartiallyDisabledComboBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ManageWeeklySchedule\EditableWeeklyScheduleViewModel.cs" />
     <Compile Include="Windows\ManageProjects\ProjectViewModel.cs" />
     <Compile Include="Windows\Main\MainWindowViewModel.cs" />
@@ -131,7 +136,7 @@
     <Compile Include="Windows\Help\HelpWindow.xaml.cs">
       <DependentUpon>HelpWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Main\ResourceDataGrid.xaml.cs">
+    <Compile Include="Windows\CustomControls\ResourceDataGrid.xaml.cs">
       <DependentUpon>ResourceDataGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ManagePeople\AllPeopleViewModel.cs" />
@@ -152,7 +157,7 @@
     </Compile>
     <Compile Include="Windows\ManageProjects\AllProjectsViewModel.cs" />
     <Compile Include="Windows\ManagePeople\SelectablePersonViewModel.cs" />
-    <Compile Include="Windows\Main\ResourceDragDropHandler.cs" />
+    <Compile Include="Windows\CustomControls\ResourceDragDropHandler.cs" />
     <Compile Include="Windows\ManageWeeklySchedule\EditWeeklyScheduleWindow.xaml.cs">
       <DependentUpon>EditWeeklyScheduleWindow.xaml</DependentUpon>
     </Compile>
@@ -161,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\AlterResourceBlock\AlterResourceBlockWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CustomControls\PartiallyDisabledComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -184,7 +193,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Main\ResourceDataGrid.xaml">
+    <Page Include="Windows\CustomControls\ResourceDataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using ResourceManagment.Operations;
 using ResourceManagment.Windows.ManageWeeklySchedule;
 
@@ -13,7 +14,10 @@ namespace ResourceManagment.Windows
         private readonly UserOperationsBuilder _userOperationsBuilder;
         private readonly AddResourceViewModel _windowViewModel;
 
-        public AddResourceWindow(AddResourceViewModel addResourceViewModel, WeekScheduleViewModel selectedSchedule, UserOperationsBuilder userOperationsBuilder)
+        public EventHandler OpenPersonManager;
+
+        public AddResourceWindow(AddResourceViewModel addResourceViewModel,
+            WeekScheduleViewModel selectedSchedule, UserOperationsBuilder userOperationsBuilder)
         {
             InitializeComponent();
             DataContext = addResourceViewModel;
@@ -32,6 +36,11 @@ namespace ResourceManagment.Windows
                 _userOperationsBuilder.SavePersonalSchedule(personalSchedule, _selectedSchedule);
                 Close();
             }
+        }
+
+        private void CreateNewResource_OnClick(object sender, RoutedEventArgs e)
+        {
+            OpenPersonManager?.Invoke(this, EventArgs.Empty);
         }
     }
 }
