@@ -7,5 +7,6 @@ namespace ResourceManagment.Data
         DataCollection<IPerson> AllPeople { get; }
         DataCollection<IProject> AllProjects { get; }
         DataCollection<IWeeklySchedule> AllWeeklySchedules { get; }
+        DataCollection<IResourceBlock> AllResourceBlocks { get; }
     }
 }

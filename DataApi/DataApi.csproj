@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Api\DataCollection.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\IConversionFactory.cs" />
     <Compile Include="Models\IPerson.cs" />
     <Compile Include="Models\IProject.cs" />
     <Compile Include="Models\IResourceBlock.cs" />

@@ -116,6 +116,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MainWindowFactory.cs" />
     <Compile Include="Data\Converters\ColorToBrushConverter.cs" />
     <Compile Include="Data\Database\ResourceManagerDatabaseSchema.cs" />
     <Compile Include="Data\Database\Tables\ProjectTable.cs" />
@@ -151,6 +152,8 @@
     <Compile Include="Windows\Main\MainWindowViewModel.cs" />
     <Compile Include="Windows\ManageWeeklySchedule\PersonalScheduleViewModel.cs" />
     <Compile Include="Windows\ManagePeople\PersonViewModel.cs" />
+    <Compile Include="Windows\ViewModels\PeopleViewModelFactory.cs" />
+    <Compile Include="Windows\ViewModels\ProjectViewModelFactory.cs" />
     <Compile Include="Windows\ViewModels\RequiredResourceViewModel.cs" />
     <Compile Include="Windows\AlterResourceBlock\ResourceBlockViewModel.cs" />
     <Compile Include="Windows\ManageWeeklySchedule\WeekScheduleViewModel.cs" />
@@ -184,6 +187,7 @@
     <Compile Include="Windows\ManageWeeklySchedule\EditWeeklyScheduleWindow.xaml.cs">
       <DependentUpon>EditWeeklyScheduleWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ViewModels\WeeklyScheduleViewModelFactory.cs" />
     <Page Include="Windows\AddResourceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

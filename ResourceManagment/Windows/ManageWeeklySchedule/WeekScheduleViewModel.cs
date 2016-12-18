@@ -10,7 +10,6 @@ using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManageWeeklySchedule
 {
-    [SqlTableBinding("weekly_schedules")]
     public class WeekScheduleViewModel : PropertyNotification, IWeeklySchedule
     {
         private DateTime _weekEnding;
@@ -21,13 +20,10 @@ namespace ResourceManagment.Windows.ManageWeeklySchedule
         public ObservableCollection<PersonalScheduleViewModel> PersonalSchedules { get; set; }
         public ObservableCollection<RequiredResourceViewModel> RequiredProjectResources { get; set; }
 
-        [SqlColumnBinding("id")]
         public int? Id { get; set; }
 
-        [SqlColumnBinding("week_ending")]
         public DateTime WeekEnding { get { return _weekEnding; } set { SetPropertyField(ref _weekEnding, value); } }
 
-        [SqlColumnBinding("color")]
         public Color WeekColor { get { return _weekColor; } set { SetPropertyField(ref _weekColor, value); } }
 
         public string Notes { get { return _notes; } set { SetPropertyField(ref _notes, value); } }
@@ -51,6 +47,11 @@ namespace ResourceManagment.Windows.ManageWeeklySchedule
         public WeekScheduleViewModel(DateTime weekEnding) : this()
         {
             WeekEnding = new DateTime(weekEnding.Year, weekEnding.Month, weekEnding.Day);
+        }
+
+        public WeekScheduleViewModel(IWeeklySchedule weekEnding)
+        {
+
         }
 
         public void Save()
