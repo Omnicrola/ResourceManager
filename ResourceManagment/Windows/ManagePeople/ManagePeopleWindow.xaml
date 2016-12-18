@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="ManagePeopleWindow" 
         WindowStartupLocation="CenterOwner"
-        d:DataContext="{d:DesignInstance managePeople:AllPeopleViewModel}"
+        d:DataContext="{d:DesignInstance managePeople:ManagePeopleWindow}"
         Height="284.211" 
         Width="508.647">
     <Grid>
@@ -18,12 +18,23 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel>
-            <Button Name="ButtonNewProject" Click="ButtonNewProject_Click" Margin="0,5,0,5">New</Button>
+            <Button Name="ButtonNewProject" Click="ButtonNewPerson_Click" Margin="0,5,0,5">New</Button>
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <ListView Grid.Column="0"
                   x:Name="projectList"
-                  ItemsSource="{Binding People}"
-                  SelectedItem="{Binding SelectedPerson}">
+                  ItemsSource="{Binding PeopleViewModel.People}"
+                  SelectedItem="{Binding PersonBeingEdited}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <Run Text="{Binding Initials}"/>
+                                <Run Text=" - "/>
+                                <Run Text="{Binding FirstName}"/>
+                                <Run Text=" "/>
+                                <Run Text="{Binding LastName}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
             </ScrollViewer>
         </StackPanel>
@@ -47,7 +58,7 @@
                     Grid.Column="1"
                     Margin="10"
                     x:Name ="textboxFirstName"  
-                    Text="{Binding EditedFirstName, UpdateSourceTrigger=PropertyChanged}"/>
+                    Text="{Binding PersonBeingEdited.FirstName, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Grid.Row="1" Grid.Column="0" Margin="10">Last Name:</Label>
                 <TextBox 
                     Width="200" 
@@ -55,7 +66,7 @@
                     Grid.Column="1"
                     Margin="10"
                     x:Name ="textboxLastName"  
-                    Text="{Binding EditedLastName, UpdateSourceTrigger=PropertyChanged}"/>
+                    Text="{Binding PersonBeingEdited.LastName, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Grid.Row="2" Grid.Column="0" Margin="10">Initials:</Label>
                 <TextBox 
                     Width="200" 
@@ -64,7 +75,7 @@
                     Margin="10"
                     x:Name ="textboxInitials"
                     IsEnabled="False"
-                    Text="{Binding Initials}"/>
+                    Text="{Binding PersonBeingEdited.Initials}"/>
                 <Button
                     Grid.Row="4"
                     Grid.Column="1"
@@ -79,9 +90,9 @@
                     Margin="10"
                     HorizontalAlignment="Right" 
                     x:Name="buttonAdd" 
+                    Content="{Binding EditMode}"
                     Padding="4,2"
-                    IsEnabled="{Binding DataHasChanged}"
-                    Click="buttonSave_Click">Save</Button>
+                    Click="buttonSave_Click"/>
 
             </Grid>
         </Canvas>

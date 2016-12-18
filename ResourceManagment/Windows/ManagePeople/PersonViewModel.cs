@@ -39,6 +39,7 @@ namespace ResourceManagment.Windows.ManagePeople
             {
                 _firstName = value;
                 FireOnPropertyChanged("FirstName");
+                FireOnPropertyChanged("Initials");
             }
         }
 
@@ -50,6 +51,7 @@ namespace ResourceManagment.Windows.ManagePeople
             {
                 _lastName = value;
                 FireOnPropertyChanged("LastName");
+                FireOnPropertyChanged("Initials");
             }
         }
 
@@ -57,7 +59,11 @@ namespace ResourceManagment.Windows.ManagePeople
         {
             get
             {
-                string initials = _firstName.Substring(0, 1) + _lastName.Substring(0, 3);
+                string first = FirstName ?? "";
+                string last = LastName ?? "";
+                int len1 = Math.Min(first.Length, 1);
+                int len2 = Math.Min(last.Length, 3);
+                string initials = first.Substring(0, len1) + last.Substring(0, len2);
                 return initials.ToUpper();
             }
             set { }
@@ -76,7 +82,7 @@ namespace ResourceManagment.Windows.ManagePeople
 
         public override string ToString()
         {
-            return String.Format("{0} - {1} {2}", Initials, FirstName, LastName);
+            return $"{Initials} - {FirstName} {LastName}";
         }
 
     }
