@@ -7,7 +7,7 @@ using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows
 {
-    public class AddResourceViewModel : ViewModel
+    public class AddResourceViewModel : PropertyNotification
     {
         private WeekScheduleViewModel selectedSchedule;
         private SelectablePersonViewModel _selectedPerson;

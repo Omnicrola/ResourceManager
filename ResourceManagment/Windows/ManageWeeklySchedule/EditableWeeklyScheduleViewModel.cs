@@ -6,7 +6,7 @@ using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManageWeeklySchedule
 {
-    public class EditableWeeklyScheduleViewModel : ViewModel
+    public class EditableWeeklyScheduleViewModel : PropertyNotification
     {
         public WeekScheduleViewModel ScheduleBeingEdited { get; }
         private string _notes;

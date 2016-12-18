@@ -9,7 +9,7 @@ using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManageWeeklySchedule
 {
-    public class PersonalScheduleViewModel : ViewModel
+    public class PersonalScheduleViewModel : PropertyNotification
     {
 
         private readonly ObservableCollection<WorkDayViewModel> _workDays;

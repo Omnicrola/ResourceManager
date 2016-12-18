@@ -117,18 +117,18 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\Converters\ColorToBrushConverter.cs" />
-    <Compile Include="Data\Database\ModelDataBinder.cs" />
     <Compile Include="Data\Database\ResourceManagerDatabaseSchema.cs" />
     <Compile Include="Data\Database\Tables\ProjectTable.cs" />
     <Compile Include="Data\Database\Tables\ResourceBlockTable.cs" />
     <Compile Include="Data\Database\Tables\WeeklyScheduleTable.cs" />
-    <Compile Include="Data\Filtering\ResourceFilters\Role.cs" />
     <Compile Include="Data\Database\Tables\PersonTable.cs" />
-    <Compile Include="Data\Model\IPerson.cs" />
-    <Compile Include="Data\Model\IProject.cs" />
-    <Compile Include="Data\Model\IResourceBlock.cs" />
-    <Compile Include="Data\Model\IWeeklySchedule.cs" />
+    <Compile Include="Data\IDataRepository.cs" />
+    <Compile Include="Data\Models\SqlProject.cs" />
+    <Compile Include="Data\Models\SqlResourceBlock.cs" />
+    <Compile Include="Data\SqliteDataRepository.cs" />
     <Compile Include="Data\Model\ResourceBlockModel.cs" />
+    <Compile Include="Data\Models\SqlPerson.cs" />
+    <Compile Include="Data\Models\SqlSchedules.cs" />
     <Compile Include="Operations\AsyncDiscreetOperation.cs" />
     <Compile Include="Operations\IDiscreetOperation.cs" />
     <Compile Include="Operations\LoadInitialDataOperation.cs" />
@@ -155,7 +155,6 @@
     <Compile Include="Windows\AlterResourceBlock\ResourceBlockViewModel.cs" />
     <Compile Include="Windows\ManageWeeklySchedule\WeekScheduleViewModel.cs" />
     <Compile Include="Windows\AlterResourceBlock\WorkDayViewModel.cs" />
-    <Compile Include="Windows\ViewModels\ViewModel.cs" />
     <Compile Include="Windows\AlterResourceBlock\AlterBlockViewModel.cs" />
     <Compile Include="Windows\Help\HelpWindow.xaml.cs">
       <DependentUpon>HelpWindow.xaml</DependentUpon>
@@ -287,6 +286,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataApi\DataApi.csproj">
+      <Project>{52AB6249-2684-46D6-8700-5EA7B461BE54}</Project>
+      <Name>DataApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DatabaseApi\DatabaseApi.csproj">
       <Project>{609BB636-6474-465B-8E59-D936A18CBA77}</Project>
       <Name>DatabaseApi</Name>

@@ -10,7 +10,7 @@ using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.Main
 {
-    public class MainWindowViewModel : ViewModel
+    public class MainWindowViewModel : PropertyNotification
     {
         private WeekScheduleViewModel _selectedSchedule;
 

@@ -3,7 +3,7 @@ using System.Windows.Media;
 
 namespace ResourceManagment.Data.Model
 {
-    public interface IProject : INotifyPropertyChanged
+    public interface IProject
     {
         Color Color { get; set; }
         string Name { get; set; }

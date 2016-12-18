@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace ResourceManagment.Data.Model
 {
-    public interface IWeeklySchedule : INotifyPropertyChanged
+    public interface IWeeklySchedule
     {
         DateTime WeekEnding { get; set; }
         Color WeekColor { get; set; }

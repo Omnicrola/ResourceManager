@@ -4,7 +4,7 @@ using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManagePeople
 {
-    public class AllPeopleViewModel : ViewModel
+    public class AllPeopleViewModel : PropertyNotification
     {
         private PersonViewModel _selectedPerson;
 

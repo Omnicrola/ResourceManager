@@ -7,7 +7,7 @@ using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.AlterResourceBlock
 {
-    public class ResourceBlockViewModel : ViewModel
+    public class ResourceBlockViewModel : PropertyNotification
     {
         private ProjectViewModel _project;
         private PersonViewModel _pairPartner;

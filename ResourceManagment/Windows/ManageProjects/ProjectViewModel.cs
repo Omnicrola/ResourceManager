@@ -6,7 +6,7 @@ using ResourceManagment.Windows.ViewModels;
 namespace ResourceManagment.Windows.ManageProjects
 {
     [SqlTableBinding("projects")]
-    public class ProjectViewModel : ViewModel, IProject
+    public class ProjectViewModel : PropertyNotification, IProject
     {
         private string _name;
         private Color _color;

@@ -11,7 +11,7 @@ using ResourceManagment.Windows.ViewModels;
 namespace ResourceManagment.Windows.ManageWeeklySchedule
 {
     [SqlTableBinding("weekly_schedules")]
-    public class WeekScheduleViewModel : ViewModel, IWeeklySchedule
+    public class WeekScheduleViewModel : PropertyNotification, IWeeklySchedule
     {
         private DateTime _weekEnding;
         private string _notes;

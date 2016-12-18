@@ -4,7 +4,7 @@ using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManageProjects
 {
-    public class AllProjectsViewModel : ViewModel
+    public class AllProjectsViewModel : PropertyNotification
     {
         private string _editedProjectName;
         private ProjectViewModel _selectedProject;

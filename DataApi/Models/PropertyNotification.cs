@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace ResourceManagment.Windows.ViewModels
 {
-    public abstract class ViewModel : INotifyPropertyChanged
+    public abstract class PropertyNotification : INotifyPropertyChanged
     {
         protected void FireOnPropertyChanged(string propertyName)
         {

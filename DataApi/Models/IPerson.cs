@@ -5,7 +5,7 @@ using ResourceManagment.Data.Filtering.ResourceFilters;
 namespace ResourceManagment.Data.Model
 {
 
-    public interface IPerson : INotifyPropertyChanged
+    public interface IPerson
     {
         string FirstName { get; set; }
         string LastName { get; set; }

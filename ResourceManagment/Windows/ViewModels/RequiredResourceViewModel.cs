@@ -4,7 +4,7 @@ using ResourceManagment.Windows.ManageWeeklySchedule;
 
 namespace ResourceManagment.Windows.ViewModels
 {
-    public class RequiredResourceViewModel : ViewModel
+    public class RequiredResourceViewModel : PropertyNotification
     {
         private float _percentFilled;
         private ProjectViewModel _project;
