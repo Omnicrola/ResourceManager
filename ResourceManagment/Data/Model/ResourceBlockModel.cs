@@ -1,4 +1,5 @@
 ﻿using System;
+using DataApi.Models;
 using DatabaseApi.SqlLite.Api;
 
 namespace ResourceManagment.Data.Model

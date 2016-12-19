@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
+using DataApi.Models;
 using ResourceManagment.Windows.ManagePeople;
 using ResourceManagment.Windows.ManageWeeklySchedule;
 using ResourceManagment.Windows.ViewModels;

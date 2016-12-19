@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
-namespace ResourceManagment.Data
+namespace DataApi.Api
 {
     public class DataCollection<T> : ReadOnlyObservableCollection<T>
     {

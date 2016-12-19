@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DataApi.Models;
 using ResourceManagment.Data.Database;
 using ResourceManagment.Data.Model;
 using ResourceManagment.Windows.AlterResourceBlock;

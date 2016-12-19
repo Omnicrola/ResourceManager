@@ -1,4 +1,5 @@
-﻿using DatabaseApi.SqlLite.Api;
+﻿using DataApi.Models;
+using DatabaseApi.SqlLite.Api;
 using ResourceManagment.Data.Model;
 
 namespace ResourceManagment.Data.Models

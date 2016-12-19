@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Configuration;
+using DataApi.Api;
+using DataApi.Models;
 using DatabaseApi.SqlLite;
 using ResourceManagment.Data.Database;
 using ResourceManagment.Data.Model;

@@ -1,8 +1,7 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows.Media;
 
-namespace ResourceManagment.Data.Model
+namespace DataApi.Models
 {
     public interface IWeeklySchedule
     {

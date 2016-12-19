@@ -1,7 +1,6 @@
-﻿using System.ComponentModel;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 
-namespace ResourceManagment.Data.Model
+namespace DataApi.Models
 {
     public interface IProject
     {

@@ -1,8 +1,4 @@
-using System.ComponentModel;
-using DatabaseApi.SqlLite.Api;
-using ResourceManagment.Data.Filtering.ResourceFilters;
-
-namespace ResourceManagment.Data.Model
+namespace DataApi.Models
 {
 
     public interface IPerson

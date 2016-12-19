@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using DataApi.Models;
 using ResourceManagment.Data.Database;
 using ResourceManagment.Data.Model;
 using ResourceManagment.Windows.ManagePeople;

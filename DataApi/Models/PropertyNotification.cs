@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace ResourceManagment.Windows.ViewModels
+namespace DataApi.Models
 {
     public abstract class PropertyNotification : INotifyPropertyChanged
     {

@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Media;
+using DataApi.Models;
 using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManageProjects

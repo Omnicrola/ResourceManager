@@ -1,4 +1,4 @@
-﻿namespace ResourceManagment.Data.Filtering.ResourceFilters
+﻿namespace DataApi.Models
 {
     public enum Role
     {

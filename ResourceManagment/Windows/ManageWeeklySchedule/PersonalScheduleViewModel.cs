@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using DataApi.Models;
 using ResourceManagment.Data.Model;
 using ResourceManagment.Windows.AlterResourceBlock;
 using ResourceManagment.Windows.ManagePeople;

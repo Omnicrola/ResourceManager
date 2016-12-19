@@ -1,4 +1,5 @@
-﻿using ResourceManagment.Windows.AlterResourceBlock;
+﻿using DataApi.Models;
+using ResourceManagment.Windows.AlterResourceBlock;
 using ResourceManagment.Windows.ManageWeeklySchedule;
 
 namespace ResourceManagment.Data.Filtering.ResourceFilters

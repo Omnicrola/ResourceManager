@@ -1,4 +1,5 @@
 ﻿using System.Windows.Media;
+using DataApi.Models;
 using DatabaseApi.SqlLite.Api;
 using ResourceManagment.Data.Model;
 using ResourceManagment.Windows.ViewModels;

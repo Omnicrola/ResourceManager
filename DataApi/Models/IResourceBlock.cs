@@ -1,4 +1,4 @@
-namespace ResourceManagment.Data.Model
+namespace DataApi.Models
 {
     public interface IResourceBlock
     {

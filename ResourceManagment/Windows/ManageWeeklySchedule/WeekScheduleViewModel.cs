@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Media;
+using DataApi.Models;
 using DatabaseApi.SqlLite.Api;
 using ResourceManagment.Data.Model;
 using ResourceManagment.Windows.AlterResourceBlock;

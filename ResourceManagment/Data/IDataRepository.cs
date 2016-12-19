@@ -1,4 +1,6 @@
-﻿using ResourceManagment.Data.Model;
+﻿using DataApi.Api;
+using DataApi.Models;
+using ResourceManagment.Data.Model;
 
 namespace ResourceManagment.Data
 {
