@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NetworkCommsDotNetComplete, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f58108eb6480f6ec, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\NetworkCommsDotNet\NetworkCommsDotNetComplete.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,6 +54,11 @@
     <Compile Include="Models\IWeeklySchedule.cs" />
     <Compile Include="Models\PropertyNotification.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Network\Messages\INetworkMessage.cs" />
+    <Compile Include="Network\Messages\TestMessage.cs" />
+    <Compile Include="Network\Wrapper\INetworkManager.cs" />
+    <Compile Include="Network\Wrapper\NetworkConfiguration.cs" />
+    <Compile Include="Network\Wrapper\NetworkManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
@@ -58,6 +67,11 @@
       <Project>{609bb636-6474-465b-8e59-d936a18cba77}</Project>
       <Name>DatabaseApi</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Library\NetworkCommsDotNet\NetworkCommsDotNetComplete.dll" />
+    <Content Include="Library\NetworkCommsDotNet\NetworkCommsDotNetComplete.pdb" />
+    <Content Include="Library\NetworkCommsDotNet\NetworkCommsDotNetComplete.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
