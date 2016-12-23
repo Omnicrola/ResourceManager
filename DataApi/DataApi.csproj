@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\DataCollection.cs" />
+    <Compile Include="Api\IDataRepository.cs" />
+    <Compile Include="Api\IDataRepositoryWrite.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\IConversionFactory.cs" />
     <Compile Include="Models\IPerson.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="Models\IWeeklySchedule.cs" />
     <Compile Include="Models\PropertyNotification.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Network\Messages\GetPeopleMessage.cs" />
     <Compile Include="Network\Messages\INetworkMessage.cs" />
     <Compile Include="Network\Messages\TestMessage.cs" />
     <Compile Include="Network\Wrapper\INetworkManager.cs" />
