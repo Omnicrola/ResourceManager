@@ -23,5 +23,11 @@ namespace ResourceManagment.Data.Models
         [SqlColumnBinding("role")]
         public Role Role { get; set; }
 
+        public void Apply(IPerson person)
+        {
+            FirstName = person.FirstName;
+            LastName = person.LastName;
+            Role = person.Role;
+        }
     }
 }

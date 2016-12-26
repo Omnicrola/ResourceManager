@@ -72,6 +72,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NetworkCommsDotNetComplete">
+      <HintPath>..\DataApi\Library\NetworkCommsDotNet\NetworkCommsDotNetComplete.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data.SQLite, Version=1.0.101.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
@@ -129,6 +132,9 @@
     <Compile Include="Data\Model\ResourceBlockModel.cs" />
     <Compile Include="Data\Models\SqlPerson.cs" />
     <Compile Include="Data\Models\SqlSchedules.cs" />
+    <Compile Include="Network\ClientNetworkMessageProcessor.cs" />
+    <Compile Include="Network\INetworkMessageQueue.cs" />
+    <Compile Include="Network\Models\NetworkPerson.cs" />
     <Compile Include="Network\NetworkDataRepository.cs" />
     <Compile Include="Network\NetworkMessageHandler.cs" />
     <Compile Include="Operations\AsyncDiscreetOperation.cs" />

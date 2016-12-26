@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
+using System.Linq;
+using System.Windows;
+using System.Windows.Threading;
 using DataApi.Api;
 using DataApi.Models;
 using DataApi.Network.Wrapper;
@@ -31,12 +35,12 @@ namespace ResourceManagment.Network
 
                 var networkManager = new NetworkManager(new NetworkConfiguration(serverAddress, serverPort));
                 NetworkMessageHandler messageHandler = new NetworkMessageHandler(networkManager);
-                _instance = new NetworkDataRepository(messageHandler);
+                _instance = new NetworkDataRepository(messageHandler, Application.Current.Dispatcher);
             }
             return _instance;
         }
 
-        private NetworkDataRepository(NetworkMessageHandler networkMessageHandler)
+        private NetworkDataRepository(NetworkMessageHandler networkMessageHandler, Dispatcher dispatcher)
         {
             _allPeople = new ObservableCollection<IPerson>();
             AllPeople = new DataCollection<IPerson>(_allPeople);
@@ -52,7 +56,24 @@ namespace ResourceManagment.Network
 
             networkMessageHandler.LoadPeople();
             networkMessageHandler.RegisterRepository(this);
+
+            var clientNetworkMessageProcessor = new ClientNetworkMessageProcessor(dispatcher, networkMessageHandler,
+                this);
+
+            dispatcher.BeginInvoke((Action)clientNetworkMessageProcessor.ProcessMessageQueue);
         }
 
+        public void PutPerson(IPerson person)
+        {
+            var possibleMatch = _allPeople.FirstOrDefault(p => p.ID == person.ID);
+            if (possibleMatch == null)
+            {
+                _allPeople.Add(person);
+            }
+            else
+            {
+                possibleMatch.Apply(person);
+            }
+        }
     }
 }

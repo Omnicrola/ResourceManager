@@ -8,7 +8,7 @@ using ResourceManagment.Windows.ViewModels;
 
 namespace ResourceManagment.Windows.ManagePeople
 {
-    public class PersonViewModel : PropertyNotification, IPerson
+    public class PersonViewModel : PropertyNotification
     {
         private string _firstName;
         private string _lastName;

@@ -26,7 +26,7 @@ namespace ResourceManagment.Operations
 
         protected override void DoWorkInternal()
         {
-            _databaseSchema.PersonTable.Save(_selectedPerson);
+            //            _databaseSchema.PersonTable.Save(_selectedPerson);
         }
     }
 }

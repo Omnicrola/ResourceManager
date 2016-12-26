@@ -1,8 +1,6 @@
-﻿using DataApi.Api;
-using DataApi.Models;
-using ResourceManagment.Data.Model;
+﻿using DataApi.Models;
 
-namespace ResourceManagment.Data
+namespace DataApi.Api
 {
     public interface IDataRepository
     {
